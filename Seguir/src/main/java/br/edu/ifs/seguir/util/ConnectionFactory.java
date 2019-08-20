@@ -12,13 +12,13 @@ public class ConnectionFactory {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
 
     //Nome do usuário do Banco de Dados
-    private static final String USERNAME = "felipe";
+    private static final String USERNAME = "root";
 
     //Senha do Banco de Dados
-    private static final String PASSWORD = "mkfelipe123";
+    private static final String PASSWORD = "admin";
 
     //Endereço do Servidor
-    private static final String ENDSRV = "192.168.255.128";
+    private static final String ENDSRV = "localhost";
 
     //Nome da instancia
     private static final String NMINST = "DBIFS";
