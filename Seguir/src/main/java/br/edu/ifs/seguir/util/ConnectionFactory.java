@@ -3,7 +3,7 @@ package br.edu.ifs;
 import java.sql.*;
 
 /**
- * @author Joao Felipe
+ * @author Joao Felipe FIDAPÉ
  * @version 1.2
  */
 public class ConnectionFactory {
