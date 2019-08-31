@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Cadastro de pessoas:</h1>
+    <form method="post">
+        Nome: <input type="text" value="" name="nome"/>
+        Data de Nascimento: <input type="date" value="" name="dtNascimento"/>
+        CPF: <input type="text" value="" name="cpf">
+        RG: <input type="text" value="" name="rg">
+        Sexo: <input type="text" value="" name="sexo">
+        Data de Cadastro: <input type="date" name="dtCadastro">
+        E-mail: <input type="text" value="" name="email">
+        <!--Colocar aqui um menu dropDown com as empresas / grupos cadastrados -->
+        Endereço: <input type="text" value="" name="logradouro">
+        Bairro: <input type="text" value="" name="bairro">
+        Cidade: <input type="text" value="" name="cidade">
+        Estado: <input type="text" value="" name="siglaEstado">
+        Telefone: <input type="text" value="" name="telefone">
+        <!--Nome do responsavel, atrelar durante o cadastro do serviço-->
+        Informe um usuário para Login: <input type="text" value="" name="login">
+        Informe uma senha: <input type="text" value="" name="senha">
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
