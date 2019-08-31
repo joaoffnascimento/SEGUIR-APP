@@ -1,4 +1,4 @@
-package com.seguirapp.seguirapp;
+package com.seguirapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
