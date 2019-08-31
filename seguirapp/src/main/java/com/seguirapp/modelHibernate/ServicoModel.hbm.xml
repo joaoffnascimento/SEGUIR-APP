@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.seguirapp.modelHibernate.ServicoModel" table="servico" schema="DBIFS">
+        <id name="idServico">
+            <column name="idServico" sql-type="int(11)"/>
+        </id>
+        <property name="idPessoa">
+            <column name="idPessoa" sql-type="int(11)"/>
+        </property>
+        <property name="preco">
+            <column name="preco" sql-type="float" precision="-1"/>
+        </property>
+        <property name="idVeiculo">
+            <column name="idVeiculo" sql-type="int(11)"/>
+        </property>
+        <property name="descricao">
+            <column name="descricao" sql-type="text" not-null="true"/>
+        </property>
+        <property name="idEquipamento">
+            <column name="idEquipamento" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="pessoaByIdPessoa" class="com.seguirapp.modelHibernate.PessoaModel">
+            <column name="idPessoa"/>
+        </many-to-one>
+        <many-to-one name="veiculoByIdVeiculo" class="com.seguirapp.modelHibernate.VeiculoModel">
+            <column name="idVeiculo"/>
+        </many-to-one>
+        <many-to-one name="equipamentoByIdEquipamento" class="com.seguirapp.modelHibernate.EquipamentoModel">
+            <column name="idEquipamento"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

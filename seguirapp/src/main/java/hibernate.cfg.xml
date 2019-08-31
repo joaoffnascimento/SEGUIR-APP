@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://192.168.255.128:3306/DBIFS</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping resource="com/seguirapp/modelHibernate/CoordenadaModel.hbm.xml"/>
+        <mapping class="com.seguirapp.modelHibernate.CoordenadaModel"/>
+        <mapping resource="com/seguirapp/modelHibernate/EmpresaModel.hbm.xml"/>
+        <mapping class="com.seguirapp.modelHibernate.EmpresaModel"/>
+        <mapping resource="com/seguirapp/modelHibernate/EquipamentoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.modelHibernate.EquipamentoModel"/>
+        <mapping resource="com/seguirapp/modelHibernate/PessoaModel.hbm.xml"/>
+        <mapping class="com.seguirapp.modelHibernate.PessoaModel"/>
+        <mapping resource="com/seguirapp/modelHibernate/ServicoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.modelHibernate.ServicoModel"/>
+        <mapping resource="com/seguirapp/modelHibernate/VeiculoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.modelHibernate.VeiculoModel"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

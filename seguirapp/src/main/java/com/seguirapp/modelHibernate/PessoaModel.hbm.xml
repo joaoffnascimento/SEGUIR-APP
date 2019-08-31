@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.seguirapp.modelHibernate.PessoaModel" table="pessoa" schema="DBIFS">
+        <id name="idPessoa">
+            <column name="idPessoa" sql-type="int(11)"/>
+        </id>
+        <property name="nome">
+            <column name="nome" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="dtNascimento">
+            <column name="dtNascimento" sql-type="date"/>
+        </property>
+        <property name="cpf">
+            <column name="cpf" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="rg">
+            <column name="rg" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="sexo">
+            <column name="sexo" sql-type="char(1)" length="1"/>
+        </property>
+        <property name="dtCadastro">
+            <column name="dtCadastro" sql-type="date"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="idEmpresa">
+            <column name="idEmpresa" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="numeroCasa">
+            <column name="numeroCasa" sql-type="int(11)"/>
+        </property>
+        <property name="bairro">
+            <column name="bairro" sql-type="varchar(45)" length="45" not-null="true"/>
+        </property>
+        <property name="siglaEstado">
+            <column name="siglaEstado" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="logradouro">
+            <column name="logradouro" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="cidade">
+            <column name="cidade" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="telefone">
+            <column name="telefone" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="idResponsavel">
+            <column name="idResponsavel" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="login">
+            <column name="login" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="senha">
+            <column name="senha" sql-type="varchar(45)" length="45"/>
+        </property>
+        <many-to-one name="empresaByIdEmpresa" class="com.seguirapp.modelHibernate.EmpresaModel">
+            <column name="idEmpresa" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="pessoaByIdResponsavel" class="com.seguirapp.modelHibernate.PessoaModel">
+            <column name="idResponsavel" not-null="true"/>
+        </many-to-one>
+        <set name="pessoasByIdPessoa" inverse="true">
+            <key>
+                <column name="idResponsavel" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.seguirapp.modelHibernate.PessoaModel"/>
+        </set>
+        <set name="servicosByIdPessoa" inverse="true">
+            <key>
+                <column name="idPessoa"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.seguirapp.modelHibernate.ServicoModel"/>
+        </set>
+    </class>
+</hibernate-mapping>

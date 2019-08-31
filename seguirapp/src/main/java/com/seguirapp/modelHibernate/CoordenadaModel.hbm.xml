@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.seguirapp.modelHibernate.CoordenadaModel" table="coordenada" schema="DBIFS">
+        <id name="idCoordenada">
+            <column name="idCoordenada" sql-type="int(11)"/>
+        </id>
+        <property name="latitude">
+            <column name="latitude" sql-type="float" precision="-1"/>
+        </property>
+        <property name="longitude">
+            <column name="longitude" sql-type="float" precision="-1"/>
+        </property>
+        <property name="velocidade">
+            <column name="velocidade" sql-type="float" precision="-1"/>
+        </property>
+        <property name="altitude">
+            <column name="altitude" sql-type="float" precision="-1"/>
+        </property>
+        <property name="horario">
+            <column name="horario" sql-type="date"/>
+        </property>
+        <set name="equipamentosByIdCoordenada" inverse="true">
+            <key>
+                <column name="idCoordenada"/>
+            </key>
+            <one-to-many not-found="ignore" class="com.seguirapp.modelHibernate.EquipamentoModel"/>
+        </set>
+    </class>
+</hibernate-mapping>
