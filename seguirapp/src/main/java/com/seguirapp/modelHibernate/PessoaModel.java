@@ -92,7 +92,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "dtCadastro", nullable = false)
+    @Column(name = "dtCadastro", nullable = true)
     public Date getDtCadastro() {
         return dtCadastro;
     }
