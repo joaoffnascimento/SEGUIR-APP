@@ -112,7 +112,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "idEmpresa", nullable = true)
+    @Column(name = "idEmpresa", nullable = true, insertable = false, updatable = false)
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
@@ -182,7 +182,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "idResponsavel", nullable = true)
+    @Column(name = "idResponsavel", nullable = true, insertable = false, updatable = false)
     public Integer getIdResponsavel() {
         return idResponsavel;
     }

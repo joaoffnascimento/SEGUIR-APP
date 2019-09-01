@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "veiculo", schema = "DBIFS", catalog = "")
+@Table(name = "veiculo", schema = "DBIFS")
 public class VeiculoModel {
     private int idVeiculo;
     private String placa;

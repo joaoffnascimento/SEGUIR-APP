@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "equipamento", schema = "DBIFS", catalog = "")
+@Table(name = "equipamento", schema = "DBIFS")
 public class EquipamentoModel {
     private int idEquipamento;
     private String marca;
@@ -35,7 +35,7 @@ public class EquipamentoModel {
     }
 
     @Basic
-    @Column(name = "idCoordenada", nullable = false)
+    @Column(name = "idCoordenada", nullable = false, insertable = false, updatable = false)
     public int getIdCoordenada() {
         return idCoordenada;
     }

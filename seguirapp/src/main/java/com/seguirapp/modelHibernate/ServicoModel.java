@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "servico", schema = "DBIFS", catalog = "")
+@Table(name = "servico", schema = "DBIFS")
 public class ServicoModel {
     private int idServico;
     private int idPessoa;
@@ -95,7 +95,7 @@ public class ServicoModel {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idPessoa", referencedColumnName = "idPessoa", nullable = false)
+    @JoinColumn(name = "idPessoa", referencedColumnName = "idPessoa", nullable = false, insertable = false, updatable = false)
     public PessoaModel getPessoaByIdPessoa() {
         return pessoaByIdPessoa;
     }
@@ -105,7 +105,7 @@ public class ServicoModel {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idVeiculo", referencedColumnName = "idVeiculo", nullable = false)
+    @JoinColumn(name = "idVeiculo", referencedColumnName = "idVeiculo", nullable = false, insertable = false, updatable = false)
     public VeiculoModel getVeiculoByIdVeiculo() {
         return veiculoByIdVeiculo;
     }
@@ -115,7 +115,7 @@ public class ServicoModel {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idEquipamento", referencedColumnName = "idEquipamento", nullable = false)
+    @JoinColumn(name = "idEquipamento", referencedColumnName = "idEquipamento", nullable = false, insertable = false, updatable = false)
     public EquipamentoModel getEquipamentoByIdEquipamento() {
         return equipamentoByIdEquipamento;
     }

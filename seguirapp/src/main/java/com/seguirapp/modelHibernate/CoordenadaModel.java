@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "coordenada", schema = "DBIFS", catalog = "")
+@Table(name = "coordenada", schema = "DBIFS")
 public class CoordenadaModel {
     private int idCoordenada;
     private double latitude;
