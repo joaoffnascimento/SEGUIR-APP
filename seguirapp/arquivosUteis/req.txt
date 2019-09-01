@@ -1,0 +1,18 @@
+Esboço de uma elicitação de requisitos:
+
+
+Req fun 1 - O equipamento cadastrado deve receber coordenadas GPS;
+
+Req fun 2 - O sistema deve permitir o cadastro de clientes e seus dependentes;
+Req fun 3 - O dispositivo cadastrado deve estar associado a apenas uma única pessoa;
+Req fun 3.1 - O dispositivo cadastrador deve possuir um código de identificação única (10 dígitos);
+Req fun 3.2 - O dispositivo deve transmitir a sua localização a cada 10 segundos juntamente com o identificador único;
+Req fun 4 - O sistema deve realizar o cadastro de empresas / grupos;
+Req fun 4.1 - O cadastro de empresas deverá ser realizado anteriormente ao cadastro dos clientes (se existir);
+
+Req fun 5 - O sistema deve permitir a consulta por clientes e ou dependentes por um período;
+Req fun 6 - O sistema deve permitir a consulta da localização atual dos clientes e ou dependentes;
+
+Req fun 7 - O sistema deve permitir a consulta das localizações pelos clientes;
+Req fun 8 - Os clientes poderão consultar as localizações dos dependentes;
+Req fun 9 - O cliente responsável pelo grupo poderá visualizar todos os clientes do mesmo;
