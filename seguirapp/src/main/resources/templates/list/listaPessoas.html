@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Pessoas</title>
+</head>
+<body>
+
+<div th:each="pessoa : ${pessoas}">
+    <div class="row">
+        <p><span th:text="${pessoa.nome}"></span></p>
+        <p><span th:text="${pessoa.dtNascimento}"></span></p>
+        <p><span th:text="${pessoa.cpf}"></span></p>
+        <p><span th:text="${pessoa.rg}"></span></p>
+    </div>
+</div>
+</body>
+</html>
