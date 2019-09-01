@@ -1,4 +1,4 @@
-package com.seguirapp.modelHibernate;
+package com.seguirapp.model;
 
 import javax.persistence.*;
 import java.sql.Date;

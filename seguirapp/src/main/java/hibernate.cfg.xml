@@ -6,18 +6,18 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://192.168.255.128:3306/DBIFS</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <mapping resource="com/seguirapp/modelHibernate/CoordenadaModel.hbm.xml"/>
-        <mapping class="com.seguirapp.modelHibernate.CoordenadaModel"/>
-        <mapping resource="com/seguirapp/modelHibernate/EmpresaModel.hbm.xml"/>
-        <mapping class="com.seguirapp.modelHibernate.EmpresaModel"/>
-        <mapping resource="com/seguirapp/modelHibernate/EquipamentoModel.hbm.xml"/>
-        <mapping class="com.seguirapp.modelHibernate.EquipamentoModel"/>
-        <mapping resource="com/seguirapp/modelHibernate/PessoaModel.hbm.xml"/>
-        <mapping class="com.seguirapp.modelHibernate.PessoaModel"/>
-        <mapping resource="com/seguirapp/modelHibernate/ServicoModel.hbm.xml"/>
-        <mapping class="com.seguirapp.modelHibernate.ServicoModel"/>
-        <mapping resource="com/seguirapp/modelHibernate/VeiculoModel.hbm.xml"/>
-        <mapping class="com.seguirapp.modelHibernate.VeiculoModel"/>
+        <mapping resource="com/seguirapp/model/CoordenadaModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.CoordenadaModel"/>
+        <mapping resource="com/seguirapp/model/EmpresaModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.EmpresaModel"/>
+        <mapping resource="com/seguirapp/model/EquipamentoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.EquipamentoModel"/>
+        <mapping resource="com/seguirapp/model/PessoaModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.PessoaModel"/>
+        <mapping resource="com/seguirapp/model/ServicoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.ServicoModel"/>
+        <mapping resource="com/seguirapp/model/VeiculoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.VeiculoModel"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

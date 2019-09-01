@@ -1,6 +1,6 @@
 package com.seguirapp.controller;
 
-import com.seguirapp.modelHibernate.PessoaModel;
+import com.seguirapp.model.PessoaModel;
 import com.seguirapp.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class PessoaController {
 	//metodo get, retorna o formulario
 	@RequestMapping(value="/cadastroPessoa", method = RequestMethod.GET)
 	public String form() {
-		return "cadastros/formPessoa";
+		return "view/formPessoa";
 	}
 
 	//metodo post, salvar o formulario
@@ -27,7 +27,7 @@ public class PessoaController {
 	public String form(PessoaModel pessoaModel) {
 		//Persistir o evento no banco de dados
 		pr.save(pessoaModel);
-		return "redirect:/formPessoa";
+		return "redirect:/cadastroPessoa";
 	}
 	
 }

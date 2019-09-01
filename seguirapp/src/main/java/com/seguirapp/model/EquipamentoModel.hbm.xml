@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.seguirapp.modelHibernate.EquipamentoModel" table="equipamento" schema="DBIFS">
+    <class name="com.seguirapp.model.EquipamentoModel" table="equipamento" schema="DBIFS">
         <id name="idEquipamento">
             <column name="idEquipamento" sql-type="int(11)"/>
         </id>
@@ -17,14 +17,14 @@
         <property name="identificador">
             <column name="identificador" sql-type="varchar(10)" length="10"/>
         </property>
-        <many-to-one name="coordenadaByIdCoordenada" class="com.seguirapp.modelHibernate.CoordenadaModel">
+        <many-to-one name="coordenadaByIdCoordenada" class="com.seguirapp.model.CoordenadaModel">
             <column name="idCoordenada"/>
         </many-to-one>
         <set name="servicosByIdEquipamento" inverse="true">
             <key>
                 <column name="idEquipamento"/>
             </key>
-            <one-to-many not-found="ignore" class="com.seguirapp.modelHibernate.ServicoModel"/>
+            <one-to-many not-found="ignore" class="com.seguirapp.model.ServicoModel"/>
         </set>
     </class>
 </hibernate-mapping>

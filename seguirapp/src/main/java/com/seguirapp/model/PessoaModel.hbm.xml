@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.seguirapp.modelHibernate.PessoaModel" table="pessoa" schema="DBIFS">
+    <class name="com.seguirapp.model.PessoaModel" table="pessoa" schema="DBIFS">
         <id name="idPessoa">
             <column name="idPessoa" sql-type="int(11)"/>
         </id>
@@ -59,23 +59,23 @@
         <property name="senha">
             <column name="senha" sql-type="varchar(45)" length="45"/>
         </property>
-        <many-to-one name="empresaByIdEmpresa" class="com.seguirapp.modelHibernate.EmpresaModel">
+        <many-to-one name="empresaByIdEmpresa" class="com.seguirapp.model.EmpresaModel">
             <column name="idEmpresa" not-null="true"/>
         </many-to-one>
-        <many-to-one name="pessoaByIdResponsavel" class="com.seguirapp.modelHibernate.PessoaModel">
+        <many-to-one name="pessoaByIdResponsavel" class="com.seguirapp.model.PessoaModel">
             <column name="idResponsavel" not-null="true"/>
         </many-to-one>
         <set name="pessoasByIdPessoa" inverse="true">
             <key>
                 <column name="idResponsavel" not-null="true"/>
             </key>
-            <one-to-many not-found="ignore" class="com.seguirapp.modelHibernate.PessoaModel"/>
+            <one-to-many not-found="ignore" class="com.seguirapp.model.PessoaModel"/>
         </set>
         <set name="servicosByIdPessoa" inverse="true">
             <key>
                 <column name="idPessoa"/>
             </key>
-            <one-to-many not-found="ignore" class="com.seguirapp.modelHibernate.ServicoModel"/>
+            <one-to-many not-found="ignore" class="com.seguirapp.model.ServicoModel"/>
         </set>
     </class>
 </hibernate-mapping>
