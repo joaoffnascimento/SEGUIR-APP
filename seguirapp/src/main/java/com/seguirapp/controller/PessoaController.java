@@ -1,6 +1,7 @@
 package com.seguirapp.controller;
 
 import com.seguirapp.model.PessoaModel;
+import com.seguirapp.repository.PessoaBO;
 import com.seguirapp.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,13 @@ public class PessoaController {
 	//metodo post, salvar o formulario
 	@RequestMapping(value="/cadastroPessoa", method = RequestMethod.POST)
 	public String form(PessoaModel pessoaModel) {
-		//Persistir o evento no banco de dados
-		pr.save(pessoaModel);
+		//Persistir o evento no banco de
+		try{
+			PessoaBO.getInstance().salvar(pessoaModel, pr);
+
+		}catch (Exception e){
+			System.out.println(e);
+		}
 		return "redirect:/cadastroPessoa";
 	}
 
