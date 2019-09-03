@@ -24,6 +24,11 @@ public class PessoaController {
 		return "view/formPessoa";
 	}
 
+	@RequestMapping(value = "/pau", method = RequestMethod.GET)
+	public String form2(){
+		return "pau/pau";
+	}
+
 	//metodo post, salvar o formulario
 	@RequestMapping(value="/cadastroPessoa", method = RequestMethod.POST)
 	public String form(PessoaModel pessoaModel) {
@@ -33,6 +38,7 @@ public class PessoaController {
 
 		}catch (Exception e){
 			System.out.println(e);
+			return "redirect:/pau";
 		}
 		return "redirect:/cadastroPessoa";
 	}
