@@ -1,6 +1,8 @@
-package com.seguirapp.repository;
+package com.seguirapp.BO;
 
 import com.seguirapp.model.PessoaModel;
+import com.seguirapp.repository.PessoaRepository;
+import com.seguirapp.util.ValidaCPF;
 
 public class PessoaBO {
     private static PessoaBO myInstance;
@@ -13,9 +15,16 @@ public class PessoaBO {
     }
     //Validar os atributos da classe
     public void salvar(PessoaModel pessoaModel, PessoaRepository pessoaRepository) throws Exception {
-        if ((pessoaModel.getCpf() == null)||(pessoaModel.getCpf() == "")) {
+        ValidaCPF validaCPF = new ValidaCPF();
+
+        if (!validaCPF.isCPF(pessoaModel.getCpf())) {
             throw new Exception("pau");
         }
+
+        if ((pessoaModel.getRg() == null)||(pessoaModel.getRg() == "")) {
+            throw new Exception("pau");
+        }
+
         pessoaRepository.save(pessoaModel);
     }
 }

@@ -1,7 +1,7 @@
 package com.seguirapp.controller;
 
 import com.seguirapp.model.PessoaModel;
-import com.seguirapp.repository.PessoaBO;
+import com.seguirapp.BO.PessoaBO;
 import com.seguirapp.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
