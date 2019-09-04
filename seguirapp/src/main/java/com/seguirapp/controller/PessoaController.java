@@ -37,7 +37,6 @@ public class PessoaController {
 			PessoaBO.getInstance().salvar(pessoaModel, pr);
 
 		}catch (Exception e){
-			System.out.println(e);
 			return "redirect:/pau";
 		}
 		return "redirect:/cadastroPessoa";
