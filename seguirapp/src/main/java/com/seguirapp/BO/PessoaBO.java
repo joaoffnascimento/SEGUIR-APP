@@ -13,6 +13,7 @@ public class PessoaBO {
         }
         return myInstance;
     }
+
     //Validar os atributos da classe
     public void salvar(PessoaModel pessoaModel, PessoaRepository pessoaRepository) throws Exception {
         Util util = new Util();
@@ -21,8 +22,12 @@ public class PessoaBO {
             throw new Exception("Deu pau ao cadastrar CPF inválido !");
         }
         //Validar EMAIL
-        if(!util.isEmail(pessoaModel.getEmail())){
+        if (!util.isEmail(pessoaModel.getEmail())) {
             throw new Exception("Deu pau ao cadastrar Email Inválido!");
+        }
+        //Validar TELEFONE
+        if(!util.isTelefone(pessoaModel.getTelefone())){
+            throw new Exception("Deu pau ao cadastrar Telefone Inválido!");
         }
         pessoaRepository.save(pessoaModel);
     }

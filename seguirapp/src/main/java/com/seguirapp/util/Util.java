@@ -75,8 +75,22 @@ public class Util {
         }
     }
 
-    public static String imprimeCPF(String CPF) {
+    public String imprimeCPF(String CPF) {
         return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
                 CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
+    }
+
+
+    //Validar TELEFONE
+    public boolean isTelefone(String telefone){
+
+        String formato = "\\([0-9]{2}?\\)[0-9]{5}?\\-[0-9]{4}?";
+
+        if ((telefone == null) || (telefone.length() != 14) || (!telefone.matches(formato))) {
+            return false;
+        } else{
+            return true;
+        }
+
     }
 }

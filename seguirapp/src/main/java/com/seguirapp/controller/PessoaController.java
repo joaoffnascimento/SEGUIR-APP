@@ -12,47 +12,48 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PessoaController {
 
-	//Intejção de dependencias
-	//Todas vez que for necessario utilizar essa interface
-	//sera utilizada a instancia criada automaticamente
-	@Autowired
-	private PessoaRepository pr;
+    //Intejção de dependencias
+    //Todas vez que for necessario utilizar essa interface
+    //sera utilizada a instancia criada automaticamente
+    @Autowired
+    private PessoaRepository pr;
 
-	//metodo get, retorna o formulario
-	@RequestMapping(value="/cadastroPessoa", method = RequestMethod.GET)
-	public String form() {
-		return "view/formPessoa";
-	}
+    //metodo get, retorna o formulario
+    @RequestMapping(value = "/cadastroPessoa", method = RequestMethod.GET)
+    public String form() {
+        return "view/formPessoa";
+    }
 
-	@RequestMapping(value = "/pau", method = RequestMethod.GET)
-	public String form2(){
-		return "pau/pau";
-	}
+    @RequestMapping(value = "/pau", method = RequestMethod.GET)
+    public String form2() {
+        return "pau/pau";
+    }
 
-	//metodo post, salvar o formulario
-	@RequestMapping(value="/cadastroPessoa", method = RequestMethod.POST)
-	public String form(PessoaModel pessoaModel) {
-		//Persistir o evento no banco de
-		try{
-			PessoaBO.getInstance().salvar(pessoaModel, pr);
+    //metodo post, salvar o formulario
+    @RequestMapping(value = "/cadastroPessoa", method = RequestMethod.POST)
+    public String form(PessoaModel pessoaModel) {
+        //Persistir o evento no banco de
+        try {
+            PessoaBO.getInstance().salvar(pessoaModel, pr);
 
-		}catch (Exception e){
-			return "redirect:/pau";
-		}
-		return "redirect:/cadastroPessoa";
-	}
+        } catch (Exception e) {
+            System.out.println(e);
+            return "redirect:/pau";
+        }
+        return "redirect:/cadastroPessoa";
+    }
 
-	//Retornar a lista de pessoas cadastradas
-	@RequestMapping("/pessoas")
-	public ModelAndView listaPessoas(){
-		//Busca dos eventos no banco de dados
-		ModelAndView mv = new ModelAndView("list\\listaPessoas");
-		//Lista de pessoas
-		//Pessoas Repository - metodo de busca, findAll
-		Iterable<PessoaModel> pessoas = pr.findAll();
-		//Atributo mv - para aparecer as coisas na tela
-		//Mesmo nome entre chaves e cifrao ${} atributeName
-		mv.addObject("pessoas", pessoas);
-		return mv;
-	}
+    //Retornar a lista de pessoas cadastradas
+    @RequestMapping("/pessoas")
+    public ModelAndView listaPessoas() {
+        //Busca dos eventos no banco de dados
+        ModelAndView mv = new ModelAndView("list\\listaPessoas");
+        //Lista de pessoas
+        //Pessoas Repository - metodo de busca, findAll
+        Iterable<PessoaModel> pessoas = pr.findAll();
+        //Atributo mv - para aparecer as coisas na tela
+        //Mesmo nome entre chaves e cifrao ${} atributeName
+        mv.addObject("pessoas", pessoas);
+        return mv;
+    }
 }
