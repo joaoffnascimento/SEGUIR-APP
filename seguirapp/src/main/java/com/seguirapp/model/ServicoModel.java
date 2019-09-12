@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "servico", schema = "DBIFS")
+@Table(name = "servico", schema = "DBIFS", catalog = "")
 public class ServicoModel {
     private int idServico;
     private int idPessoa;
@@ -17,7 +17,7 @@ public class ServicoModel {
     private EquipamentoModel equipamentoByIdEquipamento;
 
     @Id
-    @Column(name = "idServico", nullable = false)
+    @Column(name = "id_servico", nullable = false)
     public int getIdServico() {
         return idServico;
     }
@@ -27,7 +27,7 @@ public class ServicoModel {
     }
 
     @Basic
-    @Column(name = "idPessoa", nullable = false)
+    @Column(name = "id_pessoa", nullable = false)
     public int getIdPessoa() {
         return idPessoa;
     }
@@ -47,7 +47,7 @@ public class ServicoModel {
     }
 
     @Basic
-    @Column(name = "idVeiculo", nullable = false)
+    @Column(name = "id_veiculo", nullable = false)
     public int getIdVeiculo() {
         return idVeiculo;
     }
@@ -67,7 +67,7 @@ public class ServicoModel {
     }
 
     @Basic
-    @Column(name = "idEquipamento", nullable = false)
+    @Column(name = "id_equipamento", nullable = false)
     public int getIdEquipamento() {
         return idEquipamento;
     }
@@ -94,8 +94,9 @@ public class ServicoModel {
         return Objects.hash(idServico, idPessoa, preco, idVeiculo, descricao, idEquipamento);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idPessoa", referencedColumnName = "idPessoa", nullable = false, insertable = false, updatable = false)
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "pessoa",
+            joinColumns = {@JoinColumn(name = "id_pessoa", nullable = false)})
     public PessoaModel getPessoaByIdPessoa() {
         return pessoaByIdPessoa;
     }
@@ -104,8 +105,9 @@ public class ServicoModel {
         this.pessoaByIdPessoa = pessoaByIdPessoa;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idVeiculo", referencedColumnName = "idVeiculo", nullable = false, insertable = false, updatable = false)
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "veiculo",
+            joinColumns = {@JoinColumn(name = "id_veiculo", nullable = false)})
     public VeiculoModel getVeiculoByIdVeiculo() {
         return veiculoByIdVeiculo;
     }
@@ -114,8 +116,9 @@ public class ServicoModel {
         this.veiculoByIdVeiculo = veiculoByIdVeiculo;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idEquipamento", referencedColumnName = "idEquipamento", nullable = false, insertable = false, updatable = false)
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "equipamento",
+            joinColumns = {@JoinColumn(name = "id_equipamento", nullable = false)})
     public EquipamentoModel getEquipamentoByIdEquipamento() {
         return equipamentoByIdEquipamento;
     }

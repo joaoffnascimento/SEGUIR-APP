@@ -1,19 +1,19 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "empresa", schema = "DBIFS")
+@Table(name = "empresa", schema = "DBIFS", catalog = "")
 public class EmpresaModel {
     private int idEmpresa;
     private String nome;
     private String cnpj;
-    private Collection<PessoaModel> pessoasByIdEmpresa;
+    private int idPessoa;
+    private PessoaModel pessoaByIdPessoa;
 
     @Id
-    @Column(name = "idEmpresa", nullable = false, insertable = false, updatable = false)
+    @Column(name = "id_empresa", nullable = false)
     public int getIdEmpresa() {
         return idEmpresa;
     }
@@ -42,27 +42,40 @@ public class EmpresaModel {
         this.cnpj = cnpj;
     }
 
+    @Basic
+    @Column(name = "id_pessoa", nullable = false)
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmpresaModel that = (EmpresaModel) o;
         return idEmpresa == that.idEmpresa &&
+                idPessoa == that.idPessoa &&
                 Objects.equals(nome, that.nome) &&
                 Objects.equals(cnpj, that.cnpj);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEmpresa, nome, cnpj);
+        return Objects.hash(idEmpresa, nome, cnpj, idPessoa);
     }
 
-    @OneToMany(mappedBy = "empresaByIdEmpresa")
-    public Collection<PessoaModel> getPessoasByIdEmpresa() {
-        return pessoasByIdEmpresa;
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "pessoa",
+            joinColumns = {@JoinColumn(name = "id_pessoa", nullable = false)})
+    public PessoaModel getPessoaByIdPessoa() {
+        return pessoaByIdPessoa;
     }
 
-    public void setPessoasByIdEmpresa(Collection<PessoaModel> pessoasByIdEmpresa) {
-        this.pessoasByIdEmpresa = pessoasByIdEmpresa;
+    public void setPessoaByIdPessoa(PessoaModel pessoaByIdPessoa) {
+        this.pessoaByIdPessoa = pessoaByIdPessoa;
     }
 }

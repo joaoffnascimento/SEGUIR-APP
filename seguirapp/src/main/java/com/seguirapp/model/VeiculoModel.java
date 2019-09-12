@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "veiculo", schema = "DBIFS")
+@Table(name = "veiculo", schema = "DBIFS", catalog = "")
 public class VeiculoModel {
     private int idVeiculo;
     private String placa;
@@ -18,7 +18,7 @@ public class VeiculoModel {
     private Collection<ServicoModel> servicosByIdVeiculo;
 
     @Id
-    @Column(name = "idVeiculo", nullable = false)
+    @Column(name = "id_veiculo", nullable = false)
     public int getIdVeiculo() {
         return idVeiculo;
     }

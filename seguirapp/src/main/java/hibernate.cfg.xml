@@ -4,20 +4,26 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://192.168.255.128:3306/DBIFS</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mariadb://192.168.255.128:3306/DBIFS</property>
+        <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
         <mapping resource="com/seguirapp/model/CoordenadaModel.hbm.xml"/>
         <mapping class="com.seguirapp.model.CoordenadaModel"/>
         <mapping resource="com/seguirapp/model/EmpresaModel.hbm.xml"/>
         <mapping class="com.seguirapp.model.EmpresaModel"/>
         <mapping resource="com/seguirapp/model/EquipamentoModel.hbm.xml"/>
         <mapping class="com.seguirapp.model.EquipamentoModel"/>
-        <mapping resource="com/seguirapp/model/PessoaModel.hbm.xml"/>
+        <!--mapping resource="com/seguirapp/model/PessoaModel.hbm.xml"/-->
         <mapping class="com.seguirapp.model.PessoaModel"/>
         <mapping resource="com/seguirapp/model/ServicoModel.hbm.xml"/>
         <mapping class="com.seguirapp.model.ServicoModel"/>
         <mapping resource="com/seguirapp/model/VeiculoModel.hbm.xml"/>
         <mapping class="com.seguirapp.model.VeiculoModel"/>
+        <mapping resource="com/seguirapp/model/AuthModel.hbm.xml"/>
+        <mapping resource="com/seguirapp/model/CidadeModel.hbm.xml"/>
+        <mapping resource="com/seguirapp/model/EstadoModel.hbm.xml"/>
+        <mapping class="com.seguirapp.model.AuthModel"/>
+        <mapping class="com.seguirapp.model.CidadeModel"/>
+        <mapping class="com.seguirapp.model.EstadoModel"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

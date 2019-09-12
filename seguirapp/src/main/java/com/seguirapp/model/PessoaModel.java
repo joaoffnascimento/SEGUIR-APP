@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "pessoa", schema = "DBIFS")
+@Table(name = "pessoa", schema = "DBIFS", catalog = "")
 public class PessoaModel {
     private int idPessoa;
     private String nome;
@@ -16,23 +16,20 @@ public class PessoaModel {
     private String sexo;
     private Date dtCadastro;
     private String email;
-    private Integer idEmpresa;
-    private int numeroCasa;
-    private String bairro;
-    private String siglaEstado;
     private String logradouro;
-    private String cidade;
     private String telefone;
     private Integer idResponsavel;
-    private String login;
-    private String senha;
-    private EmpresaModel empresaByIdEmpresa;
+    private int auth;
+    private int cidade;
+    private Collection<EmpresaModel> empresasByIdPessoa;
     private PessoaModel pessoaByIdResponsavel;
     private Collection<PessoaModel> pessoasByIdPessoa;
+    private AuthModel authByAuth;
+    private CidadeModel cidadeByCidade;
     private Collection<ServicoModel> servicosByIdPessoa;
 
     @Id
-    @Column(name = "idPessoa", nullable = false)
+    @Column(name = "id_pessoa", nullable = false)
     public int getIdPessoa() {
         return idPessoa;
     }
@@ -52,7 +49,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "dtNascimento", nullable = false)
+    @Column(name = "dt_nascimento", nullable = false)
     public Date getDtNascimento() {
         return dtNascimento;
     }
@@ -82,7 +79,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "sexo", nullable = false, length = 1)
+    @Column(name = "sexo", nullable = false, length = 45)
     public String getSexo() {
         return sexo;
     }
@@ -92,7 +89,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "dtCadastro", nullable = true)
+    @Column(name = "dt_cadastro", nullable = false)
     public Date getDtCadastro() {
         return dtCadastro;
     }
@@ -112,46 +109,6 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "idEmpresa", nullable = true, insertable = false, updatable = false)
-    public Integer getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(Integer idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
-    @Basic
-    @Column(name = "numeroCasa", nullable = false)
-    public int getNumeroCasa() {
-        return numeroCasa;
-    }
-
-    public void setNumeroCasa(int numeroCasa) {
-        this.numeroCasa = numeroCasa;
-    }
-
-    @Basic
-    @Column(name = "bairro", nullable = true, length = 45)
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    @Basic
-    @Column(name = "siglaEstado", nullable = false, length = 45)
-    public String getSiglaEstado() {
-        return siglaEstado;
-    }
-
-    public void setSiglaEstado(String siglaEstado) {
-        this.siglaEstado = siglaEstado;
-    }
-
-    @Basic
     @Column(name = "logradouro", nullable = false, length = 100)
     public String getLogradouro() {
         return logradouro;
@@ -159,16 +116,6 @@ public class PessoaModel {
 
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
-    }
-
-    @Basic
-    @Column(name = "cidade", nullable = false, length = 45)
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
     @Basic
@@ -182,7 +129,7 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "idResponsavel", nullable = true, insertable = false, updatable = false)
+    @Column(name = "id_responsavel", nullable = true)
     public Integer getIdResponsavel() {
         return idResponsavel;
     }
@@ -192,23 +139,23 @@ public class PessoaModel {
     }
 
     @Basic
-    @Column(name = "login", nullable = false, length = 45)
-    public String getLogin() {
-        return login;
+    @Column(name = "auth", nullable = false)
+    public int getAuth() {
+        return auth;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setAuth(int auth) {
+        this.auth = auth;
     }
 
     @Basic
-    @Column(name = "senha", nullable = false, length = 45)
-    public String getSenha() {
-        return senha;
+    @Column(name = "cidade", nullable = false)
+    public int getCidade() {
+        return cidade;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setCidade(int cidade) {
+        this.cidade = cidade;
     }
 
     @Override
@@ -217,7 +164,8 @@ public class PessoaModel {
         if (o == null || getClass() != o.getClass()) return false;
         PessoaModel that = (PessoaModel) o;
         return idPessoa == that.idPessoa &&
-                numeroCasa == that.numeroCasa &&
+                auth == that.auth &&
+                cidade == that.cidade &&
                 Objects.equals(nome, that.nome) &&
                 Objects.equals(dtNascimento, that.dtNascimento) &&
                 Objects.equals(cpf, that.cpf) &&
@@ -225,34 +173,28 @@ public class PessoaModel {
                 Objects.equals(sexo, that.sexo) &&
                 Objects.equals(dtCadastro, that.dtCadastro) &&
                 Objects.equals(email, that.email) &&
-                Objects.equals(idEmpresa, that.idEmpresa) &&
-                Objects.equals(bairro, that.bairro) &&
-                Objects.equals(siglaEstado, that.siglaEstado) &&
                 Objects.equals(logradouro, that.logradouro) &&
-                Objects.equals(cidade, that.cidade) &&
                 Objects.equals(telefone, that.telefone) &&
-                Objects.equals(idResponsavel, that.idResponsavel) &&
-                Objects.equals(login, that.login) &&
-                Objects.equals(senha, that.senha);
+                Objects.equals(idResponsavel, that.idResponsavel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPessoa, nome, dtNascimento, cpf, rg, sexo, dtCadastro, email, idEmpresa, numeroCasa, bairro, siglaEstado, logradouro, cidade, telefone, idResponsavel, login, senha);
+        return Objects.hash(idPessoa, nome, dtNascimento, cpf, rg, sexo, dtCadastro, email, logradouro, telefone, idResponsavel, auth, cidade);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa")
-    public EmpresaModel getEmpresaByIdEmpresa() {
-        return empresaByIdEmpresa;
+    @OneToMany(mappedBy = "pessoaByIdPessoa")
+    public Collection<EmpresaModel> getEmpresasByIdPessoa() {
+        return empresasByIdPessoa;
     }
 
-    public void setEmpresaByIdEmpresa(EmpresaModel empresaByIdEmpresa) {
-        this.empresaByIdEmpresa = empresaByIdEmpresa;
+    public void setEmpresasByIdPessoa(Collection<EmpresaModel> empresasByIdPessoa) {
+        this.empresasByIdPessoa = empresasByIdPessoa;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idResponsavel", referencedColumnName = "idPessoa")
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "pessoa",
+            joinColumns = {@JoinColumn(name = "id_pessoa", nullable = false)})
     public PessoaModel getPessoaByIdResponsavel() {
         return pessoaByIdResponsavel;
     }
@@ -268,6 +210,28 @@ public class PessoaModel {
 
     public void setPessoasByIdPessoa(Collection<PessoaModel> pessoasByIdPessoa) {
         this.pessoasByIdPessoa = pessoasByIdPessoa;
+    }
+
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "auth",
+            joinColumns = {@JoinColumn(name = "id_auth", nullable = false)})
+    public AuthModel getAuthByAuth() {
+        return authByAuth;
+    }
+
+    public void setAuthByAuth(AuthModel authByAuth) {
+        this.authByAuth = authByAuth;
+    }
+
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "cidade",
+            joinColumns = {@JoinColumn(name = "id_cidade", nullable = false)})
+    public CidadeModel getCidadeByCidade() {
+        return cidadeByCidade;
+    }
+
+    public void setCidadeByCidade(CidadeModel cidadeByCidade) {
+        this.cidadeByCidade = cidadeByCidade;
     }
 
     @OneToMany(mappedBy = "pessoaByIdPessoa")

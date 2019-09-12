@@ -5,17 +5,16 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "equipamento", schema = "DBIFS")
+@Table(name = "equipamento", schema = "DBIFS", catalog = "")
 public class EquipamentoModel {
     private int idEquipamento;
     private String marca;
-    private int idCoordenada;
     private String identificador;
-    private CoordenadaModel coordenadaByIdCoordenada;
+    private Collection<CoordenadaModel> coordenadasByIdEquipamento;
     private Collection<ServicoModel> servicosByIdEquipamento;
 
     @Id
-    @Column(name = "idEquipamento", nullable = false)
+    @Column(name = "id_equipamento", nullable = false)
     public int getIdEquipamento() {
         return idEquipamento;
     }
@@ -35,16 +34,6 @@ public class EquipamentoModel {
     }
 
     @Basic
-    @Column(name = "idCoordenada", nullable = false, insertable = false, updatable = false)
-    public int getIdCoordenada() {
-        return idCoordenada;
-    }
-
-    public void setIdCoordenada(int idCoordenada) {
-        this.idCoordenada = idCoordenada;
-    }
-
-    @Basic
     @Column(name = "identificador", nullable = false, length = 10)
     public String getIdentificador() {
         return identificador;
@@ -60,24 +49,22 @@ public class EquipamentoModel {
         if (o == null || getClass() != o.getClass()) return false;
         EquipamentoModel that = (EquipamentoModel) o;
         return idEquipamento == that.idEquipamento &&
-                idCoordenada == that.idCoordenada &&
                 Objects.equals(marca, that.marca) &&
                 Objects.equals(identificador, that.identificador);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEquipamento, marca, idCoordenada, identificador);
+        return Objects.hash(idEquipamento, marca, identificador);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "idCoordenada", referencedColumnName = "idCoordenada", nullable = false)
-    public CoordenadaModel getCoordenadaByIdCoordenada() {
-        return coordenadaByIdCoordenada;
+    @OneToMany(mappedBy = "equipamentoByIdEquipamento")
+    public Collection<CoordenadaModel> getCoordenadasByIdEquipamento() {
+        return coordenadasByIdEquipamento;
     }
 
-    public void setCoordenadaByIdCoordenada(CoordenadaModel coordenadaByIdCoordenada) {
-        this.coordenadaByIdCoordenada = coordenadaByIdCoordenada;
+    public void setCoordenadasByIdEquipamento(Collection<CoordenadaModel> coordenadasByIdEquipamento) {
+        this.coordenadasByIdEquipamento = coordenadasByIdEquipamento;
     }
 
     @OneToMany(mappedBy = "equipamentoByIdEquipamento")
