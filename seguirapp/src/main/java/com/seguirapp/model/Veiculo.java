@@ -1,13 +1,14 @@
 package com.seguirapp.model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "veiculo", schema = "DBIFS", catalog = "")
-public class VeiculoModel {
+public class Veiculo {
     private int idVeiculo;
     private String placa;
     private String chassi;
@@ -15,7 +16,6 @@ public class VeiculoModel {
     private String cor;
     private String marca;
     private String modelo;
-    private Collection<ServicoModel> servicosByIdVeiculo;
 
     @Id
     @Column(name = "id_veiculo", nullable = false)
@@ -91,27 +91,18 @@ public class VeiculoModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VeiculoModel that = (VeiculoModel) o;
-        return idVeiculo == that.idVeiculo &&
-                Objects.equals(placa, that.placa) &&
-                Objects.equals(chassi, that.chassi) &&
-                Objects.equals(ano, that.ano) &&
-                Objects.equals(cor, that.cor) &&
-                Objects.equals(marca, that.marca) &&
-                Objects.equals(modelo, that.modelo);
+        Veiculo veiculo = (Veiculo) o;
+        return idVeiculo == veiculo.idVeiculo &&
+                Objects.equals(placa, veiculo.placa) &&
+                Objects.equals(chassi, veiculo.chassi) &&
+                Objects.equals(ano, veiculo.ano) &&
+                Objects.equals(cor, veiculo.cor) &&
+                Objects.equals(marca, veiculo.marca) &&
+                Objects.equals(modelo, veiculo.modelo);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idVeiculo, placa, chassi, ano, cor, marca, modelo);
-    }
-
-    @OneToMany(mappedBy = "veiculoByIdVeiculo")
-    public Collection<ServicoModel> getServicosByIdVeiculo() {
-        return servicosByIdVeiculo;
-    }
-
-    public void setServicosByIdVeiculo(Collection<ServicoModel> servicosByIdVeiculo) {
-        this.servicosByIdVeiculo = servicosByIdVeiculo;
     }
 }

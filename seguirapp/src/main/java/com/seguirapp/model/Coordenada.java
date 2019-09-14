@@ -1,20 +1,20 @@
 package com.seguirapp.model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "coordenada", schema = "DBIFS", catalog = "")
-public class CoordenadaModel {
+public class Coordenada {
     private int idCoordenada;
     private double latitude;
     private double longitude;
     private double velocidade;
     private double altitude;
     private Date horario;
-    private int idEquipamento;
-    private EquipamentoModel equipamentoByIdEquipamento;
 
     @Id
     @Column(name = "id_coordenada", nullable = false)
@@ -76,43 +76,21 @@ public class CoordenadaModel {
         this.horario = horario;
     }
 
-    @Basic
-    @Column(name = "id_equipamento", nullable = false)
-    public int getIdEquipamento() {
-        return idEquipamento;
-    }
-
-    public void setIdEquipamento(int idEquipamento) {
-        this.idEquipamento = idEquipamento;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CoordenadaModel that = (CoordenadaModel) o;
+        Coordenada that = (Coordenada) o;
         return idCoordenada == that.idCoordenada &&
                 Double.compare(that.latitude, latitude) == 0 &&
                 Double.compare(that.longitude, longitude) == 0 &&
                 Double.compare(that.velocidade, velocidade) == 0 &&
                 Double.compare(that.altitude, altitude) == 0 &&
-                idEquipamento == that.idEquipamento &&
                 Objects.equals(horario, that.horario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCoordenada, latitude, longitude, velocidade, altitude, horario, idEquipamento);
-    }
-
-    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "equipamento",
-            joinColumns = {@JoinColumn(name = "id_equipamento", nullable = false)})
-    public EquipamentoModel getEquipamentoByIdEquipamento() {
-        return equipamentoByIdEquipamento;
-    }
-
-    public void setEquipamentoByIdEquipamento(EquipamentoModel equipamentoByIdEquipamento) {
-        this.equipamentoByIdEquipamento = equipamentoByIdEquipamento;
+        return Objects.hash(idCoordenada, latitude, longitude, velocidade, altitude, horario);
     }
 }

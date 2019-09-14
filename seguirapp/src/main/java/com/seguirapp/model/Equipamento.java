@@ -1,17 +1,16 @@
 package com.seguirapp.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-@Table(name = "equipamento", schema = "DBIFS", catalog = "")
-public class EquipamentoModel {
+public class Equipamento {
     private int idEquipamento;
     private String marca;
     private String identificador;
-    private Collection<CoordenadaModel> coordenadasByIdEquipamento;
-    private Collection<ServicoModel> servicosByIdEquipamento;
 
     @Id
     @Column(name = "id_equipamento", nullable = false)
@@ -47,7 +46,7 @@ public class EquipamentoModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EquipamentoModel that = (EquipamentoModel) o;
+        Equipamento that = (Equipamento) o;
         return idEquipamento == that.idEquipamento &&
                 Objects.equals(marca, that.marca) &&
                 Objects.equals(identificador, that.identificador);
@@ -56,23 +55,5 @@ public class EquipamentoModel {
     @Override
     public int hashCode() {
         return Objects.hash(idEquipamento, marca, identificador);
-    }
-
-    @OneToMany(mappedBy = "equipamentoByIdEquipamento")
-    public Collection<CoordenadaModel> getCoordenadasByIdEquipamento() {
-        return coordenadasByIdEquipamento;
-    }
-
-    public void setCoordenadasByIdEquipamento(Collection<CoordenadaModel> coordenadasByIdEquipamento) {
-        this.coordenadasByIdEquipamento = coordenadasByIdEquipamento;
-    }
-
-    @OneToMany(mappedBy = "equipamentoByIdEquipamento")
-    public Collection<ServicoModel> getServicosByIdEquipamento() {
-        return servicosByIdEquipamento;
-    }
-
-    public void setServicosByIdEquipamento(Collection<ServicoModel> servicosByIdEquipamento) {
-        this.servicosByIdEquipamento = servicosByIdEquipamento;
     }
 }

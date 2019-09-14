@@ -1,16 +1,16 @@
 package com.seguirapp.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-@Table(name = "estado", schema = "DBIFS", catalog = "")
-public class EstadoModel {
+public class Estado {
     private int idEstado;
     private String nome;
     private String sigla;
-    private Collection<CidadeModel> cidadesByIdEstado;
 
     @Id
     @Column(name = "id_estado", nullable = false)
@@ -46,23 +46,14 @@ public class EstadoModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EstadoModel that = (EstadoModel) o;
-        return idEstado == that.idEstado &&
-                Objects.equals(nome, that.nome) &&
-                Objects.equals(sigla, that.sigla);
+        Estado estado = (Estado) o;
+        return idEstado == estado.idEstado &&
+                Objects.equals(nome, estado.nome) &&
+                Objects.equals(sigla, estado.sigla);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idEstado, nome, sigla);
-    }
-
-    @OneToMany(mappedBy = "estadoByEstado")
-    public Collection<CidadeModel> getCidadesByIdEstado() {
-        return cidadesByIdEstado;
-    }
-
-    public void setCidadesByIdEstado(Collection<CidadeModel> cidadesByIdEstado) {
-        this.cidadesByIdEstado = cidadesByIdEstado;
     }
 }

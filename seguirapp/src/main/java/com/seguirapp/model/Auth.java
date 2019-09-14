@@ -1,16 +1,16 @@
 package com.seguirapp.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-@Table(name = "auth", schema = "DBIFS", catalog = "")
-public class AuthModel {
+public class Auth {
     private int idAuth;
     private String login;
     private String senha;
-    private Collection<PessoaModel> pessoasByIdAuth;
 
     @Id
     @Column(name = "id_auth", nullable = false)
@@ -46,23 +46,14 @@ public class AuthModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthModel authModel = (AuthModel) o;
-        return idAuth == authModel.idAuth &&
-                Objects.equals(login, authModel.login) &&
-                Objects.equals(senha, authModel.senha);
+        Auth auth = (Auth) o;
+        return idAuth == auth.idAuth &&
+                Objects.equals(login, auth.login) &&
+                Objects.equals(senha, auth.senha);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idAuth, login, senha);
-    }
-
-    @OneToMany(mappedBy = "authByAuth")
-    public Collection<PessoaModel> getPessoasByIdAuth() {
-        return pessoasByIdAuth;
-    }
-
-    public void setPessoasByIdAuth(Collection<PessoaModel> pessoasByIdAuth) {
-        this.pessoasByIdAuth = pessoasByIdAuth;
     }
 }
