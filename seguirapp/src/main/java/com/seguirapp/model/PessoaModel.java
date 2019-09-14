@@ -1,10 +1,12 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
 
+@XmlRootElement
 @Entity
 @Table(name = "pessoa", schema = "DBIFS", catalog = "")
 public class PessoaModel {

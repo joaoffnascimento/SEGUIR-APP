@@ -3,7 +3,9 @@ package com.seguirapp.service;
 import com.seguirapp.model.PessoaModel;
 import com.seguirapp.repository.PessoaRepository;
 import com.seguirapp.util.Util;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PessoaService {
     private static PessoaService myInstance;
 
@@ -13,6 +15,7 @@ public class PessoaService {
         }
         return myInstance;
     }
+
 
     //Validar os atributos da classe
     public void salvar(PessoaModel pessoaModel, PessoaRepository pessoaRepository) throws Exception {
