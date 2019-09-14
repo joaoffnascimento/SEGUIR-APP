@@ -1,15 +1,15 @@
-package com.seguirapp.BO;
+package com.seguirapp.service;
 
 import com.seguirapp.model.PessoaModel;
 import com.seguirapp.repository.PessoaRepository;
 import com.seguirapp.util.Util;
 
-public class PessoaBO {
-    private static PessoaBO myInstance;
+public class PessoaService {
+    private static PessoaService myInstance;
 
-    public synchronized static PessoaBO getInstance() {
+    public synchronized static PessoaService getInstance() {
         if (myInstance == null) {
-            myInstance = new PessoaBO();
+            myInstance = new PessoaService();
         }
         return myInstance;
     }

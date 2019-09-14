@@ -84,9 +84,9 @@ public class Util {
     //Validar TELEFONE
     public boolean isTelefone(String telefone){
 
-        String formato = "\\([0-9]{2}?\\)[0-9]{5}?\\-[0-9]{4}?";
+        String formato = "\\([0-9]{2}?\\)[0-9]{5}?\\[0-9]{4}?";
 
-        if ((telefone == null) || (telefone.length() != 14) || (!telefone.matches(formato))) {
+        if ((telefone == null) || (telefone.length() != 13) || (!telefone.matches(formato))) {
             return false;
         } else{
             return true;
