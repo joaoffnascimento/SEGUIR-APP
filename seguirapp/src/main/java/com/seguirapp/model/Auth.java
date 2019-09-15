@@ -1,9 +1,7 @@
 package com.seguirapp.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +9,7 @@ public class Auth {
     private int idAuth;
     private String login;
     private String senha;
+    private Collection<Pessoa> pessoasByIdAuth;
 
     @Id
     @Column(name = "id_auth", nullable = false)
@@ -55,5 +54,14 @@ public class Auth {
     @Override
     public int hashCode() {
         return Objects.hash(idAuth, login, senha);
+    }
+
+    @OneToMany(mappedBy = "authByIdAuth")
+    public Collection<Pessoa> getPessoasByIdAuth() {
+        return pessoasByIdAuth;
+    }
+
+    public void setPessoasByIdAuth(Collection<Pessoa> pessoasByIdAuth) {
+        this.pessoasByIdAuth = pessoasByIdAuth;
     }
 }

@@ -9,6 +9,7 @@ public class Servico {
     private double preco;
     private String descricao;
     private Pessoa pessoaByIdPessoa;
+    private Veiculo veiculoByIdVeiculo;
     private Equipamento equipamentoByIdEquipamento;
 
     @Id
@@ -64,6 +65,16 @@ public class Servico {
 
     public void setPessoaByIdPessoa(Pessoa pessoaByIdPessoa) {
         this.pessoaByIdPessoa = pessoaByIdPessoa;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_veiculo", referencedColumnName = "id_veiculo", nullable = false)
+    public Veiculo getVeiculoByIdVeiculo() {
+        return veiculoByIdVeiculo;
+    }
+
+    public void setVeiculoByIdVeiculo(Veiculo veiculoByIdVeiculo) {
+        this.veiculoByIdVeiculo = veiculoByIdVeiculo;
     }
 
     @ManyToOne

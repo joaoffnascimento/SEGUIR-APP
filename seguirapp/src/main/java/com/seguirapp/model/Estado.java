@@ -23,7 +23,7 @@ public class Estado {
     }
 
     @Basic
-    @Column(name = "nome", nullable = true, length = 45)
+    @Column(name = "nome", nullable = false, length = 45)
     public String getNome() {
         return nome;
     }
@@ -33,7 +33,7 @@ public class Estado {
     }
 
     @Basic
-    @Column(name = "sigla", nullable = true, length = 2)
+    @Column(name = "sigla", nullable = false, length = 2)
     public String getSigla() {
         return sigla;
     }

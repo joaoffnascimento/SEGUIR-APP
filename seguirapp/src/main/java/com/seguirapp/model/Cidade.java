@@ -1,15 +1,15 @@
 package com.seguirapp.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Cidade {
     private int idCidade;
     private String nome;
+    private Estado estadoByIdEstado;
+    private Collection<Pessoa> pessoasByIdCidade;
 
     @Id
     @Column(name = "id_cidade", nullable = false)
@@ -43,5 +43,24 @@ public class Cidade {
     @Override
     public int hashCode() {
         return Objects.hash(idCidade, nome);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false)
+    public Estado getEstadoByIdEstado() {
+        return estadoByIdEstado;
+    }
+
+    public void setEstadoByIdEstado(Estado estadoByIdEstado) {
+        this.estadoByIdEstado = estadoByIdEstado;
+    }
+
+    @OneToMany(mappedBy = "cidadeByIdCidade")
+    public Collection<Pessoa> getPessoasByIdCidade() {
+        return pessoasByIdCidade;
+    }
+
+    public void setPessoasByIdCidade(Collection<Pessoa> pessoasByIdCidade) {
+        this.pessoasByIdCidade = pessoasByIdCidade;
     }
 }

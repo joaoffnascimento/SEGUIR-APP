@@ -9,7 +9,7 @@ public class Pessoa {
     private int idPessoa;
     private String nome;
     private Date dtNascimento;
-    private String cpf;
+    private String cpfCnpj;
     private String rg;
     private String sexo;
     private Date dtCadastro;
@@ -17,8 +17,8 @@ public class Pessoa {
     private String logradouro;
     private String telefone;
     private Pessoa pessoaByIdResponsavel;
-    private Auth authByAuth;
-    private Cidade cidadeByCidade;
+    private Auth authByIdAuth;
+    private Cidade cidadeByIdCidade;
 
     @Id
     @Column(name = "id_pessoa", nullable = false)
@@ -41,7 +41,7 @@ public class Pessoa {
     }
 
     @Basic
-    @Column(name = "dt_nascimento", nullable = true)
+    @Column(name = "dt_nascimento", nullable = false)
     public Date getDtNascimento() {
         return dtNascimento;
     }
@@ -51,17 +51,17 @@ public class Pessoa {
     }
 
     @Basic
-    @Column(name = "cpf", nullable = false, length = 45)
-    public String getCpf() {
-        return cpf;
+    @Column(name = "cpf_cnpj", nullable = false, length = 45)
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
     @Basic
-    @Column(name = "rg", nullable = false, length = 45)
+    @Column(name = "rg", nullable = true, length = 45)
     public String getRg() {
         return rg;
     }
@@ -71,7 +71,7 @@ public class Pessoa {
     }
 
     @Basic
-    @Column(name = "sexo", nullable = false, length = 45)
+    @Column(name = "sexo", nullable = true, length = 45)
     public String getSexo() {
         return sexo;
     }
@@ -81,7 +81,7 @@ public class Pessoa {
     }
 
     @Basic
-    @Column(name = "dt_cadastro", nullable = true)
+    @Column(name = "dt_cadastro", nullable = false)
     public Date getDtCadastro() {
         return dtCadastro;
     }
@@ -128,7 +128,7 @@ public class Pessoa {
         return idPessoa == pessoa.idPessoa &&
                 Objects.equals(nome, pessoa.nome) &&
                 Objects.equals(dtNascimento, pessoa.dtNascimento) &&
-                Objects.equals(cpf, pessoa.cpf) &&
+                Objects.equals(cpfCnpj, pessoa.cpfCnpj) &&
                 Objects.equals(rg, pessoa.rg) &&
                 Objects.equals(sexo, pessoa.sexo) &&
                 Objects.equals(dtCadastro, pessoa.dtCadastro) &&
@@ -139,7 +139,7 @@ public class Pessoa {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPessoa, nome, dtNascimento, cpf, rg, sexo, dtCadastro, email, logradouro, telefone);
+        return Objects.hash(idPessoa, nome, dtNascimento, cpfCnpj, rg, sexo, dtCadastro, email, logradouro, telefone);
     }
 
     @ManyToOne
@@ -153,22 +153,22 @@ public class Pessoa {
     }
 
     @ManyToOne
-    @JoinColumn(name = "auth", referencedColumnName = "id_auth", nullable = false)
-    public Auth getAuthByAuth() {
-        return authByAuth;
+    @JoinColumn(name = "id_auth", referencedColumnName = "id_auth", nullable = false)
+    public Auth getAuthByIdAuth() {
+        return authByIdAuth;
     }
 
-    public void setAuthByAuth(Auth authByAuth) {
-        this.authByAuth = authByAuth;
+    public void setAuthByIdAuth(Auth authByIdAuth) {
+        this.authByIdAuth = authByIdAuth;
     }
 
     @ManyToOne
-    @JoinColumn(name = "cidade", referencedColumnName = "id_cidade", nullable = false)
-    public Cidade getCidadeByCidade() {
-        return cidadeByCidade;
+    @JoinColumn(name = "id_cidade", referencedColumnName = "id_cidade", nullable = false)
+    public Cidade getCidadeByIdCidade() {
+        return cidadeByIdCidade;
     }
 
-    public void setCidadeByCidade(Cidade cidadeByCidade) {
-        this.cidadeByCidade = cidadeByCidade;
+    public void setCidadeByIdCidade(Cidade cidadeByIdCidade) {
+        this.cidadeByIdCidade = cidadeByIdCidade;
     }
 }

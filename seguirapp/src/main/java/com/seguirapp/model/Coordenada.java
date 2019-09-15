@@ -1,10 +1,8 @@
 package com.seguirapp.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +13,7 @@ public class Coordenada {
     private double velocidade;
     private double altitude;
     private Date horario;
+    private Collection<Equipamento> equipamentosByIdCoordenada;
 
     @Id
     @Column(name = "id_coordenada", nullable = false)
@@ -92,5 +91,14 @@ public class Coordenada {
     @Override
     public int hashCode() {
         return Objects.hash(idCoordenada, latitude, longitude, velocidade, altitude, horario);
+    }
+
+    @OneToMany(mappedBy = "coordenadaByIdCoordenada")
+    public Collection<Equipamento> getEquipamentosByIdCoordenada() {
+        return equipamentosByIdCoordenada;
+    }
+
+    public void setEquipamentosByIdCoordenada(Collection<Equipamento> equipamentosByIdCoordenada) {
+        this.equipamentosByIdCoordenada = equipamentosByIdCoordenada;
     }
 }

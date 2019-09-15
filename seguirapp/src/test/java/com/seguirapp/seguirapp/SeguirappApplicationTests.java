@@ -2,8 +2,12 @@ package com.seguirapp.seguirapp;
 
 import com.seguirapp.model.Auth;
 import com.seguirapp.model.Cidade;
+import com.seguirapp.model.Empresa;
 import com.seguirapp.model.Pessoa;
+import com.seguirapp.repository.EmpresaRepository;
 import com.seguirapp.repository.PessoaRepository;
+import com.seguirapp.service.EmpresaService;
+import com.seguirapp.service.PessoaService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,9 @@ import java.util.GregorianCalendar;
 @SpringBootTest
 public class SeguirappApplicationTests {
 	@Autowired
-	PessoaRepository pr;
+	PessoaService ps;
+	@Autowired
+	EmpresaService es;
 
 	@Test
 	public void contextLoads() {
@@ -43,8 +49,20 @@ public class SeguirappApplicationTests {
 			p.setRg("123");
 			p.setSexo("Masculino");
 			p.setTelefone("(79)99685-9817");
-			pr.save(p);
+			ps.save(p);
 
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void cadastrarEmpresa(){
+		try{
+			Empresa empresa = new Empresa();
+			empresa.setCnpj("03.861.512/0001-30");
+			empresa.setNome("INDUSTRIAS ALIMENTICIAS MARATA LTDA");
+			es.save(empresa);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
