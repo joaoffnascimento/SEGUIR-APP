@@ -1,12 +1,13 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Coordenada {
+public class Coordenada implements Serializable {
     private int idCoordenada;
     private double latitude;
     private double longitude;
@@ -100,5 +101,18 @@ public class Coordenada {
 
     public void setEquipamentosByIdCoordenada(Collection<Equipamento> equipamentosByIdCoordenada) {
         this.equipamentosByIdCoordenada = equipamentosByIdCoordenada;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordenada{" +
+                "idCoordenada=" + idCoordenada +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", velocidade=" + velocidade +
+                ", altitude=" + altitude +
+                ", horario=" + horario +
+                ", equipamentosByIdCoordenada=" + equipamentosByIdCoordenada +
+                '}';
     }
 }

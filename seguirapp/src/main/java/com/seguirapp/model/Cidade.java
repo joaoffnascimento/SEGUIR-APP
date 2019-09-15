@@ -1,11 +1,12 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Cidade {
+public class Cidade implements Serializable {
     private int idCidade;
     private String nome;
     private Estado estadoByIdEstado;
@@ -62,5 +63,15 @@ public class Cidade {
 
     public void setPessoasByIdCidade(Collection<Pessoa> pessoasByIdCidade) {
         this.pessoasByIdCidade = pessoasByIdCidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Cidade{" +
+                "idCidade=" + idCidade +
+                ", nome='" + nome + '\'' +
+                ", estadoByIdEstado=" + estadoByIdEstado +
+                ", pessoasByIdCidade=" + pessoasByIdCidade +
+                '}';
     }
 }

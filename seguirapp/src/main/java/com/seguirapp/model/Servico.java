@@ -1,10 +1,11 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Servico {
+public class Servico implements Serializable {
     private int idServico;
     private double preco;
     private String descricao;
@@ -85,5 +86,17 @@ public class Servico {
 
     public void setEquipamentoByIdEquipamento(Equipamento equipamentoByIdEquipamento) {
         this.equipamentoByIdEquipamento = equipamentoByIdEquipamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Servico{" +
+                "idServico=" + idServico +
+                ", preco=" + preco +
+                ", descricao='" + descricao + '\'' +
+                ", pessoaByIdPessoa=" + pessoaByIdPessoa +
+                ", veiculoByIdVeiculo=" + veiculoByIdVeiculo +
+                ", equipamentoByIdEquipamento=" + equipamentoByIdEquipamento +
+                '}';
     }
 }

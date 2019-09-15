@@ -3,12 +3,13 @@ package com.seguirapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-public class indexController {
+@RestController
+public class IndexRestController {
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET) //Dir, root
+	@RequestMapping(value = "/", method = RequestMethod.GET) //Dir, root
 	public String index() {
-		return "/index"; //nmTemplate
+		return "Hello"; //nmTemplate
 	}
 }

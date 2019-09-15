@@ -4,11 +4,12 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class Veiculo {
+public class Veiculo implements Serializable {
     private int idVeiculo;
     private String placa;
     private String chassi;
@@ -104,5 +105,18 @@ public class Veiculo {
     @Override
     public int hashCode() {
         return Objects.hash(idVeiculo, placa, chassi, ano, cor, marca, modelo);
+    }
+
+    @Override
+    public String toString() {
+        return "Veiculo{" +
+                "idVeiculo=" + idVeiculo +
+                ", placa='" + placa + '\'' +
+                ", chassi='" + chassi + '\'' +
+                ", ano=" + ano +
+                ", cor='" + cor + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                '}';
     }
 }

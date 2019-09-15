@@ -1,11 +1,12 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Auth {
+public class Auth implements Serializable {
     private int idAuth;
     private String login;
     private String senha;
@@ -63,5 +64,15 @@ public class Auth {
 
     public void setPessoasByIdAuth(Collection<Pessoa> pessoasByIdAuth) {
         this.pessoasByIdAuth = pessoasByIdAuth;
+    }
+
+    @Override
+    public String toString() {
+        return "Auth{" +
+                "idAuth=" + idAuth +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", pessoasByIdAuth=" + pessoasByIdAuth +
+                '}';
     }
 }

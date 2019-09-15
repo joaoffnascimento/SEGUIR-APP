@@ -44,16 +44,12 @@ public class PessoaService {
 
         Util util = new Util();
         //Validar CPF
-        if (!util.isCPF(pessoa.getCpf())) {
+        if (!util.isCPF(pessoa.getCpfCnpj())) {
             throw new Exception("Deu pau ao cadastrar CPF inválido !");
         }
         //Validar EMAIL
         if (!util.isEmail(pessoa.getEmail())) {
             throw new Exception("Deu pau ao cadastrar Email Inválido!");
-        }
-        //Validar TELEFONE
-        if (!util.isTelefone(pessoa.getTelefone())) {
-            throw new Exception("Deu pau ao cadastrar Telefone Inválido!");
         }
         pr.save(pessoa);
     }

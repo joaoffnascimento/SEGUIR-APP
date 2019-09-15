@@ -1,11 +1,12 @@
 package com.seguirapp.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class Pessoa {
+public class Pessoa implements Serializable {
     private int idPessoa;
     private String nome;
     private Date dtNascimento;
@@ -170,5 +171,24 @@ public class Pessoa {
 
     public void setCidadeByIdCidade(Cidade cidadeByIdCidade) {
         this.cidadeByIdCidade = cidadeByIdCidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "idPessoa=" + idPessoa +
+                ", nome='" + nome + '\'' +
+                ", dtNascimento=" + dtNascimento +
+                ", cpfCnpj='" + cpfCnpj + '\'' +
+                ", rg='" + rg + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", dtCadastro=" + dtCadastro +
+                ", email='" + email + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", pessoaByIdResponsavel=" + pessoaByIdResponsavel +
+                ", authByIdAuth=" + authByIdAuth +
+                ", cidadeByIdCidade=" + cidadeByIdCidade +
+                '}';
     }
 }

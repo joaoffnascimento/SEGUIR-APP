@@ -4,10 +4,11 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Estado {
+public class Estado implements Serializable {
     private int idEstado;
     private String nome;
     private String sigla;
@@ -55,5 +56,14 @@ public class Estado {
     @Override
     public int hashCode() {
         return Objects.hash(idEstado, nome, sigla);
+    }
+
+    @Override
+    public String toString() {
+        return "Estado{" +
+                "idEstado=" + idEstado +
+                ", nome='" + nome + '\'' +
+                ", sigla='" + sigla + '\'' +
+                '}';
     }
 }
