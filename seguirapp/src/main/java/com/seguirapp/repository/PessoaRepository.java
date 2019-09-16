@@ -4,8 +4,10 @@ import com.seguirapp.model.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
-public interface PessoaRepository extends JpaRepository<Pessoa, String> {
+public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
     //instanciar e utilizar metodos ja prontos
     //salvar, deletar, update e etc
+
+
 
 }

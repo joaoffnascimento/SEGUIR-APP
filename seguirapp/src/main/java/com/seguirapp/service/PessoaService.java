@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class PessoaService {
     private static PessoaService myInstance;
 
@@ -26,17 +28,12 @@ public class PessoaService {
         return myInstance;
     }
 
-    //Listar Pessoas
-    public ModelAndView findAll() {
-        //Busca dos eventos no banco de dados
-        ModelAndView mv = new ModelAndView();
-        //Lista de pessoas
-        //Pessoas Repository - metodo de busca, findAll
-        Iterable<Pessoa> pessoas = pr.findAll();
-        //Atributo mv - para aparecer as coisas na tela
-        //Mesmo nome entre chaves e cifrao ${} atributeName
-        mv.addObject("pessoas", pessoas);
-        return mv;
+    public List<Pessoa> findAll(){
+        List<Pessoa> pessoas = new ArrayList<>();
+        for (Pessoa pessoa : pr.findAll()) {
+            pessoas.add(pessoa);
+        }
+        return pessoas;
     }
 
     //Validar os atributos da classe
@@ -53,4 +50,22 @@ public class PessoaService {
         }
         pr.save(pessoa);
     }
+
+    public void delete(int id){
+        pr.deleteById(id);
+    }
+
+    /*//Listar Pessoas
+    public ModelAndView findAll() {
+        //Busca dos eventos no banco de dados
+        ModelAndView mv = new ModelAndView();
+        //Lista de pessoas
+        //Pessoas Repository - metodo de busca, findAll
+        Iterable<Pessoa> pessoas = pr.findAll();
+        //Atributo mv - para aparecer as coisas na tela
+        //Mesmo nome entre chaves e cifrao ${} atributeName
+        mv.addObject("pessoas", pessoas);
+        return mv;
+    }*/
+
 }

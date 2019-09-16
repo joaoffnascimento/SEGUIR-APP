@@ -21,6 +21,22 @@ public class Pessoa implements Serializable {
     private Auth authByIdAuth;
     private Cidade cidadeByIdCidade;
 
+    public Pessoa (){
+
+    }
+
+    public Pessoa(String nome, Date dtNascimento, String cpfCnpj, String rg, String sexo, Date dtCadastro, String email, String logradouro, String telefone) {
+        this.nome = nome;
+        this.dtNascimento = dtNascimento;
+        this.cpfCnpj = cpfCnpj;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.dtCadastro = dtCadastro;
+        this.email = email;
+        this.logradouro = logradouro;
+        this.telefone = telefone;
+    }
+
     @Id
     @Column(name = "id_pessoa", nullable = false)
     public int getIdPessoa() {
@@ -186,9 +202,6 @@ public class Pessoa implements Serializable {
                 ", email='" + email + '\'' +
                 ", logradouro='" + logradouro + '\'' +
                 ", telefone='" + telefone + '\'' +
-                ", pessoaByIdResponsavel=" + pessoaByIdResponsavel +
-                ", authByIdAuth=" + authByIdAuth +
-                ", cidadeByIdCidade=" + cidadeByIdCidade +
                 '}';
     }
 }
