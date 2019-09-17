@@ -4,85 +4,91 @@ import com.seguirapp.model.Pessoa;
 import com.seguirapp.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class IndexRestController {
 
     @Autowired
-    PessoaService pessoaService;
+    PessoaService ps;
 
-    /*@GetMapping(value = "/") //Dir, root
-    public String home() {
-        return "/index.html"; //nmTemplate
+    @RequestMapping(value = "/index")
+    public String formCadastroPessoa(ModelMap model) {
+        Pessoa pessoa = new Pessoa();
+        model.addAttribute("pessoa", pessoa);
+        return "index";
     }
 
-    @GetMapping("/all-pessoas")
-    @ResponseBody
-    public String listarPessoas() {
-        return pessoaService.findAll().toString();
-    }
-
-    @GetMapping("/save-pessoa")
-    @ResponseBody
-    public String salvarPessoa(@RequestParam String nome, @RequestParam Date dtNascimento, @RequestParam String cpfCnpj, @RequestParam
-            String rg, @RequestParam String sexo, @RequestParam Date dtCadastro, @RequestParam String email, @RequestParam String logradouro,
-                               @RequestParam String telefone) {
-        Pessoa pessoa = new Pessoa(nome, dtNascimento, cpfCnpj, rg, sexo, dtCadastro, email, logradouro, telefone);
-        return "Pessoa Salva!";
-    }
-
-    @GetMapping("/delete-pessoa")
-    @ResponseBody
-    public String deletePessoa(@RequestParam int id) {
-        pessoaService.delete(id);
-        return "Pessoa apagada!";
-    }*/
-
-    @GetMapping("/")
-    public ModelAndView findAll() {
-
-        ModelAndView mv = new ModelAndView("/pessoa");
-        mv.addObject("pessoa", pessoaService.findAll());
-
-        return mv;
-    }
-
-    @GetMapping("/add")
-    public ModelAndView add(Pessoa pessoa) {
-
-        ModelAndView mv = new ModelAndView("/pessoaAdd");
-        mv.addObject("pessoa", pessoa);
-
-        return mv;
-    }
-
-    @GetMapping("/edit/{id}")
-    public ModelAndView edit(@PathVariable("id") int id) {
-
-        return add(pessoaService.findById(id));
-    }
-
-    @GetMapping("/delete/{id}")
-    public ModelAndView delete(@PathVariable("id") int id) {
-
-        pessoaService.delete(id);
-        return findAll();
-    }
-
-    @PostMapping("/save")
-    public ModelAndView save(@Valid Pessoa pessoa, BindingResult result) throws Exception {
-
+    @RequestMapping(value = "/save", method = RequestMethod.GET)
+    public String salvarRegistroPessoa(@Valid Pessoa pessoa, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) throws Exception {
         if (result.hasErrors()) {
-            return add(pessoa);
+            System.out.println("Verificar erro de preenchimento !");
+            return "index";
         }
+        ps.save(pessoa);
+        return "redirect:/viewpessoas";
+    }
 
-        pessoaService.save(pessoa);
-        return findAll();
+    @RequestMapping(value = "/viewpessoas")
+    public ModelAndView getAll() {
+        List<Pessoa> list = ps.findAll();
+        return new ModelAndView("viewpessoas", "list", list);
+    }
+
+    @RequestMapping(value = "/editpessoa/{id}")
+    public String edit(@PathVariable int id, ModelMap model) {
+        Pessoa pessoa = ps.findById(id);
+        model.addAttribute("pessoa", pessoa);
+        return "editpessoa";
+    }
+
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute("pessoa") Pessoa p) throws Exception {
+        Pessoa pessoa = ps.findById(p.getIdPessoa());
+
+        pessoa.setNome(pessoa.getNome());
+        pessoa.setDtNascimento(pessoa.getDtNascimento());
+        pessoa.setDtCadastro(pessoa.getDtCadastro());
+        pessoa.setRg(pessoa.getRg());
+        pessoa.setCpfCnpj(pessoa.getCpfCnpj());
+        pessoa.setSexo(pessoa.getSexo());
+        pessoa.setEmail(pessoa.getEmail());
+        pessoa.setTelefone(pessoa.getTelefone());
+        pessoa.setLogradouro(pessoa.getLogradouro());
+        pessoa.setPessoaByIdResponsavel(pessoa.getPessoaByIdResponsavel());
+        pessoa.setAuthByIdAuth(pessoa.getAuthByIdAuth());
+        pessoa.setCidadeByIdCidade(pessoa.getCidadeByIdCidade());
+
+        ps.save(pessoa);
+        return new ModelAndView("redirect:/viewpessoas");
+    }
+
+    @RequestMapping(value = "deletepessoa/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable int id) {
+        Pessoa p = ps.findById(id);
+        ps.delete(p);
+        return new ModelAndView("redirect:/viewpessoa");
+    }
+
+    @ModelAttribute("cidades")
+    public List<String> initializeCidades() {
+        List<String> cidades = new ArrayList<String>();
+        cidades.add("Lagarto");
+        return cidades;
+    }
+
+    @ModelAttribute("estados")
+    public List<String> initalizeEstados() {
+        List<String> estados = new ArrayList<String>();
+        estados.add("Sergipe");
+        return estados;
     }
 }

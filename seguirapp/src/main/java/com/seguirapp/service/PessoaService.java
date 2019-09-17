@@ -28,52 +28,36 @@ public class PessoaService {
         return myInstance;
     }
 
-   /* public List<Pessoa> findAll(){
-        List<Pessoa> pessoas = new ArrayList<>();
-        for (Pessoa pessoa : pr.findAll()) {
-            pessoas.add(pessoa);
-        }
-        return pessoas;
-    }*/
-
-   public List<Pessoa> findAll(){
-       return pr.findAll();
-   }
-
-   public Pessoa findById(int id){
-       return pr.findById(id);
-   }
-
-    //Validar os atributos da classe
-    public void save(Pessoa pessoa) throws Exception {
+    /*Save*/
+    public Pessoa save(Pessoa p) throws Exception{
 
         Util util = new Util();
         //Validar CPF
-        if (!util.isCPF(pessoa.getCpfCnpj())) {
+        if (!util.isCPF(p.getCpfCnpj())) {
             throw new Exception("Deu pau ao cadastrar CPF inválido !");
         }
         //Validar EMAIL
-        if (!util.isEmail(pessoa.getEmail())) {
+        if (!util.isEmail(p.getEmail())) {
             throw new Exception("Deu pau ao cadastrar Email Inválido!");
         }
-        pr.save(pessoa);
+        return pr.save(p);
     }
 
-    public void delete(int id){
-        pr.deleteById(id);
+    /*Delete*/
+    public void delete(Pessoa p){
+        pr.delete(p);
+    }
+    /*Update*/
+
+
+    /*Select All*/
+    public List<Pessoa> findAll(){
+        return pr.findAll();
     }
 
-    /*//Listar Pessoas
-    public ModelAndView findAll() {
-        //Busca dos eventos no banco de dados
-        ModelAndView mv = new ModelAndView();
-        //Lista de pessoas
-        //Pessoas Repository - metodo de busca, findAll
-        Iterable<Pessoa> pessoas = pr.findAll();
-        //Atributo mv - para aparecer as coisas na tela
-        //Mesmo nome entre chaves e cifrao ${} atributeName
-        mv.addObject("pessoas", pessoas);
-        return mv;
-    }*/
+    /*Select By Id*/
+    public Pessoa findById(int id){
+        return pr.findById(id);
+    }
 
 }
