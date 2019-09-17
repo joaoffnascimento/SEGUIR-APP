@@ -15,32 +15,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/")
 public class IndexRestController {
 
     @Autowired
     PessoaService ps;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String formCadastroPessoa(ModelMap model) {
         Pessoa pessoa = new Pessoa();
         model.addAttribute("pessoa", pessoa);
         return "index";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.GET)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String salvarRegistroPessoa(@Valid Pessoa pessoa, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) throws Exception {
-        if (result.hasErrors()) {
-            System.out.println("Verificar erro de preenchimento !");
-            return "index";
-        }
+
         ps.save(pessoa);
         return "redirect:/viewpessoas";
     }
 
-    @RequestMapping(value = "/viewpessoas")
+   /* @RequestMapping(value = "/viewpessoas")
     public ModelAndView getAll() {
         List<Pessoa> list = ps.findAll();
         return new ModelAndView("viewpessoas", "list", list);
+    }*/
+
+    //Retornar a lista de pessoas cadastradas
+    @RequestMapping("/viewpessoas")
+    public ModelAndView getAll() {
+        //Busca dos eventos no banco de dados
+        ModelAndView mv = new ModelAndView("\\viewpessoas");
+        //Lista de pessoas
+        //Pessoas Repository - metodo de busca, findAll
+        Iterable<Pessoa> pessoas = ps.findAll();
+        //Atributo mv - para aparecer as coisas na tela
+        //Mesmo nome entre chaves e cifrao ${} atributeName
+        mv.addObject("pessoas", pessoas);
+        return mv;
     }
 
     @RequestMapping(value = "/editpessoa/{id}")
