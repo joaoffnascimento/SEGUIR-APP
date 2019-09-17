@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
     //instanciar e utilizar metodos ja prontos
     //salvar, deletar, update e etc
-
+    public Pessoa findById(int id);
 
 
 }

@@ -28,13 +28,21 @@ public class PessoaService {
         return myInstance;
     }
 
-    public List<Pessoa> findAll(){
+   /* public List<Pessoa> findAll(){
         List<Pessoa> pessoas = new ArrayList<>();
         for (Pessoa pessoa : pr.findAll()) {
             pessoas.add(pessoa);
         }
         return pessoas;
-    }
+    }*/
+
+   public List<Pessoa> findAll(){
+       return pr.findAll();
+   }
+
+   public Pessoa findById(int id){
+       return pr.findById(id);
+   }
 
     //Validar os atributos da classe
     public void save(Pessoa pessoa) throws Exception {

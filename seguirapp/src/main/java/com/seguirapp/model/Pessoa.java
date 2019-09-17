@@ -1,6 +1,10 @@
 package com.seguirapp.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
@@ -48,6 +52,7 @@ public class Pessoa implements Serializable {
     }
 
     @Basic
+    @NotBlank(message = "Nome é uma Informação Obrigatória !")
     @Column(name = "nome", nullable = false, length = 100)
     public String getNome() {
         return nome;
@@ -58,6 +63,7 @@ public class Pessoa implements Serializable {
     }
 
     @Basic
+    @NotNull(message = "Data é uma informação obrigatória.")
     @Column(name = "dt_nascimento", nullable = false)
     public Date getDtNascimento() {
         return dtNascimento;
@@ -98,6 +104,7 @@ public class Pessoa implements Serializable {
     }
 
     @Basic
+    @NotNull(message = "Data é uma informação obrigatória.")
     @Column(name = "dt_cadastro", nullable = false)
     public Date getDtCadastro() {
         return dtCadastro;
