@@ -9,7 +9,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/">SeguirAPP</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="//viewstudents">Pessoas Cadastradas <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/viewpessoas">Pessoas Cadastradas <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Features</a>
@@ -93,16 +93,16 @@
                 </td>
             </tr>
             <tr>
-                <td>Cidade :</td>
+                <td>Estados: </td>
                 <td>
-                    <select th:field="*{cidadeByIdCidade}">
-                        <option th:each="country : ${cidades}" th:value="${cidades}" th:text="${cidades}">
-                            Country
-                        </option>
+                    <select name="estados">
+                        <option th:each="estado : ${ls}"
+                                th:value="${estado.idEstado}"
+                                th:selected="${estado.idEstado == selecionado.idEstado}"
+                                th:text="${estado.nome}"></option>
                     </select>
-                    <!--label th:if="${#fields.hasErrors('country')}" th:errors="*{country}" th:class="'error'">Error
-                        in Country</label-->
                 </td>
+
             </tr>
             <tr>
                 <td>Gender :</td>

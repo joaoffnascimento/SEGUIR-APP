@@ -1,9 +1,13 @@
 package com.seguirapp.controller;
 
+import com.seguirapp.model.Cidade;
+import com.seguirapp.model.Estado;
 import com.seguirapp.model.Pessoa;
+import com.seguirapp.service.CidadeService;
 import com.seguirapp.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -20,6 +25,9 @@ public class IndexRestController {
 
     @Autowired
     PessoaService ps;
+
+    @Autowired
+    CidadeService cs;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String formCadastroPessoa(ModelMap model) {
@@ -91,9 +99,11 @@ public class IndexRestController {
     }
 
     @ModelAttribute("estados")
-    public List<String> initalizeEstados() {
-        List<String> estados = new ArrayList<String>();
-        estados.add("Sergipe");
-        return estados;
+    public void index(Model model) {
+        List<Estado> ls = cs.getAllEstados();
+
+        model.addAttribute("ls", ls);
+        model.addAttribute( "selecionado", new Estado());
     }
+
 }
