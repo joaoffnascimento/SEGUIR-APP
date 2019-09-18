@@ -41,24 +41,17 @@ public class IndexRestController {
         return new ModelAndView("viewpessoas", "list", list);
     }*/
 
-    //Retornar a lista de pessoas cadastradas
-    @RequestMapping("/viewpessoas")
+    @RequestMapping(value="/viewpessoas")
     public ModelAndView getAll() {
-        //Busca dos eventos no banco de dados
-        ModelAndView mv = new ModelAndView("\\viewpessoas");
-        //Lista de pessoas
-        //Pessoas Repository - metodo de busca, findAll
-        Iterable<Pessoa> pessoas = ps.findAll();
-        //Atributo mv - para aparecer as coisas na tela
-        //Mesmo nome entre chaves e cifrao ${} atributeName
-        mv.addObject("pessoas", pessoas);
-        return mv;
+
+        List<Pessoa> pessoas=ps.findAll();
+        return new ModelAndView("viewpessoas", "pessoas", pessoas);
     }
 
     @RequestMapping(value = "/editpessoa/{id}")
     public String edit(@PathVariable int id, ModelMap model) {
         Pessoa pessoa = ps.findById(id);
-        model.addAttribute("pessoa", pessoa);
+        model.addAttribute("pessoas", pessoa);
         return "editpessoa";
     }
 

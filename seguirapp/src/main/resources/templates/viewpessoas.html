@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:form="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>Pessoa</title>
@@ -10,46 +9,35 @@
 </head>
 <body>
 <h1 align="center">Lista de Pessoas</h1>
-<table id="t02" cellpadding="2">
+
+<table id="t01" border="2" width="70%" cellpadding="2">
     <tr>
-        <th>
-            <a href="/index"><h2>Pessoas Cadastradas</h2></a>
-        </th>
-        <th>
-            <a align="right" href="/delete"><h2>Excluir todas as pessoas</h2></a>
-        </th>
+        <th>ID Pessoa</th>
+        <th>Nome</th>
+        <th>Sexo</th>
+        <th>Data de Cadastro</th>
+        <th>Email</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>CPF</th>
+    </tr>
+
+    <tr th:each="pessoa : ${pessoas}">
+        <td th:text="${pessoa.idPessoa}"></td>
+        <td th:text="${pessoa.nome}"></td>
+        <td th:text="${pessoa.sexo}"></td>
+        <td th:text="${pessoa.dtCadastro}"></td>
+        <td th:text="${pessoa.email}"></td>
+        <td th:text="${pessoa.logradouro}"></td>
+        <td th:text="${pessoa.telefone}"></td>
+        <td th:text="${pessoa.cpfCnpj}"></td>
+
+
+        <td><a th:href="@{'/editstudent/' + ${pessoa.idPessoa}}">Edit</a></td>
+        <td><a th:href="@{'/deletestudent/' + ${pessoa.idPessoa}}">Delete</a></td>
     </tr>
 </table>
-<table>
-</table>
-
-    <table id="t01" border="2" width="70%" cellpadding="2">
-        <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Sex</th>
-            <th>Date Modified</th>
-            <th>Email</th>
-            <th>Section</th>
-            <th>Country</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        <tr th:each="pessoas : ${pessoa}">
-            <td th:text="${pessoa.i}"></td>
-            <td th:text="${student.firstName}"></td>
-            <td th:text="${student.lastName}"></td>
-            <td th:text="${student.sex}"></td>
-            <td th:text="${student.createdAt}"></td>
-            <td th:text="${student.email}"></td>
-            <td th:text="${student.section}"></td>
-            <td th:text="${student.country}"></td>
-            <td><a th:href="@{'/editstudent/' + ${student.id}}">Edit</a></td>
-            <td><a th:href="@{'/deletestudent/' + ${student.id}}">Delete</a></td>
-        </tr>
-    </table>
-    <br/>
+<br/>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
