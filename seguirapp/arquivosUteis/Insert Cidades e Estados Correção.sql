@@ -1,4 +1,4 @@
-USE DBIFS ;
+USE mydb ;
 
 
 INSERT INTO estado (id_estado, nome, sigla) VALUES

@@ -15,4 +15,4 @@ Req fun 6 - O sistema deve permitir a consulta da localização atual dos client
 
 Req fun 7 - O sistema deve permitir a consulta das localizações pelos clientes;
 Req fun 8 - Os clientes poderão consultar as localizações dos dependentes;
-Req fun 9 - O cliente responsável pelo grupo poderá visualizar todos os clientes do mesmo; 
+Req fun 9 - O cliente responsável pelo grupo poderá visualizar todos os clientes do mesmo;;;
