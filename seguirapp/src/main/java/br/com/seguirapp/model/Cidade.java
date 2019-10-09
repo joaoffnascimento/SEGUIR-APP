@@ -19,7 +19,7 @@ public class Cidade {
     private int idCidade;
 
     @Basic
-    @Column(name = "nome", nullable = true, length = 45)
+    @Column(name = "nome", nullable = false, length = 45)
     private String nome;
 
     // Muitos para um, minha classe vai estar N em ...
