@@ -1,6 +1,7 @@
 package br.com.seguirapp.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +14,8 @@ public class Estado {
      */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_estado")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estado", nullable = false)
     private int idEstado;
 
     @Basic
@@ -25,7 +26,8 @@ public class Estado {
     @Column(name = "sigla", nullable = false, length = 2)
     private String sigla;
 
-    //Getters and Setters
+    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
+    private Collection<Cidade> cidades;
 
     public int getIdEstado() {
         return idEstado;
@@ -51,7 +53,13 @@ public class Estado {
         this.sigla = sigla;
     }
 
-    //Equals and HashCode
+    public Collection<Cidade> getCidades() {
+        return cidades;
+    }
+
+    public void setCidades(Collection<Cidade> cidades) {
+        this.cidades = cidades;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -60,12 +68,13 @@ public class Estado {
         Estado estado = (Estado) o;
         return idEstado == estado.idEstado &&
                 Objects.equals(nome, estado.nome) &&
-                Objects.equals(sigla, estado.sigla);
+                Objects.equals(sigla, estado.sigla) &&
+                Objects.equals(cidades, estado.cidades);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEstado, nome, sigla);
+        return Objects.hash(idEstado, nome, sigla, cidades);
     }
 
     @Override

@@ -23,12 +23,12 @@ public class Cidade {
     private String nome;
 
     // Muitos para um, minha classe vai estar N em ...
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false)
     private Estado estado;
 
     //Para fins didaticos estou adicionando esse relacionamento, mapeando o objeto cidade da classe pessoa
-    @OneToMany(mappedBy = "cidade")
+    @OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
     private Collection<Pessoa> pessoasByIdCidade;
 
     //Getters and Setters
