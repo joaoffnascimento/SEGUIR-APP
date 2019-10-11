@@ -24,7 +24,7 @@ public class Cidade {
 
     // Muitos para um, minha classe vai estar N em ...
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false)
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false, foreignKey = @ForeignKey(name = "id_estado"))
     private Estado estado;
 
     //Para fins didaticos estou adicionando esse relacionamento, mapeando o objeto cidade da classe pessoa
