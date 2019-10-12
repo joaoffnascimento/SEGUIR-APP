@@ -1,15 +1,17 @@
 package br.com.seguirapp.model;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "estado")
+@Entity(name = "estado")
 public class Estado {
 
     /**
      * CIDADE
+     *
      * @author João F. F. Nascimento
      */
 
@@ -26,8 +28,6 @@ public class Estado {
     @Column(name = "sigla", nullable = false, length = 2)
     private String sigla;
 
-    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
-    private Collection<Cidade> cidades;
 
     public int getIdEstado() {
         return idEstado;
@@ -53,35 +53,28 @@ public class Estado {
         this.sigla = sigla;
     }
 
-    public Collection<Cidade> getCidades() {
-        return cidades;
-    }
-
-    public void setCidades(Collection<Cidade> cidades) {
-        this.cidades = cidades;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Estado estado = (Estado) o;
-        return idEstado == estado.idEstado &&
-                Objects.equals(nome, estado.nome) &&
-                Objects.equals(sigla, estado.sigla) &&
-                Objects.equals(cidades, estado.cidades);
+        return getIdEstado() == estado.getIdEstado() &&
+                Objects.equals(getNome(), estado.getNome()) &&
+                Objects.equals(getSigla(), estado.getSigla());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEstado, nome, sigla, cidades);
+        return 0;
     }
 
     @Override
     public String toString() {
-        return "Estado{" +
-                "nome='" + nome + '\'' +
-                ", sigla='" + sigla + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("Estado{");
+        sb.append("idEstado=").append(getIdEstado());
+        sb.append(", nome='").append(getNome()).append('\'');
+        sb.append(", sigla='").append(getSigla()).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

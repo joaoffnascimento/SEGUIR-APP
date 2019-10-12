@@ -1,11 +1,12 @@
 package br.com.seguirapp.model;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "cidade")
+@Entity(name = "cidade")
 public class Cidade {
 
     /**
@@ -24,12 +25,8 @@ public class Cidade {
 
     // Muitos para um, minha classe vai estar N em ...
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false, foreignKey = @ForeignKey(name = "id_estado"))
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado", nullable = false)
     private Estado estado;
-
-    //Para fins didaticos estou adicionando esse relacionamento, mapeando o objeto cidade da classe pessoa
-    @OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
-    private Collection<Pessoa> pessoasByIdCidade;
 
     //Getters and Setters
 
@@ -49,45 +46,39 @@ public class Cidade {
         this.nome = nome;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public int getEstado() {
+        return estado.getIdEstado();
     }
 
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
-    public Collection<Pessoa> getPessoasByIdCidade() {
-        return pessoasByIdCidade;
-    }
-
-    public void setPessoasByIdCidade(Collection<Pessoa> pessoasByIdCidade) {
-        this.pessoasByIdCidade = pessoasByIdCidade;
-    }
-
     //Para auxiliar, equals and hashCode
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cidade cidade = (Cidade) o;
-        return idCidade == cidade.idCidade &&
-                Objects.equals(nome, cidade.nome) &&
-                Objects.equals(estado, cidade.estado) &&
-                Objects.equals(pessoasByIdCidade, cidade.pessoasByIdCidade);
+        return getIdCidade() == cidade.getIdCidade() &&
+                Objects.equals(getNome(), cidade.getNome()) &&
+                Objects.equals(getEstado(), cidade.getEstado());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCidade, nome, estado, pessoasByIdCidade);
+        return 0;
     }
 
     @Override
     public String toString() {
-        return "Cidade {" +
-                "nome='" + nome + '\'' +
-                ", estado=" + estado +
-                '}';
+        final StringBuffer sb = new StringBuffer("Cidade{");
+        sb.append("idCidade=").append(getIdCidade());
+        sb.append(", nome='").append(getNome()).append('\'');
+        sb.append(", estado=").append(getEstado());
+        sb.append('}');
+        return sb.toString();
     }
 }
