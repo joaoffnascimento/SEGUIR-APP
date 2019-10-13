@@ -21,8 +21,12 @@ public class GrupoBO {
         return grupoDAO.save(g);
     }
 
-    public void delete(String nome){
-        grupoDAO.deleteByEmpresa(nome);
+    public void delete(int id){
+        grupoDAO.deleteById(id);
+    }
+
+    public void update(String nome, String newNome){
+        grupoDAO.updateEmpresa(nome, newNome);
     }
 
 }

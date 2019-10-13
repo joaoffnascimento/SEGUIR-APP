@@ -1,8 +1,12 @@
 package br.com.seguirapp;
 
 import br.com.seguirapp.model.Cidade;
+import br.com.seguirapp.model.Grupo;
+import br.com.seguirapp.model.Localizacao;
 import br.com.seguirapp.model.Usuario;
 import br.com.seguirapp.repository.CidadeRepository;
+import br.com.seguirapp.service.GrupoService;
+import br.com.seguirapp.service.LocalizacaoService;
 import br.com.seguirapp.service.UsuarioService;
 import br.com.seguirapp.util.Util;
 import org.junit.Test;
@@ -42,6 +46,37 @@ public class SeguirappApplicationTests {
         Usuario user = new Usuario("felipe@bol.com", "abcd1234");
         usuarioService.updatePassword(user, "abcd123567");
     }
+
+    @Test
+    public void delete() throws Exception {
+        usuarioService.delete("rayssa@bol.com");
+    }
     //--------------------------------------------------------------------------//
 
+    @Autowired
+    GrupoService grupoService;
+
+    @Test
+    public void createGroup() throws Exception {
+        grupoService.createGroup("marata");
+    }
+
+    @Test
+    public void deleteGroup() throws Exception {
+        grupoService.delete(2);
+    }
+
+    //BO GRUPO OK
+    //--------------------------------------------------------------------------//
+
+
+    @Autowired
+    LocalizacaoService localizacaoService;
+
+//    @Test
+//    public void inserirPos() throws Exception {
+//        localizacaoService.create((new java.sql.Date(new java.util.Date().getTime())),"-10906181511598900", "-37061850152271500", "0.21687925979495049");
+//    }
+
+    // BO Localizacao OK
 }

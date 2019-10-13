@@ -27,4 +27,8 @@ public class UsuarioService {
         usuarioBO.updateSenha(usuario, newPass);
     }
 
+    public void delete(String email){
+        usuarioBO.deleteUser(email);
+    }
+
 }

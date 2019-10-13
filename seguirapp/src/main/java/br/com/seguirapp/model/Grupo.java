@@ -19,6 +19,10 @@ public class Grupo {
         this.empresa = empresa;
     }
 
+    public Grupo(){
+
+    }
+
     public int getIdGrupo() {
         return idGrupo;
     }

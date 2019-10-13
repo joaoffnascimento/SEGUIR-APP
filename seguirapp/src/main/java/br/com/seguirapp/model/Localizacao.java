@@ -1,5 +1,6 @@
 package br.com.seguirapp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CollectionId;
 
 import javax.persistence.*;
@@ -15,20 +16,32 @@ public class Localizacao {
     private int idLocalizacao;
 
     @Basic
-    @Column(name = "latitude", nullable = false, length = 255)
-    private int latitude;
+    @Column(name = "latitude", nullable = false, length = 45)
+    private String latitude;
 
     @Basic
-    @Column(name = "longitude", nullable = false, length = 255)
-    private int longitude;
+    @Column(name = "longitude", nullable = false, length = 45)
+    private String longitude;
 
     @Basic
-    @Column(name = "velocidade", nullable = false, length = 255)
-    private int velocidade;
+    @Column(name = "velocidade", nullable = false, length = 45)
+    private String velocidade;
 
     @Basic
     @Column(name = "horario", nullable = false)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
     private Date horario;
+
+    public Localizacao(){
+
+    }
+
+    public Localizacao(Date horario, String latitude, String longitude, String velocidade) {
+        this.horario = horario;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.velocidade = velocidade;
+    }
 
     public int getIdLocalizacao() {
         return idLocalizacao;
@@ -38,27 +51,27 @@ public class Localizacao {
         this.idLocalizacao = idLocalizacao;
     }
 
-    public int getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public int getVelocidade() {
+    public String getVelocidade() {
         return velocidade;
     }
 
-    public void setVelocidade(int velocidade) {
+    public void setVelocidade(String velocidade) {
         this.velocidade = velocidade;
     }
 
