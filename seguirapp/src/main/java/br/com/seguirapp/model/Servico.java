@@ -4,8 +4,7 @@ package br.com.seguirapp.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "servico")
+@Entity(name = "servico")
 public class Servico {
 
     @Id
@@ -70,29 +69,14 @@ public class Servico {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Servico servico = (Servico) o;
-        return idServico == servico.idServico &&
-                Float.compare(servico.preco, preco) == 0 &&
-                Objects.equals(grupo, servico.grupo) &&
-                Objects.equals(pessoa, servico.pessoa) &&
-                Objects.equals(dispositivo, servico.dispositivo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idServico, grupo, pessoa, dispositivo, preco);
-    }
-
-    @Override
     public String toString() {
-        return "Servico{" +
-                "grupo=" + grupo +
-                ", pessoa=" + pessoa +
-                ", dispositivo=" + dispositivo +
-                ", preco=" + preco +
-                '}';
+        final StringBuffer sb = new StringBuffer("Servico{");
+        sb.append("idServico=").append(getIdServico());
+        sb.append(", grupo=").append(getGrupo());
+        sb.append(", pessoa=").append(getPessoa());
+        sb.append(", dispositivo=").append(getDispositivo());
+        sb.append(", preco=").append(getPreco());
+        sb.append('}');
+        return sb.toString();
     }
 }

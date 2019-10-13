@@ -3,8 +3,7 @@ package br.com.seguirapp.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "veiculo")
+@Entity(name = "veiculo")
 public class Veiculo {
 
     @Id
@@ -81,31 +80,33 @@ public class Veiculo {
     }
 
     @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Veiculo{");
+        sb.append("idVeiculo=").append(getIdVeiculo());
+        sb.append(", marca='").append(getMarca()).append('\'');
+        sb.append(", modelo='").append(getModelo()).append('\'');
+        sb.append(", cor='").append(getCor()).append('\'');
+        sb.append(", placa='").append(getPlaca()).append('\'');
+        sb.append(", dispositivo=").append(getDispositivo());
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Veiculo veiculo = (Veiculo) o;
-        return idVeiculo == veiculo.idVeiculo &&
-                Objects.equals(marca, veiculo.marca) &&
-                Objects.equals(modelo, veiculo.modelo) &&
-                Objects.equals(cor, veiculo.cor) &&
-                Objects.equals(placa, veiculo.placa) &&
-                Objects.equals(dispositivo, veiculo.dispositivo);
+        return getIdVeiculo() == veiculo.getIdVeiculo() &&
+                Objects.equals(getMarca(), veiculo.getMarca()) &&
+                Objects.equals(getModelo(), veiculo.getModelo()) &&
+                Objects.equals(getCor(), veiculo.getCor()) &&
+                Objects.equals(getPlaca(), veiculo.getPlaca()) &&
+                Objects.equals(getDispositivo(), veiculo.getDispositivo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idVeiculo, marca, modelo, cor, placa, dispositivo);
-    }
-
-    @Override
-    public String toString() {
-        return "Veiculo{" +
-                "marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", cor='" + cor + '\'' +
-                ", placa='" + placa + '\'' +
-                ", dispositivo=" + dispositivo +
-                '}';
+        return 0;
     }
 }

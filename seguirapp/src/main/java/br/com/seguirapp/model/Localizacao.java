@@ -6,8 +6,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "localizacao")
+@Entity(name = "localizacao")
 public class Localizacao {
 
     @Id
@@ -72,29 +71,31 @@ public class Localizacao {
     }
 
     @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Localizacao{");
+        sb.append("idLocalizacao=").append(getIdLocalizacao());
+        sb.append(", latitude=").append(getLatitude());
+        sb.append(", longitude=").append(getLongitude());
+        sb.append(", velocidade=").append(getVelocidade());
+        sb.append(", horario=").append(getHorario());
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Localizacao that = (Localizacao) o;
-        return idLocalizacao == that.idLocalizacao &&
-                latitude == that.latitude &&
-                longitude == that.longitude &&
-                velocidade == that.velocidade &&
-                Objects.equals(horario, that.horario);
+        return getIdLocalizacao() == that.getIdLocalizacao() &&
+                getLatitude() == that.getLatitude() &&
+                getLongitude() == that.getLongitude() &&
+                getVelocidade() == that.getVelocidade() &&
+                Objects.equals(getHorario(), that.getHorario());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idLocalizacao, latitude, longitude, velocidade, horario);
-    }
-
-    @Override
-    public String toString() {
-        return "Localizacao{" +
-                "latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", velocidade=" + velocidade +
-                ", horario=" + horario +
-                '}';
+        return 0;
     }
 }

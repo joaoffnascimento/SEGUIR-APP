@@ -5,8 +5,7 @@ import java.awt.*;
 import java.sql.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "pessoa")
+@Entity(name = "pessoa")
 public class Pessoa {
 
     /**
@@ -40,11 +39,11 @@ public class Pessoa {
     private Date dtNascimento;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(unique = true)
+    @JoinColumn(name = "email", referencedColumnName = "email", nullable = false, unique = true)
     private Usuario usuario;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(unique = true)
+    @JoinColumn(name = "dispositivo", referencedColumnName = "id_dispositivo")
     private Dispositivo dispositivo;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -52,7 +51,6 @@ public class Pessoa {
     private Grupo grupo;
 
     //Getters and Setters
-
 
     public int getIdPessoa() {
         return idPessoa;
@@ -135,39 +133,41 @@ public class Pessoa {
     }
 
     @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Pessoa{");
+        sb.append("idPessoa=").append(getIdPessoa());
+        sb.append(", nome='").append(getNome()).append('\'');
+        sb.append(", cpfCnpj='").append(getCpfCnpj()).append('\'');
+        sb.append(", logradouro='").append(getLogradouro()).append('\'');
+        sb.append(", cidade=").append(getCidade());
+        sb.append(", telefone='").append(getTelefone()).append('\'');
+        sb.append(", dtNascimento=").append(getDtNascimento());
+        sb.append(", usuario=").append(getUsuario());
+        sb.append(", dispositivo=").append(getDispositivo());
+        sb.append(", grupo=").append(getGrupo());
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pessoa pessoa = (Pessoa) o;
-        return idPessoa == pessoa.idPessoa &&
-                Objects.equals(nome, pessoa.nome) &&
-                Objects.equals(cpfCnpj, pessoa.cpfCnpj) &&
-                Objects.equals(logradouro, pessoa.logradouro) &&
-                Objects.equals(cidade, pessoa.cidade) &&
-                Objects.equals(telefone, pessoa.telefone) &&
-                Objects.equals(dtNascimento, pessoa.dtNascimento) &&
-                Objects.equals(usuario, pessoa.usuario) &&
-                Objects.equals(dispositivo, pessoa.dispositivo) &&
-                Objects.equals(grupo, pessoa.grupo);
+        return getIdPessoa() == pessoa.getIdPessoa() &&
+                Objects.equals(getNome(), pessoa.getNome()) &&
+                Objects.equals(getCpfCnpj(), pessoa.getCpfCnpj()) &&
+                Objects.equals(getLogradouro(), pessoa.getLogradouro()) &&
+                Objects.equals(getCidade(), pessoa.getCidade()) &&
+                Objects.equals(getTelefone(), pessoa.getTelefone()) &&
+                Objects.equals(getDtNascimento(), pessoa.getDtNascimento()) &&
+                Objects.equals(getUsuario(), pessoa.getUsuario()) &&
+                Objects.equals(getDispositivo(), pessoa.getDispositivo()) &&
+                Objects.equals(getGrupo(), pessoa.getGrupo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idPessoa, nome, cpfCnpj, logradouro, cidade, telefone, dtNascimento, usuario, dispositivo, grupo);
-    }
-
-    @Override
-    public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                ", cpfCnpj='" + cpfCnpj + '\'' +
-                ", logradouro='" + logradouro + '\'' +
-                ", cidade=" + cidade +
-                ", telefone='" + telefone + '\'' +
-                ", dtNascimento=" + dtNascimento +
-                ", usuario=" + usuario +
-                ", dispositivo=" + dispositivo +
-                ", grupo=" + grupo +
-                '}';
+        return 0;
     }
 }

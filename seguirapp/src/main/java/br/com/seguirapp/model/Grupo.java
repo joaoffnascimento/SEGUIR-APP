@@ -3,8 +3,7 @@ package br.com.seguirapp.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "grupo")
+@Entity(name = "grupo")
 public class Grupo {
 
     @Id
@@ -15,6 +14,10 @@ public class Grupo {
     @Basic
     @Column(name = "empresa", nullable = false, length = 45)
     private String empresa;
+
+    public Grupo(String empresa){
+        this.empresa = empresa;
+    }
 
     public int getIdGrupo() {
         return idGrupo;
@@ -33,23 +36,25 @@ public class Grupo {
     }
 
     @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Grupo{");
+        sb.append("idGrupo=").append(getIdGrupo());
+        sb.append(", empresa='").append(getEmpresa()).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grupo grupo = (Grupo) o;
-        return idGrupo == grupo.idGrupo &&
-                Objects.equals(empresa, grupo.empresa);
+        return getIdGrupo() == grupo.getIdGrupo() &&
+                Objects.equals(getEmpresa(), grupo.getEmpresa());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idGrupo, empresa);
-    }
-
-    @Override
-    public String toString() {
-        return "Grupo{" +
-                "empresa='" + empresa + '\'' +
-                '}';
+        return 0;
     }
 }

@@ -3,8 +3,7 @@ package br.com.seguirapp.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "dispositivo")
+@Entity(name = "dispositivo")
 public class Dispositivo {
 
     /**
@@ -62,27 +61,29 @@ public class Dispositivo {
     }
 
     @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Dispositivo{");
+        sb.append("idDispositivo=").append(getIdDispositivo());
+        sb.append(", nome='").append(getNome()).append('\'');
+        sb.append(", identificador='").append(getIdentificador()).append('\'');
+        sb.append(", localizacao=").append(getLocalizacao());
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dispositivo that = (Dispositivo) o;
-        return idDispositivo == that.idDispositivo &&
-                Objects.equals(nome, that.nome) &&
-                Objects.equals(identificador, that.identificador) &&
-                Objects.equals(localizacao, that.localizacao);
+        return getIdDispositivo() == that.getIdDispositivo() &&
+                Objects.equals(getNome(), that.getNome()) &&
+                Objects.equals(getIdentificador(), that.getIdentificador()) &&
+                Objects.equals(getLocalizacao(), that.getLocalizacao());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idDispositivo, nome, identificador, localizacao);
-    }
-
-    @Override
-    public String toString() {
-        return "Dispositivo{" +
-                "nome='" + nome + '\'' +
-                ", identificador='" + identificador + '\'' +
-                ", localizacao=" + localizacao +
-                '}';
+        return 0;
     }
 }
