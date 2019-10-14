@@ -23,23 +23,27 @@ public class Pessoa {
     @Column(name = "nome", nullable = false, length = 45)
     private String nome;
 
+    @Basic
+    @Column(name = "cpf_cnpj", nullable = true, length = 15)
     private String cpfCnpj;
+    @Basic
+    @Column(name = "logradouro", nullable = true, length = 45)
     private String logradouro;
 
     @ManyToOne
-    @JoinColumn(name = "id_cidade", referencedColumnName = "id_cidade", nullable = false)
+    @JoinColumn(name = "id_cidade", referencedColumnName = "id_cidade", nullable = true)
     private Cidade cidade;
 
     @Basic
-    @Column(name = "telefone", nullable = false, length = 11)
+    @Column(name = "telefone", nullable = true, length = 11)
     private String telefone;
 
     @Basic
-    @Column(name = "dt_nascimento", nullable = false)
+    @Column(name = "dt_nascimento", nullable = true)
     private Date dtNascimento;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "email", referencedColumnName = "email", nullable = false, unique = true)
+    @JoinColumn(name = "email", referencedColumnName = "email", nullable = true, unique = true)
     private Usuario usuario;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -47,8 +51,16 @@ public class Pessoa {
     private Dispositivo dispositivo;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", nullable = false)
+    @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", nullable = true)
     private Grupo grupo;
+
+    public Pessoa(){
+
+    }
+
+    public Pessoa(int idPessoa){
+        this.idPessoa = idPessoa;
+    }
 
     //Getters and Setters
 

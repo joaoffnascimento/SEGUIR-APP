@@ -1,9 +1,12 @@
 package br.com.seguirapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity(name = "dispositivo")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Dispositivo {
 
     /**
@@ -24,6 +27,13 @@ public class Dispositivo {
     @Column(name = "identificador", nullable = false, length = 10)
     private String identificador;
 
+    public Dispositivo(){
+
+    }
+
+    public Dispositivo(int idDispositivo){
+        this.idDispositivo = idDispositivo;
+    }
 
     public int getIdDispositivo() {
         return idDispositivo;
@@ -61,15 +71,16 @@ public class Dispositivo {
 
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(getIdDispositivo(), getNome(), getIdentificador());
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         final StringBuffer sb = new StringBuffer("Dispositivo{");
-        sb.append("idDispositivo=").append(getIdDispositivo());
-        sb.append(", nome='").append(getNome()).append('\'');
-        sb.append(", identificador='").append(getIdentificador()).append('\'');
+        sb.append("idDispositivo=").append(idDispositivo);
+        sb.append(", nome='").append(nome).append('\'');
+        sb.append(", identificador='").append(identificador).append('\'');
         sb.append('}');
         return sb.toString();
     }

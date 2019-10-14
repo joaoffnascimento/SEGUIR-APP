@@ -79,28 +79,7 @@ public class SeguirappApplicationTests {
     // BO Localizacao OK
     //--------------------------------------------------------------------------//
 
-    @Autowired
-    VeiculoService veiculoService;
 
-
-    @Test
-    public void createVeiculo() throws Exception{
-
-        Dispositivo dispositivo = new Dispositivo();
-        dispositivo.setIdDispositivo(1);
-        dispositivo.setIdentificador("abcd1234");
-        dispositivo.setNome("Dubom");
-        Veiculo veiculo = new Veiculo();
-        veiculo.setCor("Vermelho");
-        veiculo.setDispositivo(dispositivo);
-        veiculo.setMarca("Chevrolet");
-        veiculo.setModelo("Cruze");
-        veiculo.setPlaca("ABC-1234");
-
-        veiculoService.createVeiculo(veiculo);
-
-    }
-    //VEICULO BO
     //--------------------------------------------------------------------------//
 
     @Autowired
@@ -117,6 +96,29 @@ public class SeguirappApplicationTests {
 
     //CADASTRAR DISPOSITIVO OK, ELE GERA UM CODIGO AUTOMATICO UNICO PARA CADA PESSOA
     //A LOCALIZACAO ESTA RELACIONADA AO DISPOSITIVO E O DISPOSITIVO A PESSOA
+    @Autowired
+    VeiculoService veiculoService;
+
+
+    @Test
+    public void createVeiculo() throws Exception{
+
+        Dispositivo dispositivo = new Dispositivo();
+        dispositivo.setIdDispositivo(1);
+        dispositivo.setIdentificador("abcd1234");
+        dispositivo.setNome("Paraneu");
+        Veiculo veiculo = new Veiculo();
+        veiculo.setCor("Vermelho");
+        veiculo.setDispositivo(dispositivo);
+        veiculo.setMarca("Chevrolet");
+        veiculo.setModelo("Cruze");
+        veiculo.setPlaca("ABC-1234");
+
+        veiculoService.createVeiculo(veiculo);
+
+    }
+    //VEICULO BO
+
     //--------------------------------------------------------------------------//
 
     //PESSOA BO
@@ -169,4 +171,50 @@ public class SeguirappApplicationTests {
         g.setEmpresa("marata");
         System.out.println(pessoaService.dependentes(g));
     }
+
+    //PESSOA BO OK
+    //--------------------------------------------------------------------------//
+    //SERVICO BO
+
+    @Autowired
+    ServicoService servicoService;
+
+    @Test
+    public void criarServico() throws Exception{
+        Servico s = new Servico();
+        Cidade c = new Cidade();
+        Estado e = new Estado();
+        e.setIdEstado(1);
+        e.setSigla("AC");
+        e.setNome("Acre");
+        c.setIdCidade(82);
+        c.setNome("Bujari");
+        c.setEstado(e);
+        Pessoa p = new Pessoa();
+        p.setIdPessoa(2);
+        p.setNome("felipe");
+        p.setCpfCnpj("41076206034");
+        p.setCidade(c);
+        Grupo g = new Grupo();
+        g.setEmpresa("marata");
+        g.setIdGrupo(1);
+        p.setGrupo(g);
+        Dispositivo d = new Dispositivo();
+        d.setIdDispositivo(1);
+        d.setNome("Paraneu");
+        d.setIdentificador("SQZUQBNQS");
+        p.setDispositivo(d);
+        p.setLogradouro("Rua cel souza freire");
+        p.setTelefone("79996859817");
+        Usuario u = new Usuario();
+        u.setEmail("felipe@gol.com");
+        u.setSenha("abcd1234");
+        p.setUsuario(u);
+        s.setDispositivo(d);
+        s.setGrupo(g);
+        s.setPreco(1000);
+        s.setPessoa(p);
+        servicoService.createServico(s);
+    }
+
 }

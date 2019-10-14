@@ -32,8 +32,8 @@ public class Localizacao {
     @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
     private Date horario;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_dispositivo", referencedColumnName = "id_dispositivo", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "dispositivo", referencedColumnName = "id_dispositivo")
     private Dispositivo dispositivo;
 
     public Localizacao(){
@@ -45,6 +45,14 @@ public class Localizacao {
         this.latitude = latitude;
         this.longitude = longitude;
         this.velocidade = velocidade;
+    }
+
+    public Localizacao(String latitude, String longitude, String velocidade, Date horario, Dispositivo dispositivo) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.velocidade = velocidade;
+        this.horario = horario;
+        this.dispositivo = dispositivo;
     }
 
     public int getIdLocalizacao() {
@@ -87,16 +95,12 @@ public class Localizacao {
         this.horario = horario;
     }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Localizacao{");
-        sb.append("idLocalizacao=").append(getIdLocalizacao());
-        sb.append(", latitude=").append(getLatitude());
-        sb.append(", longitude=").append(getLongitude());
-        sb.append(", velocidade=").append(getVelocidade());
-        sb.append(", horario=").append(getHorario());
-        sb.append('}');
-        return sb.toString();
+    public Dispositivo getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(Dispositivo dispositivo) {
+        this.dispositivo = dispositivo;
     }
 
     @Override
@@ -105,14 +109,28 @@ public class Localizacao {
         if (o == null || getClass() != o.getClass()) return false;
         Localizacao that = (Localizacao) o;
         return getIdLocalizacao() == that.getIdLocalizacao() &&
-                getLatitude() == that.getLatitude() &&
-                getLongitude() == that.getLongitude() &&
-                getVelocidade() == that.getVelocidade() &&
-                Objects.equals(getHorario(), that.getHorario());
+                Objects.equals(getLatitude(), that.getLatitude()) &&
+                Objects.equals(getLongitude(), that.getLongitude()) &&
+                Objects.equals(getVelocidade(), that.getVelocidade()) &&
+                Objects.equals(getHorario(), that.getHorario()) &&
+                Objects.equals(getDispositivo(), that.getDispositivo());
     }
 
     @Override
     public int hashCode() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Localizacao{");
+        sb.append("idLocalizacao=").append(getIdLocalizacao());
+        sb.append(", latitude='").append(getLatitude()).append('\'');
+        sb.append(", longitude='").append(getLongitude()).append('\'');
+        sb.append(", velocidade='").append(getVelocidade()).append('\'');
+        sb.append(", horario=").append(getHorario());
+        sb.append(", dispositivo=").append(getDispositivo());
+        sb.append('}');
+        return sb.toString();
     }
 }

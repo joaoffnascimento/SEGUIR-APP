@@ -71,6 +71,7 @@ public class LerCSV {
                 String horario = localizacao[3];
                 System.out.println(horario);
                 loc.put("horario", horario);
+                loc.put("dispositivo", 1);
                 System.out.println(loc);
                 Localizacao lac = new Localizacao(localizacao[0], localizacao[1], localizacao[2], ler.converter(localizacao[3]));
                 System.out.println(lac);
