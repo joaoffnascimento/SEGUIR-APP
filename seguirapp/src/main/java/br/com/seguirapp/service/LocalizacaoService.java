@@ -16,6 +16,15 @@ public class LocalizacaoService {
     @Autowired
     LocalizacaoBO localizacaoBO;
 
+    private static LocalizacaoService myInstance;
+
+    public synchronized static LocalizacaoService getInstance() {
+        if (myInstance == null) {
+            myInstance = new LocalizacaoService();
+        }
+        return myInstance;
+    }
+
     public Localizacao create(Localizacao localizacao) throws Exception{
         return localizacaoBO.createLocalizacao(localizacao);
     }

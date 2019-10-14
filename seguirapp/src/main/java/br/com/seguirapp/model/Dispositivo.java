@@ -24,7 +24,7 @@ public class Dispositivo {
     @Column(name = "identificador", nullable = false, length = 10)
     private String identificador;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_localizacao", referencedColumnName = "id_localizacao", nullable = false)
     private Localizacao localizacao;
 

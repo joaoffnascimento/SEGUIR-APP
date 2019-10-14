@@ -1,13 +1,9 @@
 package br.com.seguirapp;
 
-import br.com.seguirapp.model.Cidade;
-import br.com.seguirapp.model.Grupo;
-import br.com.seguirapp.model.Localizacao;
-import br.com.seguirapp.model.Usuario;
+import br.com.seguirapp.model.*;
 import br.com.seguirapp.repository.CidadeRepository;
-import br.com.seguirapp.service.GrupoService;
-import br.com.seguirapp.service.LocalizacaoService;
-import br.com.seguirapp.service.UsuarioService;
+import br.com.seguirapp.service.*;
+import br.com.seguirapp.util.LerCSV;
 import br.com.seguirapp.util.Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.swing.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
@@ -79,4 +77,50 @@ public class SeguirappApplicationTests {
 //    }
 
     // BO Localizacao OK
+    //--------------------------------------------------------------------------//
+
+    @Autowired
+    VeiculoService veiculoService;
+
+
+    @Test
+    public void createVeiculo() throws Exception{
+
+        Dispositivo dispositivo = new Dispositivo();
+        dispositivo.setIdDispositivo(1);
+        dispositivo.setIdentificador("abcd1234");
+        dispositivo.setLocalizacao(localizacaoService.findById(1));
+        dispositivo.setNome("Dubom");
+        Veiculo veiculo = new Veiculo();
+        veiculo.setCor("Vermelho");
+        veiculo.setDispositivo(dispositivo);
+        veiculo.setMarca("Chevrolet");
+        veiculo.setModelo("Cruze");
+        veiculo.setPlaca("ABC-1234");
+
+        veiculoService.createVeiculo(veiculo);
+
+    }
+    //VEICULO BO
+    //--------------------------------------------------------------------------//
+
+    @Autowired
+    DispositivoService dispositivoService;
+
+    @Test
+    public void createDispositivo() throws Exception{
+        Dispositivo dispositivo = new Dispositivo();
+        dispositivo.setIdentificador("abcd1234");
+        Localizacao l = new Localizacao();
+        l.setVelocidade("0.0");
+        l.setLongitude("-37.1007574");
+        l.setLatitude("-10.902873");
+        LerCSV cs = new LerCSV();
+        l.setHorario(cs.converter("02/03/2016  00:00:00"));
+        l.setIdLocalizacao(333);
+        dispositivo.setLocalizacao(l);
+        dispositivo.setNome("Dubom");
+        dispositivoService.createDispositivo(dispositivo);
+
+    }
 }

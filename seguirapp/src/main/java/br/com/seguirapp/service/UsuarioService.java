@@ -11,6 +11,15 @@ public class UsuarioService {
     @Autowired
     UsuarioBO usuarioBO;
 
+    private static UsuarioService myInstance;
+
+    public synchronized static UsuarioService getInstance() {
+        if (myInstance == null) {
+            myInstance = new UsuarioService();
+        }
+        return myInstance;
+    }
+
     public Usuario create(String email, String senha) throws Exception{
         return usuarioBO.createUser(email, senha);
     }

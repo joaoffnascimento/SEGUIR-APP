@@ -11,6 +11,15 @@ public class PessoaService {
     @Autowired
     PessoaBO pessoaBO;
 
+    private static PessoaService myInstance;
+
+    public synchronized static PessoaService getInstance() {
+        if (myInstance == null) {
+            myInstance = new PessoaService();
+        }
+        return myInstance;
+    }
+
     public boolean create(Pessoa pessoa) throws Exception{
         pessoaBO.save(pessoa);
         return true;
