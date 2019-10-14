@@ -89,7 +89,6 @@ public class SeguirappApplicationTests {
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setIdDispositivo(1);
         dispositivo.setIdentificador("abcd1234");
-        dispositivo.setLocalizacao(localizacaoService.findById(1));
         dispositivo.setNome("Dubom");
         Veiculo veiculo = new Veiculo();
         veiculo.setCor("Vermelho");
@@ -111,16 +110,13 @@ public class SeguirappApplicationTests {
     public void createDispositivo() throws Exception{
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setIdentificador("abcd1234");
-        Localizacao l = new Localizacao();
-        l.setVelocidade("0.0");
-        l.setLongitude("-37.1007574");
-        l.setLatitude("-10.902873");
-        LerCSV cs = new LerCSV();
-        l.setHorario(cs.converter("02/03/2016  00:00:00"));
-        l.setIdLocalizacao(333);
-        dispositivo.setLocalizacao(l);
         dispositivo.setNome("Dubom");
         dispositivoService.createDispositivo(dispositivo);
 
     }
+
+    //CADASTRAR DISPOSITIVO OK, ELE GERA UM CODIGO AUTOMATICO UNICO PARA CADA PESSOA
+    //A LOCALIZACAO ESTA RELACIONADA AO DISPOSITIVO E O DISPOSITIVO A PESSOA
+    //--------------------------------------------------------------------------//
+
 }

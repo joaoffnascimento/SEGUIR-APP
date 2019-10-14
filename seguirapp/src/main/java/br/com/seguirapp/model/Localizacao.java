@@ -32,6 +32,10 @@ public class Localizacao {
     @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
     private Date horario;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_dispositivo", referencedColumnName = "id_dispositivo", nullable = true)
+    private Dispositivo dispositivo;
+
     public Localizacao(){
 
     }

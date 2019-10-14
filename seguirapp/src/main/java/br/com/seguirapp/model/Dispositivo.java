@@ -24,9 +24,6 @@ public class Dispositivo {
     @Column(name = "identificador", nullable = false, length = 10)
     private String identificador;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_localizacao", referencedColumnName = "id_localizacao", nullable = false)
-    private Localizacao localizacao;
 
     public int getIdDispositivo() {
         return idDispositivo;
@@ -52,12 +49,19 @@ public class Dispositivo {
         this.identificador = identificador;
     }
 
-    public Localizacao getLocalizacao() {
-        return localizacao;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dispositivo that = (Dispositivo) o;
+        return getIdDispositivo() == that.getIdDispositivo() &&
+                Objects.equals(getNome(), that.getNome()) &&
+                Objects.equals(getIdentificador(), that.getIdentificador());
     }
 
-    public void setLocalizacao(Localizacao localizacao) {
-        this.localizacao = localizacao;
+    @Override
+    public int hashCode() {
+        return 0;
     }
 
     @Override
@@ -66,24 +70,7 @@ public class Dispositivo {
         sb.append("idDispositivo=").append(getIdDispositivo());
         sb.append(", nome='").append(getNome()).append('\'');
         sb.append(", identificador='").append(getIdentificador()).append('\'');
-        sb.append(", localizacao=").append(getLocalizacao());
         sb.append('}');
         return sb.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dispositivo that = (Dispositivo) o;
-        return getIdDispositivo() == that.getIdDispositivo() &&
-                Objects.equals(getNome(), that.getNome()) &&
-                Objects.equals(getIdentificador(), that.getIdentificador()) &&
-                Objects.equals(getLocalizacao(), that.getLocalizacao());
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
     }
 }
