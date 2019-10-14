@@ -36,7 +36,7 @@ public class Localizacao {
 
     }
 
-    public Localizacao(Date horario, String latitude, String longitude, String velocidade) {
+    public Localizacao(String latitude, String longitude, String velocidade, Date horario) {
         this.horario = horario;
         this.latitude = latitude;
         this.longitude = longitude;

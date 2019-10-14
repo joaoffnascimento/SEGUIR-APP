@@ -20,7 +20,6 @@ public class LocalizacaoController {
 
     @PostMapping(path = "/cadastrar")
     public ResponseEntity setLocalizacao(@RequestBody Localizacao localizacao) throws Exception {
-        System.out.println(localizacao);
         return new ResponseEntity(localizacaoService.create(localizacao), HttpStatus.CREATED);
     }
 
