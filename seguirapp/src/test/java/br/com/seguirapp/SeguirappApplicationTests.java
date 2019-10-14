@@ -28,8 +28,8 @@ public class SeguirappApplicationTests {
 
     @Test
     public void createUser() throws Exception {
-        usuarioService.create("rayssa@bol.com", "dcba");
-        System.out.println(usuarioService.findByEmail("rayssa@bol.com"));
+        usuarioService.create("felipe@bol.com", "abcd1234");
+        /*System.out.println(usuarioService.findByEmail("rayssa@bol.com"));*/
     }
 
     @Test
@@ -110,7 +110,7 @@ public class SeguirappApplicationTests {
     public void createDispositivo() throws Exception{
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setIdentificador("abcd1234");
-        dispositivo.setNome("Dubom");
+        dispositivo.setNome("Paraneu");
         dispositivoService.createDispositivo(dispositivo);
 
     }
@@ -119,4 +119,54 @@ public class SeguirappApplicationTests {
     //A LOCALIZACAO ESTA RELACIONADA AO DISPOSITIVO E O DISPOSITIVO A PESSOA
     //--------------------------------------------------------------------------//
 
+    //PESSOA BO
+
+    @Autowired
+    PessoaService pessoaService;
+
+    //CREATE JA INSERE NAS OUTRAS TABELAS AS INFORMACOES
+    @Test
+    public void cadastrarPessoa() throws Exception{
+        Cidade c = new Cidade();
+        Estado e = new Estado();
+        e.setIdEstado(1);
+        e.setSigla("AC");
+        e.setNome("Acre");
+        c.setIdCidade(82);
+        c.setNome("Bujari");
+        c.setEstado(e);
+        Pessoa p = new Pessoa();
+        p.setNome("felipe");
+        p.setCpfCnpj("41076206034");
+        p.setCidade(c);
+        Grupo g = new Grupo();
+        g.setEmpresa("marata");
+        g.setIdGrupo(1);
+        p.setGrupo(g);
+        Dispositivo d = new Dispositivo();
+        d.setIdDispositivo(1);
+        d.setNome("Paraneu");
+        d.setIdentificador("SQZUQBNQS");
+        p.setDispositivo(d);
+        p.setLogradouro("Rua cel souza freire");
+        p.setTelefone("79996859817");
+        Usuario u = new Usuario();
+        u.setEmail("felipe@gol.com");
+        u.setSenha("abcd1234");
+        p.setUsuario(u);
+        pessoaService.create(p);
+    }
+
+    @Test
+    public void deletePessoa(){
+        pessoaService.deletePessoa(1);
+    }
+
+    @Test
+    public void dependentes(){
+        Grupo g = new Grupo();
+        g.setIdGrupo(1);
+        g.setEmpresa("marata");
+        System.out.println(pessoaService.dependentes(g));
+    }
 }

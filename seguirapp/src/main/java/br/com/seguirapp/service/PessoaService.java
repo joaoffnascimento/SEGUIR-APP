@@ -1,9 +1,11 @@
 package br.com.seguirapp.service;
 
 import br.com.seguirapp.BO.PessoaBO;
-import br.com.seguirapp.model.Pessoa;
+import br.com.seguirapp.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PessoaService {
@@ -20,9 +22,19 @@ public class PessoaService {
         return myInstance;
     }
 
-    public boolean create(Pessoa pessoa) throws Exception{
-        pessoaBO.save(pessoa);
-        return true;
+    public Pessoa create(Pessoa pessoa) throws Exception{
+        return pessoaBO.save(pessoa);
     }
 
+    public Pessoa vinculoDependente(Pessoa pessoa, Grupo grupo) throws Exception{
+        return pessoaBO.save(pessoa);
+    }
+
+    public List<String> dependentes(Grupo grupo){
+        return pessoaBO.dependentes(grupo);
+    }
+
+    public void deletePessoa(int id){
+        pessoaBO.deleteById(id);
+    }
 }

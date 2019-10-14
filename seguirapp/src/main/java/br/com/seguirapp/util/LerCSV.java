@@ -79,7 +79,7 @@ public class LerCSV {
                 headers.setContentType(MediaType.APPLICATION_JSON);
 
                 HttpEntity<String> request = new HttpEntity<String>(loc.toString(), headers);
-
+                Thread.sleep(1000);
                 String insereKct = restTemplate.postForObject("http://localhost:8080/rest/localizacao/post/", request, String.class);
 
             }
