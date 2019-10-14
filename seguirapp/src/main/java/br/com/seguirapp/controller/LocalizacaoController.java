@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/rest/localizacao")
@@ -27,6 +28,12 @@ public class LocalizacaoController {
     public ResponseEntity<?> obterLocalizacao(@PathVariable("id") int id) throws Exception {
         return new ResponseEntity<Localizacao>(localizacaoService.findById(id), HttpStatus.OK);
     }
+
+    @GetMapping
+    public List<Localizacao> findAll(){
+        return localizacaoService.findAll();
+    }
+
 
     @RequestMapping(value = "/post", method =  RequestMethod.POST)
     public Localizacao Post(@Valid @RequestBody Localizacao localizacao)throws Exception {

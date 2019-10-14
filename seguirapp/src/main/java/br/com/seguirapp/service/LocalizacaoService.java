@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class LocalizacaoService {
@@ -21,5 +22,9 @@ public class LocalizacaoService {
 
     public Localizacao findById(int id) throws Exception{
         return localizacaoBO.findById(id);
+    }
+
+    public List<Localizacao> findAll(){
+        return localizacaoBO.findAll();
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class LocalizacaoBO {
@@ -25,5 +26,9 @@ public class LocalizacaoBO {
 
     public Localizacao findById(int id) {
         return localizacaoDAO.findById(id).get();
+    }
+
+    public List<Localizacao> findAll(){
+        return localizacaoDAO.findAll();
     }
 }
