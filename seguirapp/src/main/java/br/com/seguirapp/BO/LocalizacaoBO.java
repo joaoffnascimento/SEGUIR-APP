@@ -31,4 +31,8 @@ public class LocalizacaoBO {
     public List<Localizacao> findAll(){
         return localizacaoDAO.findAll();
     }
+
+    public List<String> findByDisp(int id) throws Exception{
+        return localizacaoDAO.getLocalizacao(id);
+    }
 }

@@ -7,6 +7,7 @@ import br.com.seguirapp.repository.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class ServicoBO {
         servicoDAO.deleteById(id);
     }
 
-    public List<Localizacao> consultaLocalizacao(Servico servico){
-        return null;
+    public ArrayList<String> consultaLocalizacao(int idDispositivo){
+        return servicoDAO.getLocalizacao(idDispositivo);
     }
 }

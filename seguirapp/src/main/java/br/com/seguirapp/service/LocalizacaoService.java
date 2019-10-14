@@ -33,6 +33,10 @@ public class LocalizacaoService {
         return localizacaoBO.findById(id);
     }
 
+    public List<String> findByDisp(int id) throws Exception{
+        return localizacaoBO.findByDisp(id);
+    }
+
     public List<Localizacao> findAll(){
         return localizacaoBO.findAll();
     }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,6 +28,11 @@ public class LocalizacaoController {
     @GetMapping(path = "/getLocalizacaoById/{id}")
     public ResponseEntity<?> obterLocalizacao(@PathVariable("id") int id) throws Exception {
         return new ResponseEntity<Localizacao>(localizacaoService.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getLocalizacao/{id}")
+    public ResponseEntity<?> obterLocalizacaoDisp(@PathVariable("id") int id) throws Exception {
+        return new ResponseEntity<String>((MultiValueMap<String, String>) localizacaoService.findByDisp(id), HttpStatus.OK);
     }
 
     @GetMapping

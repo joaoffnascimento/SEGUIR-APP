@@ -86,7 +86,7 @@ public class SeguirappApplicationTests {
     DispositivoService dispositivoService;
 
     @Test
-    public void createDispositivo() throws Exception{
+    public void createDispositivo() throws Exception {
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setIdentificador("abcd1234");
         dispositivo.setNome("Paraneu");
@@ -101,7 +101,7 @@ public class SeguirappApplicationTests {
 
 
     @Test
-    public void createVeiculo() throws Exception{
+    public void createVeiculo() throws Exception {
 
         Dispositivo dispositivo = new Dispositivo();
         dispositivo.setIdDispositivo(1);
@@ -128,7 +128,7 @@ public class SeguirappApplicationTests {
 
     //CREATE JA INSERE NAS OUTRAS TABELAS AS INFORMACOES
     @Test
-    public void cadastrarPessoa() throws Exception{
+    public void cadastrarPessoa() throws Exception {
         Cidade c = new Cidade();
         Estado e = new Estado();
         e.setIdEstado(1);
@@ -160,12 +160,12 @@ public class SeguirappApplicationTests {
     }
 
     @Test
-    public void deletePessoa(){
+    public void deletePessoa() {
         pessoaService.deletePessoa(1);
     }
 
     @Test
-    public void dependentes(){
+    public void dependentes() {
         Grupo g = new Grupo();
         g.setIdGrupo(1);
         g.setEmpresa("marata");
@@ -180,7 +180,7 @@ public class SeguirappApplicationTests {
     ServicoService servicoService;
 
     @Test
-    public void criarServico() throws Exception{
+    public void criarServico() throws Exception {
         Servico s = new Servico();
         Cidade c = new Cidade();
         Estado e = new Estado();
@@ -191,7 +191,7 @@ public class SeguirappApplicationTests {
         c.setNome("Bujari");
         c.setEstado(e);
         Pessoa p = new Pessoa();
-        p.setIdPessoa(2);
+        p.setIdPessoa(1);
         p.setNome("felipe");
         p.setCpfCnpj("41076206034");
         p.setCidade(c);
@@ -217,4 +217,13 @@ public class SeguirappApplicationTests {
         servicoService.createServico(s);
     }
 
+
+    //-------------------------------------------------//
+
+    //BUSCAR LOCALIZACOES DE UM DISPOSITIVO
+
+    @Test
+    public void getLocalizacao() throws Exception {
+        System.out.println(servicoService.consultaLocalizacao(1));
+    }
 }

@@ -7,6 +7,7 @@ import br.com.seguirapp.model.Servico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,8 +33,8 @@ public class ServicoService {
         servicoBO.deleteServico(id);
     }
 
-    public List<Localizacao> consultaLocalizacao(Servico servico){
-        return null;
+    public ArrayList<String> consultaLocalizacao(int idDispositivo){
+        return servicoBO.consultaLocalizacao(idDispositivo);
     }
 
 
