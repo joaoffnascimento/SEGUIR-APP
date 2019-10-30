@@ -1,0 +1,43 @@
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    flex-direction: row;
+    box-shadow: 1px 0 5px 0px black;
+    z-index: 999;
+    font-size: 20px;
+}
+
+.btn-sair {
+    color: white;
+    padding: 0 10px;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+    
+}
+
+.btn-sair:hover{
+    cursor: pointer;
+    color: white;
+    text-decoration: underline;
+    opacity: .75;
+}
+
+.text-bar{
+    margin-left: 50px;
+    color: white;
+    text-decoration: inherit;
+}
+
+.text-bar:hover {
+    color: inherit;
+}

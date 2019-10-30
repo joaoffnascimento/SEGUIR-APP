@@ -1,0 +1,14 @@
+.nav-bar{
+    display: flex;
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    background-color: grey;
+    overflow: auto;
+}
+
+.text-inicio{
+    font-weight: bold !important;
+}
