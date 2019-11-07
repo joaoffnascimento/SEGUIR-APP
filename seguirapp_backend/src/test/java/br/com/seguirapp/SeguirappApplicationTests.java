@@ -1,3 +1,4 @@
+/*
 package br.com.seguirapp;
 
 import br.com.seguirapp.model.*;
@@ -29,7 +30,9 @@ public class SeguirappApplicationTests {
     @Test
     public void createUser() throws Exception {
         usuarioService.create("felipe@bol.com", "abcd1234");
-        /*System.out.println(usuarioService.findByEmail("rayssa@bol.com"));*/
+        */
+/*System.out.println(usuarioService.findByEmail("rayssa@bol.com"));*//*
+
     }
 
     @Test
@@ -226,4 +229,4 @@ public class SeguirappApplicationTests {
     public void getLocalizacao() throws Exception {
         System.out.println(servicoService.consultaLocalizacao(1));
     }
-}
+}*/

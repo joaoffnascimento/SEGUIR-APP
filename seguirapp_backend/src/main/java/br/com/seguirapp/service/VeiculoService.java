@@ -1,7 +1,7 @@
 package br.com.seguirapp.service;
 
-import br.com.seguirapp.BO.VeiculoBO;
 import br.com.seguirapp.model.Veiculo;
+import br.com.seguirapp.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class VeiculoService {
 
     @Autowired
-    VeiculoBO veiculoBO;
+    private VeiculoRepository veiculoDAO;
 
     private static VeiculoService myInstance;
 
@@ -20,20 +20,36 @@ public class VeiculoService {
         return myInstance;
     }
 
+    //SO IRA CRIAR O VEICULO SE EXISTIR UM DISPOSITIVO PARA SER ASSOCIADO
+
     public Veiculo createVeiculo(Veiculo veiculo) throws Exception {
-        return veiculoBO.createVeiculo(veiculo);
+        if (veiculo.getDispositivo() == null) {
+            throw new Exception("Veiculo so sera cadastrado se existir algum dispositivo a ser associado!");
+        }
+        return veiculoDAO.save(veiculo);
     }
 
     public void deleteVeiculo(int id) {
-        veiculoBO.deleteVeiculo(id);
+        veiculoDAO.deleteById(id);
     }
 
-    public Veiculo updatePlaca(Veiculo veiculo, String placa) throws Exception {
-        return veiculoBO.updatePlaca(veiculo, placa);
+    //POSSIBILIDADE DE ALTERAR A PLACA DO VEICULO
+    public Veiculo updatePlaca(Veiculo veiculo, String placa) throws Exception{
+        if(placa == null){
+            throw  new Exception("Placa invalida");
+        }
+        return veiculoDAO.updatePlaca(veiculo.getPlaca(), placa);
     }
 
-    public Veiculo updateCor(Veiculo veiculo, String cor) throws Exception {
-        return veiculoBO.updateCor(veiculo, cor);
+    //POSSIBILIDADE DE ALTERAR A COR DO VEICULO
+    public Veiculo updateCor(Veiculo veiculo, String cor) throws Exception{
+        if(cor == null){
+            throw  new Exception("Cor deve ser alterada para algo !");
+        } else if (cor == veiculo.getCor()){
+            throw new Exception("O veiculo já é dessa cor !");
+        }
+        return veiculoDAO.updateCor(veiculo.getCor(), cor);
     }
+
 
 }

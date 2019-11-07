@@ -53,7 +53,7 @@ public class LerCSV {
 
     public JSONObject run() throws Exception {
 
-        String arquivoCSV = "C:\\github\\IFS-WEB\\seguirapp\\src\\main\\java\\br\\com\\seguirapp\\util\\csv.csv";
+        String arquivoCSV = "C:\\github\\IFS-WEB\\seguirapp_backend\\src\\main\\java\\br\\com\\seguirapp\\util\\csv.csv";
         BufferedReader br = null;
         String linha = "";
         String csvDivisor = ";";

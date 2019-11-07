@@ -1,9 +1,8 @@
 package br.com.seguirapp.service;
 
-import br.com.seguirapp.BO.PessoaBO;
-import br.com.seguirapp.BO.ServicoBO;
 import br.com.seguirapp.model.Localizacao;
 import br.com.seguirapp.model.Servico;
+import br.com.seguirapp.repository.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public class ServicoService {
 
     @Autowired
-    ServicoBO servicoBO;
+    private ServicoRepository servicoDAO;
 
     private static ServicoService myInstance;
 
@@ -26,17 +25,15 @@ public class ServicoService {
     }
 
     public Servico createServico(Servico servico){
-        return servicoBO.createServico(servico);
+        return servicoDAO.save(servico);
     }
 
     public void deleteServico(int id){
-        servicoBO.deleteServico(id);
+        servicoDAO.deleteById(id);
     }
 
     public ArrayList<String> consultaLocalizacao(int idDispositivo){
-        return servicoBO.consultaLocalizacao(idDispositivo);
+        return servicoDAO.getLocalizacao(idDispositivo);
     }
-
-
 
 }

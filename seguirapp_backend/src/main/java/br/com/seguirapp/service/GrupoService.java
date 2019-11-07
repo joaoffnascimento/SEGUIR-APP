@@ -1,7 +1,7 @@
 package br.com.seguirapp.service;
 
-import br.com.seguirapp.BO.GrupoBO;
 import br.com.seguirapp.model.Grupo;
+import br.com.seguirapp.repository.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class GrupoService {
 
     @Autowired
-    GrupoBO grupoBO;
+    private GrupoRepository grupoDAO;
 
     private static GrupoService myInstance;
 
@@ -20,17 +20,12 @@ public class GrupoService {
         return myInstance;
     }
 
-    public Grupo createGroup(String nome){
-        Grupo grupo = new Grupo(nome);
-        return grupoBO.createGroup(nome);
-    }
-
-    public void updateGroup(String nome, String newNome){
-        grupoBO.update(nome, newNome);
-    }
-
     public void delete(int id){
-        grupoBO.delete(id);
+        grupoDAO.deleteById(id);
+    }
+
+    public void update(String nome, String newNome){
+        grupoDAO.updateEmpresa(nome, newNome);
     }
 
 }
