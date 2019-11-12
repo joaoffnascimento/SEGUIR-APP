@@ -22,7 +22,7 @@ public class LocalizacaoController {
 
     @PostMapping(path = "/cadastrar")
     public ResponseEntity setLocalizacao(@RequestBody Localizacao localizacao) throws Exception {
-        return new ResponseEntity(localizacaoService.create(localizacao), HttpStatus.CREATED);
+        return new ResponseEntity(localizacaoService.createLocalizacao(localizacao), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/getLocalizacaoById/{id}")
@@ -43,6 +43,6 @@ public class LocalizacaoController {
 
     @RequestMapping(value = "/post", method =  RequestMethod.POST)
     public Localizacao Post(@Valid @RequestBody Localizacao localizacao)throws Exception {
-        return localizacaoService.create(localizacao);
+        return localizacaoService.createLocalizacao(localizacao);
     }
 }

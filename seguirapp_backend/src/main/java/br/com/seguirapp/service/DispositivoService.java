@@ -1,6 +1,5 @@
 package br.com.seguirapp.service;
 
-import br.com.seguirapp.BO.GrupoBO;
 import br.com.seguirapp.model.Dispositivo;
 import br.com.seguirapp.repository.DispositivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

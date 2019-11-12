@@ -1,5 +1,7 @@
 package br.com.seguirapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.awt.*;
 import java.sql.Date;

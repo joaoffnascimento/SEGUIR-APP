@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PessoaService {
@@ -38,22 +39,30 @@ public class PessoaService {
 //        }
 
         //Validar EMAIL
-        if(!util.isEmail(pessoa.getUsuario().getEmail())){
+        if (!util.isEmail(pessoa.getUsuario().getEmail())) {
             throw new Exception("Deu pau ao cadastrar email invalido!");
         }
         return pessoaDAO.save(pessoa);
     }
 
-    public Pessoa vinculoDependente(Pessoa pessoa, Grupo grupo) throws Exception{
+    public Pessoa vinculoDependente(Pessoa pessoa, Grupo grupo) throws Exception {
         pessoa.setGrupo(grupo);
         return pessoaDAO.save(pessoa);
     }
 
-    public List<String> dependentes(Grupo grupo){
+    public List<String> dependentes(Grupo grupo) {
         return pessoaDAO.getDependentes(grupo.getIdGrupo());
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         pessoaDAO.deleteById(id);
+    }
+
+    public Pessoa findById(int id){
+        return pessoaDAO.findById(id);
+    }
+
+    public List<Pessoa> getAll(){
+        return pessoaDAO.findAll();
     }
 }

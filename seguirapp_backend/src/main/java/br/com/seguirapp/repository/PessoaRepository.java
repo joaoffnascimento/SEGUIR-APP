@@ -12,11 +12,11 @@ import java.util.List;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
-
+    Pessoa findById(int idPessoa);
 
     @Transactional
     @Modifying
     @Query(value = "select p.nome from pessoa p join grupo g where (p.id_grupo =:idGrupo = g.id_grupo =:idGrupo)", nativeQuery = true)
     List<String> getDependentes(@Param("idGrupo") int idGrupo);
 
-}
+ }
