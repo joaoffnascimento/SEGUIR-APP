@@ -1,4 +1,4 @@
-import axiosApi from './AxiosApi'
+import axiosApi from './axiosApi'
 
 export const getClientes = () => {
     return axiosApi.get(`/pessoa`)

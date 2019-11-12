@@ -22,7 +22,7 @@ public class Pessoa {
     private int idPessoa;
 
     @Basic
-    @Column(name = "nome", nullable = false, length = 45)
+    @Column(name = "nome", nullable = true, length = 45)
     private String nome;
 
     @Basic
@@ -44,9 +44,13 @@ public class Pessoa {
     @Column(name = "dt_nascimento", nullable = true)
     private Date dtNascimento;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "email", referencedColumnName = "email", nullable = true, unique = true)
-    private Usuario usuario;
+    @Column(name = "email", nullable = false, length = 45)
+    private String email;
+
+    @Basic
+    @Column(name = "senha", nullable = false, length = 32)
+    private String senha;
+
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dispositivo", referencedColumnName = "id_dispositivo")
@@ -65,6 +69,7 @@ public class Pessoa {
     }
 
     //Getters and Setters
+
 
     public int getIdPessoa() {
         return idPessoa;
@@ -122,12 +127,20 @@ public class Pessoa {
         this.dtNascimento = dtNascimento;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public Dispositivo getDispositivo() {
@@ -147,23 +160,6 @@ public class Pessoa {
     }
 
     @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Pessoa{");
-        sb.append("idPessoa=").append(getIdPessoa());
-        sb.append(", nome='").append(getNome()).append('\'');
-        sb.append(", cpfCnpj='").append(getCpfCnpj()).append('\'');
-        sb.append(", logradouro='").append(getLogradouro()).append('\'');
-        sb.append(", cidade=").append(getCidade());
-        sb.append(", telefone='").append(getTelefone()).append('\'');
-        sb.append(", dtNascimento=").append(getDtNascimento());
-        sb.append(", usuario=").append(getUsuario());
-        sb.append(", dispositivo=").append(getDispositivo());
-        sb.append(", grupo=").append(getGrupo());
-        sb.append('}');
-        return sb.toString();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -175,13 +171,33 @@ public class Pessoa {
                 Objects.equals(getCidade(), pessoa.getCidade()) &&
                 Objects.equals(getTelefone(), pessoa.getTelefone()) &&
                 Objects.equals(getDtNascimento(), pessoa.getDtNascimento()) &&
-                Objects.equals(getUsuario(), pessoa.getUsuario()) &&
+                Objects.equals(getEmail(), pessoa.getEmail()) &&
+                Objects.equals(getSenha(), pessoa.getSenha()) &&
                 Objects.equals(getDispositivo(), pessoa.getDispositivo()) &&
                 Objects.equals(getGrupo(), pessoa.getGrupo());
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        return Objects.hash(getIdPessoa(), getNome(), getCpfCnpj(), getLogradouro(), getCidade(), getTelefone(), getDtNascimento(), getEmail(), getSenha(), getDispositivo(), getGrupo());
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Pessoa{");
+        sb.append("idPessoa=").append(idPessoa);
+        sb.append(", nome='").append(nome).append('\'');
+        sb.append(", cpfCnpj='").append(cpfCnpj).append('\'');
+        sb.append(", logradouro='").append(logradouro).append('\'');
+        sb.append(", cidade=").append(cidade);
+        sb.append(", telefone='").append(telefone).append('\'');
+        sb.append(", dtNascimento=").append(dtNascimento);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", senha='").append(senha).append('\'');
+        sb.append(", dispositivo=").append(dispositivo);
+        sb.append(", grupo=").append(grupo);
+        sb.append('}');
+        return sb.toString();
     }
 }

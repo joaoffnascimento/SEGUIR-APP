@@ -38,10 +38,10 @@ public class PessoaService {
 //            throw new Exception("Deu pau ao cadastrar Telefone Inválido!");
 //        }
 
-        //Validar EMAIL
-        if (!util.isEmail(pessoa.getUsuario().getEmail())) {
-            throw new Exception("Deu pau ao cadastrar email invalido!");
-        }
+//        //Validar EMAIL
+//        if (!util.isEmail(pessoa.getUsuario().getEmail())) {
+//            throw new Exception("Deu pau ao cadastrar email invalido!");
+//        }
         return pessoaDAO.save(pessoa);
     }
 
