@@ -12,8 +12,6 @@ class Login extends Component {
         event.preventDefault()
 
         localStorage.setItem('user', 1)
-
-        this.props.history.push('/dashboard')
     }
 
     render() {
@@ -34,7 +32,7 @@ class Login extends Component {
                         type='password'
                         required
                     />
-                    <Button className="btn" type="submit">Entrar</Button>
+                        <Button className="btn" type="submit">Entrar</Button>
                 </Form>
             </div>
         )

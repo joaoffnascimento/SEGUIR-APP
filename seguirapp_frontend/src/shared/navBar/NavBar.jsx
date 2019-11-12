@@ -22,7 +22,7 @@ class NavBar extends Component {
                         name='Inicio'
                         active={itemAtivo === 'Inicio'}
                         href="#/"
-                        onClick={this.handleItemClick}/>
+                        onClick={this.handleItemClick} />
                     <Menu.Item className="text-white"> <strong>Cadastros</strong> </Menu.Item>
                     <Menu.Menu className="text-white">
                         <Menu.Item
@@ -35,6 +35,21 @@ class NavBar extends Component {
                             name='Dispositivo'
                             active={itemAtivo === 'Dispositivo'}
                             href="#/cadastro-dispositivo"
+                            onClick={this.handleItemClick}
+                        />
+                    </Menu.Menu>
+                    <Menu.Item className="text-white"> <strong>Listar</strong> </Menu.Item>
+                    <Menu.Menu>
+                        <Menu.Item
+                            name='Cliente'
+                            active={itemAtivo === 'Cliente'}
+                            href="#/lista-clientes"
+                            onClick={this.handleItemClick}
+                        />
+                        <Menu.Item
+                            name='Dispositivo'
+                            active={itemAtivo === 'Dispositivo'}
+                            href="#/lista-dispositivos"
                             onClick={this.handleItemClick}
                         />
                     </Menu.Menu>
