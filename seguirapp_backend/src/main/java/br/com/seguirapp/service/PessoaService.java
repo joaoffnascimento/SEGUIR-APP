@@ -29,9 +29,9 @@ public class PessoaService {
         Util util = new Util();
         //Validar CPF
 
-        if (!util.isValid(pessoa.getCpfCnpj())) {
-            throw new Exception("Deu pau ao cadastrar CPF inválido !");
-        }
+//        if (!util.isValid(pessoa.getCpfCnpj())) {
+//            throw new Exception("Deu pau ao cadastrar CPF inválido !");
+//        }
 
         //Validar TELEFONE
 //        if(!util.isTelefone(pessoa.getTelefone())){
@@ -45,10 +45,10 @@ public class PessoaService {
         return pessoaDAO.save(pessoa);
     }
 
-    public Pessoa vinculoDependente(Pessoa pessoa, Grupo grupo) throws Exception {
-        pessoa.setGrupo(grupo);
-        return pessoaDAO.save(pessoa);
-    }
+//    public Pessoa vinculoDependente(Pessoa pessoa, Grupo grupo) throws Exception {
+//        pessoa.setGrupo(grupo);
+//        return pessoaDAO.save(pessoa);
+//    }
 
     public List<String> dependentes(Grupo grupo) {
         return pessoaDAO.getDependentes(grupo.getIdGrupo());

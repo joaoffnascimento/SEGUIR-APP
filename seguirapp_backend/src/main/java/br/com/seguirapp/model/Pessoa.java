@@ -52,13 +52,13 @@ public class Pessoa {
     private String senha;
 
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "dispositivo", referencedColumnName = "id_dispositivo")
     private Dispositivo dispositivo;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", nullable = true)
-    private Grupo grupo;
+//    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", nullable = true)
+//    private Grupo grupo;
 
     public Pessoa(){
 
@@ -151,13 +151,13 @@ public class Pessoa {
         this.dispositivo = dispositivo;
     }
 
-    public Grupo getGrupo() {
-        return grupo;
-    }
-
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
-    }
+//    public Grupo getGrupo() {
+//        return grupo;
+//    }
+//
+//    public void setGrupo(Grupo grupo) {
+//        this.grupo = grupo;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -173,13 +173,13 @@ public class Pessoa {
                 Objects.equals(getDtNascimento(), pessoa.getDtNascimento()) &&
                 Objects.equals(getEmail(), pessoa.getEmail()) &&
                 Objects.equals(getSenha(), pessoa.getSenha()) &&
-                Objects.equals(getDispositivo(), pessoa.getDispositivo()) &&
-                Objects.equals(getGrupo(), pessoa.getGrupo());
+                Objects.equals(getDispositivo(), pessoa.getDispositivo());
+//                Objects.equals(getGrupo(), pessoa.getGrupo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdPessoa(), getNome(), getCpfCnpj(), getLogradouro(), getCidade(), getTelefone(), getDtNascimento(), getEmail(), getSenha(), getDispositivo(), getGrupo());
+        return Objects.hash(getIdPessoa(), getNome(), getCpfCnpj(), getLogradouro(), getCidade(), getTelefone(), getDtNascimento(), getEmail(), getSenha(), getDispositivo());
     }
 
 
@@ -196,7 +196,7 @@ public class Pessoa {
         sb.append(", email='").append(email).append('\'');
         sb.append(", senha='").append(senha).append('\'');
         sb.append(", dispositivo=").append(dispositivo);
-        sb.append(", grupo=").append(grupo);
+//        sb.append(", grupo=").append(grupo);
         sb.append('}');
         return sb.toString();
     }
