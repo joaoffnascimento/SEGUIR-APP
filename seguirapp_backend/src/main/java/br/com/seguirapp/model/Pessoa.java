@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Pessoa {
 
     /**
-     * CIDADE
+     * PESSOA
      *
      * @author João F. F. Nascimento
      */
@@ -51,14 +51,17 @@ public class Pessoa {
     @Column(name = "senha", nullable = false, length = 32)
     private String senha;
 
+    @Basic
+    @Column(name = "tipo", nullable = false, length = 32)
+    private String tipo;
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "dispositivo", referencedColumnName = "id_dispositivo")
     private Dispositivo dispositivo;
 
-//    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id_grupo", referencedColumnName = "id_grupo", nullable = true)
-//    private Grupo grupo;
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "grupo", referencedColumnName = "id_grupo")
+    private Grupo grupo;
 
     public Pessoa(){
 
@@ -70,6 +73,38 @@ public class Pessoa {
 
     //Getters and Setters
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return getIdPessoa() == pessoa.getIdPessoa() &&
+                Objects.equals(getNome(), pessoa.getNome()) &&
+                Objects.equals(getCpfCnpj(), pessoa.getCpfCnpj()) &&
+                Objects.equals(getLogradouro(), pessoa.getLogradouro()) &&
+                Objects.equals(getCidade(), pessoa.getCidade()) &&
+                Objects.equals(getTelefone(), pessoa.getTelefone()) &&
+                Objects.equals(getDtNascimento(), pessoa.getDtNascimento()) &&
+                Objects.equals(getEmail(), pessoa.getEmail()) &&
+                Objects.equals(getSenha(), pessoa.getSenha()) &&
+                Objects.equals(getTipo(), pessoa.getTipo()) &&
+                Objects.equals(getDispositivo(), pessoa.getDispositivo()) &&
+                Objects.equals(getGrupo(), pessoa.getGrupo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdPessoa(), getNome(), getCpfCnpj(), getLogradouro(), getCidade(), getTelefone(), getDtNascimento(), getEmail(), getSenha(), getTipo(), getDispositivo(), getGrupo());
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public int getIdPessoa() {
         return idPessoa;
@@ -151,37 +186,13 @@ public class Pessoa {
         this.dispositivo = dispositivo;
     }
 
-//    public Grupo getGrupo() {
-//        return grupo;
-//    }
-//
-//    public void setGrupo(Grupo grupo) {
-//        this.grupo = grupo;
-//    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return getIdPessoa() == pessoa.getIdPessoa() &&
-                Objects.equals(getNome(), pessoa.getNome()) &&
-                Objects.equals(getCpfCnpj(), pessoa.getCpfCnpj()) &&
-                Objects.equals(getLogradouro(), pessoa.getLogradouro()) &&
-                Objects.equals(getCidade(), pessoa.getCidade()) &&
-                Objects.equals(getTelefone(), pessoa.getTelefone()) &&
-                Objects.equals(getDtNascimento(), pessoa.getDtNascimento()) &&
-                Objects.equals(getEmail(), pessoa.getEmail()) &&
-                Objects.equals(getSenha(), pessoa.getSenha()) &&
-                Objects.equals(getDispositivo(), pessoa.getDispositivo());
-//                Objects.equals(getGrupo(), pessoa.getGrupo());
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getIdPessoa(), getNome(), getCpfCnpj(), getLogradouro(), getCidade(), getTelefone(), getDtNascimento(), getEmail(), getSenha(), getDispositivo());
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
-
 
     @Override
     public String toString() {
@@ -196,7 +207,7 @@ public class Pessoa {
         sb.append(", email='").append(email).append('\'');
         sb.append(", senha='").append(senha).append('\'');
         sb.append(", dispositivo=").append(dispositivo);
-//        sb.append(", grupo=").append(grupo);
+        sb.append(", grupo=").append(grupo);
         sb.append('}');
         return sb.toString();
     }

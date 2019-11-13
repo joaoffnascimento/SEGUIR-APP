@@ -46,5 +46,4 @@ public class DispositivoService {
         dispositivoDAO.deleteById(id);
     }
 
-
 }

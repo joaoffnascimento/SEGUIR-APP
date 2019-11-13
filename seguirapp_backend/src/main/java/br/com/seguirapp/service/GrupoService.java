@@ -20,6 +20,10 @@ public class GrupoService {
         return myInstance;
     }
 
+    public void save (Grupo g){
+        grupoDAO.save(g);
+    }
+
     public void delete(int id){
         grupoDAO.deleteById(id);
     }

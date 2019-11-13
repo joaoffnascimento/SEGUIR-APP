@@ -101,10 +101,10 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="false"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.jdbc.url" value="jdbc:mysql://192.168.255.128:3306/seguirapp"/>
+            <property name="hibernate.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/seguirapp"/>
             <property name="hibernate.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.jdbc.user" value="felipe"/>
-            <property name="hibernate.jdbc.password" value="mkfelipe123"/>
+            <property name="hibernate.jdbc.user" value="root"/>
+            <property name="hibernate.jdbc.password" value="alan1704"/>
         </properties>
     </persistence-unit>
 </persistence>

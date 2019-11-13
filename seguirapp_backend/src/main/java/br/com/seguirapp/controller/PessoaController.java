@@ -51,4 +51,6 @@ public class PessoaController {
     public Pessoa Post(@Valid @RequestBody Pessoa pessoa)throws Exception {
         return ps.save(pessoa);
     }
+
+
 }
