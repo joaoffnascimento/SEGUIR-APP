@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { Container, Header, Form, Button } from 'semantic-ui-react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { createCliente } from '../../actions/clienteActions'
 import { TextField } from '../../shared/form/TextField'
 
-class clienteForm extends Component {
+class ClienteForm extends Component {
+
   render() {
+    const { handleSubmit } = this.props
+
     return (
       <Container className='semi-fluid'>
         <Header>Cadastrar Cliente</Header>
-        <Form>
+        <Form onSubmit={handleSubmit(this.props.createCliente)}>
           <Form.Group widths='equal'>
             <Field
               name='nome'
@@ -25,7 +31,7 @@ class clienteForm extends Component {
             <Field
               name='dtNascimento'
               type='date'
-              required={true}
+              required={false}
               label='Data de Nascimento'
               component={TextField} />
           </Form.Group>
@@ -38,7 +44,7 @@ class clienteForm extends Component {
               component={TextField} />
             <Field
               name='cidade'
-              required={true}
+              required={false}
               label='Cidade'
               component={TextField} />
             <Field
@@ -57,6 +63,10 @@ class clienteForm extends Component {
               name='dispositivo'
               label='Dispositivo'
               component={TextField} />
+            <Field
+              name='tipo'
+              label='Tipo de Usuario'
+              component={TextField} />
           </Form.Group>
           <Form.Group widths='equal'>
             <Field
@@ -74,16 +84,18 @@ class clienteForm extends Component {
               component={TextField} />
           </Form.Group>
 
-          <Button positive >Cadastrar</Button>
+          <Button type='button' onClick={() => this.props.history.goBack()}> Cancelar </Button>
+          <Button positive type='submit' >Cadastrar</Button>
         </Form>
       </Container>
     );
   }
 }
 
-
-const ClienteForm = reduxForm({
+const clienteForm = reduxForm({
   form: 'clienteForm'
-})(clienteForm)
+})(ClienteForm)
 
-export default ClienteForm
+const mapDispatchToProps = dispatch => bindActionCreators({createCliente}, dispatch)
+
+export default connect(null, mapDispatchToProps)(clienteForm)

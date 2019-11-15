@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
+import Cookie from 'cookiejs'
 import './NavBar.css'
 
 class NavBar extends Component {
@@ -12,51 +14,65 @@ class NavBar extends Component {
         this.setState({ itemAtivo: name })
     }
 
-    render() {
+    renderAdmin() {
         const { itemAtivo } = this.state
 
         return (
-            <div className="nav-bar">
-                <Menu vertical pointing inverted color='grey'>
+            <Menu vertical pointing inverted color='grey'>
+                <Menu.Item className="text-inicio"
+                    name='Inicio'
+                    active={itemAtivo === 'Inicio'}
+                    href="#/"
+                    onClick={this.handleItemClick} />
+                <Menu.Item
+                    name='Clientes'
+                    active={itemAtivo === 'Clientes'}
+                    href="#/cliente"
+                    onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                    name='Dispositivos'
+                    active={itemAtivo === 'Dispositivos'}
+                    href="#/dispositivo"
+                    onClick={this.handleItemClick}
+                />
+            </Menu>
+        )
+    }
+
+    renderCliente() {
+        const { itemAtivo } = this.state
+
+        return(
+            <Menu vertical pointing inverted color='grey'>
                     <Menu.Item className="text-inicio"
                         name='Inicio'
                         active={itemAtivo === 'Inicio'}
                         href="#/"
                         onClick={this.handleItemClick} />
-                    <Menu.Item className="text-white"> <strong>Cadastros</strong> </Menu.Item>
-                    <Menu.Menu className="text-white">
-                        <Menu.Item
-                            name='Cliente'
-                            active={itemAtivo === 'Cliente'}
-                            href="#/cadastro-cliente"
-                            onClick={this.handleItemClick}
-                        />
-                        <Menu.Item
-                            name='Dispositivo'
-                            active={itemAtivo === 'Dispositivo'}
-                            href="#/cadastro-dispositivo"
-                            onClick={this.handleItemClick}
-                        />
-                    </Menu.Menu>
-                    <Menu.Item className="text-white"> <strong>Listar</strong> </Menu.Item>
-                    <Menu.Menu>
-                        <Menu.Item
-                            name='Cliente'
-                            active={itemAtivo === 'Cliente'}
-                            href="#/lista-clientes"
-                            onClick={this.handleItemClick}
-                        />
-                        <Menu.Item
-                            name='Dispositivo'
-                            active={itemAtivo === 'Dispositivo'}
-                            href="#/lista-dispositivos"
-                            onClick={this.handleItemClick}
-                        />
-                    </Menu.Menu>
+                    <Menu.Item
+                        name='Localizar Dispositivo'
+                        active={itemAtivo === 'Localizar Dispositivo'}
+                        href="#/"
+                        onClick={this.handleItemClick}
+                    />
                 </Menu>
+        )
+    }
+
+    render() {
+        const tipo = Cookie.get('tipo')
+
+        return (
+            <div className="nav-bar">
+                {tipo === 'administrador' ? this.renderAdmin() : this.renderCliente()}
             </div>
         )
     }
 }
 
-export default NavBar
+const mapStateToProps = state => ({
+  user: state.system.user
+});
+
+export default connect(mapStateToProps)(NavBar)
