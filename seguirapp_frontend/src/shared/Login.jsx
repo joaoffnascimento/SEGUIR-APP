@@ -43,7 +43,7 @@ class Login extends Component {
                 setUsuario(usuario)
 
                 window.localStorage.setItem('user', usuario.idUser)
-                Cookie.set('tipo', usuario.tipoUser)
+                window.localStorage.setItem('tipo', usuario.tipoUser)
                 this.setState({ email: '', senha: '', emailError: false, senhaError: false })
             } else {
                 this.setState({ userError: true })

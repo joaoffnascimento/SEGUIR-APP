@@ -15,9 +15,16 @@ class TopBar extends Component {
             tipoUser: ''
         }
 
+        const {
+            protocol,
+            host
+        } = window.location;
+        
+
         setUsuario(usuario)
-        window.localStorage.removeItem('user')
-        Cookie.remove('tipo')
+        window.location.replace(`${protocol}//${host}`);
+        localStorage.removeItem('user')
+        localStorage.removeItem('tipo')
     }
 
     render() {

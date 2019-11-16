@@ -20,16 +20,33 @@
       monospace;
   }
 
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+
   .container{
-    margin-top: 100px;
+    margin-top: 70px;
     margin-left: 210px;
     
 }
+
 
 .semi-fluid {
   width: 95% !important;
 }
   .text-white{
     color: white !important;
+  }
+
+  .mapContainer{
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .buttonMapTrackMe{
+    position: relative;
+    float: right;
+    padding: 20px;
   }
   

@@ -8,11 +8,12 @@ import Dashboard from './pages/dashboard/Dashboard'
 import ClienteForm from './pages/clientes/ClienteForm'
 import DispositivoForm from './pages/dispositivos/DispositivoForm'
 import ClienteList from './pages/clientes/ClienteList'
+import Cookie from 'cookiejs'
 
 class App extends Component {
 
   render() {
-    const user = window.localStorage.getItem('user')
+    const user = localStorage.getItem('user')
 
     if (!user) {
       return <Login />

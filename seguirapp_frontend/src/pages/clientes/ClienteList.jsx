@@ -54,8 +54,6 @@ class ClienteList extends Component {
       console.log(cliente)
     ))
 
-    console.log(localStorage.getItem('user'))
-
     return (
 
       <Container className='semi-fluid'>

@@ -61,7 +61,7 @@ class NavBar extends Component {
     }
 
     render() {
-        const tipo = Cookie.get('tipo')
+        const tipo = localStorage.getItem('tipo')
 
         return (
             <div className="nav-bar">
