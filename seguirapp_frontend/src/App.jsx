@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Route, HashRouter, Switch } from 'react-router-dom'
 import Login from './shared/Login'
 import TopBar from './shared/topBar/TopBar'
@@ -9,10 +10,11 @@ import DispositivoForm from './pages/dispositivos/DispositivoForm'
 import ClienteList from './pages/clientes/ClienteList'
 
 class App extends Component {
-  render() {
-    const token = localStorage.getItem('user')
 
-    if (!token) {
+  render() {
+    const user = window.localStorage.getItem('user')
+
+    if (!user) {
       return <Login />
     }
 
@@ -25,10 +27,10 @@ class App extends Component {
                 <TopBar />
                 <NavBar />
                 <div className='container'>
-                  <Route path="/" exact component={Dashboard}/>
-                  <Route path="/cadastro-cliente" component={ClienteForm}/>
-                  <Route path="/cadastro-dispositivo" component={DispositivoForm} />
-                  <Route path="/lista-clientes" component={ClienteList}/>
+                  <Route path="/" exact component={Dashboard} />
+                  <Route path="/cliente" exact component={ClienteList} />
+                  <Route path="/cliente/novo" exact component={ClienteForm} />
+                  <Route path="/dispositivo" exact component={DispositivoForm} />
                 </div>
               </div>
             )} />
@@ -39,4 +41,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.system.user
+});
+
+export default connect(mapStateToProps)(App);

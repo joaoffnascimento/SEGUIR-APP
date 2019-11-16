@@ -1,7 +1,25 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { setUsuario } from '../../actions/systemActions'
+import Cookie from 'cookiejs'
 import './TopBar.css'
 
 class TopBar extends Component {
+
+    handleSair = () => {
+        const { setUsuario } = this.props
+
+        const usuario = {
+            idUser: '',
+            tipoUser: ''
+        }
+
+        setUsuario(usuario)
+        window.localStorage.removeItem('user')
+        Cookie.remove('tipo')
+    }
+
     render() {
         return (
             <div className="top-bar">
@@ -10,7 +28,7 @@ class TopBar extends Component {
                         Segui<strong>App</strong>
                     </a>
                 </div>
-                <a href="#/" className="btn-sair">
+                <a onClick={this.handleSair} className="btn-sair">
                     Sair
                 </a>
             </div>
@@ -18,4 +36,7 @@ class TopBar extends Component {
     }
 }
 
-export default TopBar
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({setUsuario}, dispatch);
+
+export default connect(null,mapDispatchToProps)(TopBar)
