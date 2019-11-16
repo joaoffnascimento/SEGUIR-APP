@@ -5,6 +5,7 @@ import br.com.seguirapp.repository.DispositivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -40,6 +41,10 @@ public class DispositivoService {
         }
         dispositivo.setIdentificador(armazenaChaves);
         return dispositivoDAO.save(dispositivo);
+    }
+
+    public List<Dispositivo> getDispositivo (){
+        return dispositivoDAO.findAll();
     }
 
     public void deleteDispositivo(int id){
