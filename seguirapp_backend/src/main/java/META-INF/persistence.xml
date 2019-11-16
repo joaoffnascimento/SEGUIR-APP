@@ -3,47 +3,6 @@
 
     <persistence-unit name="seguirPU">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtanexoscustas.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/EcdtanexoscustasExercicio.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/EcdtanexoscustasFundos.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtarquivosassinados.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtbairro.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtbanco.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcargo.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcartorio.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtchequesimpressos.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcidade.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcidadeinss.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcolaborador.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcolaboradorsinalpub.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcolaboradorsinalpubimagem.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcomunicacoesrecebidas.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcorespessoas.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtcorrentista.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtdocumentospessoa.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtdocumentospessoaimagem.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtdoi.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtdoipartesenvolvidas.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtdoitipotransacao.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtendereco.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtestadocivil.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtetiqueta.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtferiado.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtfolhaseg.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtfuncoeseditor.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtfundos.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtguia.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtguiaitbi.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtguiasato.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdthistoricopessoa.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtimovel.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtimpressaocomunicacao.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtimpressaolivroscaixaprotoco.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtitemsguia.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/Ecdtlivro.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/EcdtlivroprotImoveis.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/EcdtlivroprotImpressaodiaria.xml</mapping-file>
-        <mapping-file>br/com/seguirapp/ExtraModel/EcdtlivroprotNotas.xml</mapping-file>
         <class>br.com.seguirapp.model.Cidade</class>
         <class>br.com.seguirapp.model.Dispositivo</class>
         <class>br.com.seguirapp.model.Estado</class>
@@ -53,58 +12,16 @@
         <class>br.com.seguirapp.model.Servico</class>
         <class>br.com.seguirapp.model.Usuario</class>
         <class>br.com.seguirapp.model.Veiculo</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtanexoscustas</class>
-        <class>br.com.seguirapp.ExtraModel.EcdtanexoscustasExercicio</class>
-        <class>br.com.seguirapp.ExtraModel.EcdtanexoscustasFundos</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtarquivosassinados</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtbairro</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtbanco</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcargo</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcartorio</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtchequesimpressos</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcidade</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcidadeinss</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcolaborador</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcolaboradorsinalpub</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcolaboradorsinalpubimagem</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcomunicacoesrecebidas</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcorespessoas</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtcorrentista</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtdocumentospessoa</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtdocumentospessoaimagem</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtdoi</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtdoipartesenvolvidas</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtdoitipotransacao</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtendereco</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtestadocivil</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtetiqueta</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtferiado</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtfolhaseg</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtfuncoeseditor</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtfundos</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtguia</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtguiaitbi</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtguiasato</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdthistoricopessoa</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtimovel</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtimpressaocomunicacao</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtimpressaolivroscaixaprotoco</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtitemsguia</class>
-        <class>br.com.seguirapp.ExtraModel.Ecdtlivro</class>
-        <class>br.com.seguirapp.ExtraModel.EcdtlivroprotImoveis</class>
-        <class>br.com.seguirapp.ExtraModel.EcdtlivroprotImpressaodiaria</class>
-        <class>br.com.seguirapp.ExtraModel.EcdtlivroprotNotas</class>
-
         <properties>
             <!-- Dados da conexão com o banco -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="false"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.jdbc.url" value="jdbc:mysql://192.168.255.128:3306/seguirapp"/>
+            <property name="hibernate.jdbc.url" value="jdbc:mysql://localhost:3306/seguirapp"/>
             <property name="hibernate.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.jdbc.user" value="felipe"/>
-            <property name="hibernate.jdbc.password" value="mkfelipe123"/>
+            <property name="hibernate.jdbc.user" value="root"/>
+            <property name="hibernate.jdbc.password" value="alan1704"/>
         </properties>
     </persistence-unit>
 </persistence>
