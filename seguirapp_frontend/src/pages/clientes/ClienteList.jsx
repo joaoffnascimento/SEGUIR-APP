@@ -15,7 +15,6 @@ class ClienteList extends Component {
 
   getClientes() {
     Requests.getClientes().then(data => {
-      console.log(data)
       this.setState({ clientes: data })
     })
   }
@@ -24,8 +23,6 @@ class ClienteList extends Component {
     const cidade = cliente.cidade ? cliente.cidade.nome : 'Não encontrada'
     const dispositivo = cliente.dispositivo ? cliente.dispositivo.nome : 'Não encontrado'
     const grupo = cliente.grupo ? cliente.grupo.empresa : 'Não encontrado'
-
-    console.log(cidade)
 
     return (
       <Table.Row key={cliente.idPessoa}>
@@ -57,9 +54,6 @@ class ClienteList extends Component {
   render() {
     const { clientes } = this.state
 
-    clientes.map(cliente => (
-      console.log(cliente)
-    ))
 
     return (
 

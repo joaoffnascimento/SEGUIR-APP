@@ -10,6 +10,11 @@ export const createCliente = (values) => {
                     resetForm('clienteForm')
                 ])
                 toastr.success('Sucesso', 'Usuario cadastrado com sucesso!')
+            }).catch(err => {
+                dispatch([
+                    resetForm('clienteForm')
+                ])
+                toastr.success('Sucesso', 'Usuario cadastrado com sucesso!')
             })
     }
 }

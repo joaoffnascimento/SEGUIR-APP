@@ -22,22 +22,23 @@ class ClienteForm extends Component {
     errors: [],
     optionsTipo: [{ key: 'adm', text: 'Administrador', value: 'administrador' }, { key: 'cli', text: 'Cliente', value: 'cliente' }],
     optionsDispositivos: [],
+    optionsEstados: [],
     optionsCidades: [],
     optionsGrupos: [],
-    pessoas: []
+    estado: ''
   }
 
   componentDidMount() {
-    this.getCidades()
     this.getDispositivos()
-    this.getCidades()
+    this.getEstados()
+    // this.getCidades()
     this.getGrupos()
   }
 
 
   getDispositivos() {
 
-    this.setState({loading: true})
+    this.setState({ loading: true })
 
     Requests.getClientes().then(pessoas => {
 
@@ -47,33 +48,45 @@ class ClienteForm extends Component {
         return pessoa.dispositivo
       })
 
+      console.log(dispPessoa)
+
       dispPessoa.map(id => {
         identificador.push(id.dispositivo.identificador)
       })
 
-      this.setState({loading: true})
-
       Requests.getDispositivos().then(dispositivos => {
-
         let dispositivoValid = []
 
-        for (let index = 0; index < dispositivos.length; index++) {
+        console.log(dispositivos)
 
-          const dispositivo = dispositivos[index]
+        dispositivos.map(disp => {
+          identificador.map(ident => {
+            console.log(disp)
+            console.log(ident)
+          })
 
-          const identificadorPessoa = identificador[index]
 
-          dispositivoValid.push(dispositivo.identificador !== identificadorPessoa ?
-            dispositivos[index] : null)
-        }
+        })
+        // for (let index = 0; index < dispositivos.length; index++) {
 
-        const disps = dispositivoValid.map(disp => (
-          disp ?
-            { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
-            : {}
-        ))
+        //   const dispositivo = dispositivos[index]
 
-        this.setState({ optionsDispositivos: disps, loading: false })
+        //   const identificadorPessoa = identificador[index]
+
+        //   console.log('disp ' + dispositivo.identificador)
+        //   console.log('idend ' + identificadorPessoa)
+
+        //   dispositivoValid.push(dispositivo.identificador !== identificadorPessoa ?
+        //     dispositivos[index] : null)
+        // }
+
+        // const disps = dispositivoValid.map(disp => (
+        //   disp ?
+        //     { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
+        //     : {}
+        // ))
+
+        // this.setState({ optionsDispositivos: disps, loading: false })
 
       })
     })
@@ -123,21 +136,53 @@ class ClienteForm extends Component {
 
   // { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
 
-  getCidades() {
-    this.setState({loading: true})
-
-    Requests.getCidades().then(cidade => {
-      const cidades = cidade.map(cid => ({ key: cid.idCidade, text: cid.nome, value: cid.nome }))
+  getEstados() {
+    Requests.getEstados().then(estados => {
+      const estado = estados.map(uf => ({ key: uf.idEstado, text: uf.nome, value: uf.idEstado }))
 
       this.setState({
-        optionsCidades: cidades,
+        optionsEstados: estado,
         loading: false
       })
     })
   }
 
+  // getCidades() {
+  //   this.setState({ loading: true })
+
+  //   Requests.getCidades().then(cidade => {
+  //     const cidades = cidade.map(cid => ({ key: cid.idCidade, text: cid.nome, value: { idCidade: Number(cid.idCidade) } }))
+
+  //     this.setState({
+  //       optionsCidades: cidades,
+  //       loading: false
+  //     })
+  //   })
+  // }
+
+  getCidades = (value) => {
+    let cidadesEsts = []
+
+    Requests.getCidades().then((cidades) => {
+      cidades.map(cidade => {
+        if (value === cidade.estado) {
+
+          cidadesEsts.push(cidade)
+          // let cidadesEsts = []
+          const cids = cidadesEsts.map(cid => ({
+            key: cid.idCidade,
+            text: cid.nome,
+            value: { idCidade: cid.idCidade, nome: cid.nome, estado: {idEstado: value} }
+          }))
+
+          this.setState({ optionsCidades: cids })
+        }
+      })
+    })
+  }
+
   getGrupos() {
-    this.setState({loading: true})
+    this.setState({ loading: true })
 
     Requests.getGrupos().then(grupo => {
       const grupos = grupo.map(gr => ({ key: gr.idGrupo, text: gr.empresa, value: { idGrupo: String(gr.idGrupo) } }))
@@ -260,13 +305,11 @@ class ClienteForm extends Component {
     const { handleSubmit } = this.props
     const { errors, optionsDispositivos, loading } = this.state
 
-    console.log(optionsDispositivos)
-
     const dispositivosOpts = optionsDispositivos.filter(item => {
-       if (item.key) {
-         return item
-       }
-   });
+      if (item.key) {
+        return item
+      }
+    });
 
     return (
       <Container className='semi-fluid'>
@@ -307,6 +350,14 @@ class ClienteForm extends Component {
               label='Logradouro'
               placeholder='Informe seu endereço'
               component={TextField} />
+            <Form.Select
+              search
+              selection
+              options={this.state.optionsEstados}
+              placeholder='Selecione o estado'
+              value={this.state.estado}
+              label='Estado'
+              onChange={(event, { value }) => this.setState({ estado: value }, this.getCidades(value))} />
             <Field
               name='cidade'
               options={this.state.optionsCidades}
