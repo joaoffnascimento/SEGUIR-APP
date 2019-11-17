@@ -16,161 +16,257 @@ class ClienteForm extends Component {
     cpf: null,
     dtNascimento: null,
     dispositivo: null,
+    loading: false,
 
 
     errors: [],
     optionsTipo: [{ key: 'adm', text: 'Administrador', value: 'administrador' }, { key: 'cli', text: 'Cliente', value: 'cliente' }],
     optionsDispositivos: [],
     optionsCidades: [],
-    optionsGrupos: []
+    optionsGrupos: [],
+    pessoas: []
   }
 
   componentDidMount() {
+    this.getCidades()
     this.getDispositivos()
     this.getCidades()
     this.getGrupos()
   }
 
-  getDispositivos() {
-    Requests.getDispositivos().then(dispositivo => {
-      const dispositivos = dispositivo.map(disp => ({ key: disp.idDispositivo, text: disp.nome, value: {idDispositivo: String(disp.idDispositivo)} }))
 
-      this.setState({
-        optionsDispositivos: dispositivos
+  getDispositivos() {
+
+    this.setState({loading: true})
+
+    Requests.getClientes().then(pessoas => {
+
+      let identificador = []
+
+      const dispPessoa = pessoas.filter(pessoa => {
+        return pessoa.dispositivo
+      })
+
+      dispPessoa.map(id => {
+        identificador.push(id.dispositivo.identificador)
+      })
+
+      this.setState({loading: true})
+
+      Requests.getDispositivos().then(dispositivos => {
+
+        let dispositivoValid = []
+
+        for (let index = 0; index < dispositivos.length; index++) {
+
+          const dispositivo = dispositivos[index]
+
+          const identificadorPessoa = identificador[index]
+
+          dispositivoValid.push(dispositivo.identificador !== identificadorPessoa ?
+            dispositivos[index] : null)
+        }
+
+        const disps = dispositivoValid.map(disp => (
+          disp ?
+            { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
+            : {}
+        ))
+
+        this.setState({ optionsDispositivos: disps, loading: false })
+
       })
     })
+
+
+
+
+    // })
+    // let dispositivoPessoa = []
+
+    // Requests.getDispositivos().then(dispositivo => {
+
+    //   Requests.getClientes().then(pessoas => {
+    //     pessoas.map(pessoa => {
+
+    //       dispositivoPessoa.push({id: pessoa.dispositivo ? pessoa.dispositivo.idDispositivo : null})
+
+    //       //
+
+
+    //     })
+    //   })
+
+    //   console.log(dispositivoPessoa)
+
+
+    //     // const dispositivos = dispositivo.filter(disp => {
+    //     //   let pessoa
+    //     //   dispositivoPessoa.map(p => {
+    //     //     pessoa = p.id
+    //     //   })
+    //     //   return disp.idDispositivo === pessoa
+    //     // })
+
+
+
+
+
+
+
+    //   // dispositivo.map(disp => {
+    //   //   console.log(disp)
+    //   // })
+
+    // })
   }
 
+  // { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
+
   getCidades() {
+    this.setState({loading: true})
+
     Requests.getCidades().then(cidade => {
       const cidades = cidade.map(cid => ({ key: cid.idCidade, text: cid.nome, value: cid.nome }))
 
       this.setState({
-        optionsCidades: cidades
+        optionsCidades: cidades,
+        loading: false
       })
     })
   }
 
   getGrupos() {
+    this.setState({loading: true})
+
     Requests.getGrupos().then(grupo => {
-      const grupos = grupo.map(gr => ({ key: gr.idGrupo, text: gr.empresa, value: {idGrupo: String(gr.idGrupo)} }))
+      const grupos = grupo.map(gr => ({ key: gr.idGrupo, text: gr.empresa, value: { idGrupo: String(gr.idGrupo) } }))
 
       this.setState({
-        optionsGrupos: grupos
+        optionsGrupos: grupos,
+        loading: false
       })
     })
   }
 
-//   render() {
-//     const { errors } = this.state
+  //   render() {
+  //     const { errors } = this.state
 
-//     return (
-//       <Container className='semi-fluid'>
-//         <Header>Cadastrar Cliente</Header>
+  //     return (
+  //       <Container className='semi-fluid'>
+  //         <Header>Cadastrar Cliente</Header>
 
-//         <Message
-//           error
-//           hidden={errors.length === 0}
-//           list={errors}>
-//         </Message>
+  //         <Message
+  //           error
+  //           hidden={errors.length === 0}
+  //           list={errors}>
+  //         </Message>
 
-//         <Form>
+  //         <Form>
 
-//           <Form.Group widths='equal'>
-//             <Form.Input
-//               name='nome'
-//               label='Nome'
-//               placeholder='Informe o nome completo'
-//               value={this.state.nome}
-//               onChange={(event, {value}) => this.setState({ nome: value })} />
+  //           <Form.Group widths='equal'>
+  //             <Form.Input
+  //               name='nome'
+  //               label='Nome'
+  //               placeholder='Informe o nome completo'
+  //               value={this.state.nome}
+  //               onChange={(event, {value}) => this.setState({ nome: value })} />
 
-//             <Form.Input
-//               name='cpfCnpj'
-//               label='CPF'
-//               placeholder='Informe o cpf'
-//               value={this.state.cpf}
-//               onChange={(event, {value}) => this.setState({ cpf: cpfLabel(value) })} />
+  //             <Form.Input
+  //               name='cpfCnpj'
+  //               label='CPF'
+  //               placeholder='Informe o cpf'
+  //               value={this.state.cpf}
+  //               onChange={(event, {value}) => this.setState({ cpf: cpfLabel(value) })} />
 
-//             <Form.Input
-//               name='dtNascimento'
-//               type='date'
-//               label='Data de Nascimento'
-//               value={this.state.dtNascimento}
-//               onChange={(event, {value}) => this.setState({ dtNascimento: value})}
-//             />
-//           </Form.Group>
+  //             <Form.Input
+  //               name='dtNascimento'
+  //               type='date'
+  //               label='Data de Nascimento'
+  //               value={this.state.dtNascimento}
+  //               onChange={(event, {value}) => this.setState({ dtNascimento: value})}
+  //             />
+  //           </Form.Group>
 
-//           <Form.Group widths='equal'>
-//             <Form.Input
-//               name='logradouro'
-//               label='Logradouro'
-//               placeholder='Informe seu endereço'
-//               value={this.state.logradouro}
-//               onChange={(event, {value}) => this.setState({ logradouro: value})}/>
-//             <Field
-//               name='cidade'
-//               search={true}
-//               options={this.state.optionsCidades}
-//               label='Cidade'
-//               component={SelectField} />
-//             <Field
-//               name='telefone'
-//               label='Telefone'
-//               value={this.state.telefone}
-//               onChange={(event, {value}) => this.setState({ telefone: celularLabel(value)})}/>
-//           </Form.Group>
-//           <Form.Group widths='equal'>
-//             <Form.Select
-//               name='grupo'
-//               options={this.state.optionsGrupos}
-//               label='Grupo'
-//               value={this.state.dispositivo}
-//               onChange={(event, {value}) => this.setState({dispositivo: value})}/>
-//             <Form.Select
-//               name='dispositivo'
-//               options={this.state.optionsDispositivos}
-//               placeholder='Selecione um dispositivo'
-//               label='Dispositivo'
-//               value={this.state.dispositivo}
-//               onChange={(event, {value}) => this.setState({dispositivo: value})}/>
-//             <Form.Select
-//               required
-//               name='tipo'
-//               options={this.state.optionsTipo}
-//               label='Tipo de Usuario'
-//               value={this.state.tipo}
-//               onChange={(event, {value}) => this.setState({tipo: value})} />
-//           </Form.Group>
-//           <Form.Group widths='equal'>
-//             <Form.Input
-//               name='email'
-//               required
-//               type='email'
-//               placeholder='Informe o e-mail'
-//               label='E-mail'
-//               value={this.state.email}
-//               onChange={(event, {value}) => this.setState({ email: value })}/>
-//             <Form.Input
-//               name='senha'
-//               required
-//               type='password'
-//               label='Senha'
-//               value={this.state.senha}
-//               onChange={(event, {value}) => this.setState({ senha: value })}/>
-//           </Form.Group>
+  //           <Form.Group widths='equal'>
+  //             <Form.Input
+  //               name='logradouro'
+  //               label='Logradouro'
+  //               placeholder='Informe seu endereço'
+  //               value={this.state.logradouro}
+  //               onChange={(event, {value}) => this.setState({ logradouro: value})}/>
+  //             <Field
+  //               name='cidade'
+  //               search={true}
+  //               options={this.state.optionsCidades}
+  //               label='Cidade'
+  //               component={SelectField} />
+  //             <Field
+  //               name='telefone'
+  //               label='Telefone'
+  //               value={this.state.telefone}
+  //               onChange={(event, {value}) => this.setState({ telefone: celularLabel(value)})}/>
+  //           </Form.Group>
+  //           <Form.Group widths='equal'>
+  //             <Form.Select
+  //               name='grupo'
+  //               options={this.state.optionsGrupos}
+  //               label='Grupo'
+  //               value={this.state.dispositivo}
+  //               onChange={(event, {value}) => this.setState({dispositivo: value})}/>
+  //             <Form.Select
+  //               name='dispositivo'
+  //               options={this.state.optionsDispositivos}
+  //               placeholder='Selecione um dispositivo'
+  //               label='Dispositivo'
+  //               value={this.state.dispositivo}
+  //               onChange={(event, {value}) => this.setState({dispositivo: value})}/>
+  //             <Form.Select
+  //               required
+  //               name='tipo'
+  //               options={this.state.optionsTipo}
+  //               label='Tipo de Usuario'
+  //               value={this.state.tipo}
+  //               onChange={(event, {value}) => this.setState({tipo: value})} />
+  //           </Form.Group>
+  //           <Form.Group widths='equal'>
+  //             <Form.Input
+  //               name='email'
+  //               required
+  //               type='email'
+  //               placeholder='Informe o e-mail'
+  //               label='E-mail'
+  //               value={this.state.email}
+  //               onChange={(event, {value}) => this.setState({ email: value })}/>
+  //             <Form.Input
+  //               name='senha'
+  //               required
+  //               type='password'
+  //               label='Senha'
+  //               value={this.state.senha}
+  //               onChange={(event, {value}) => this.setState({ senha: value })}/>
+  //           </Form.Group>
 
-//           <Button type='button' onClick={() => this.props.history.goBack()}> Cancelar </Button>
-//           <Button positive type='submit' >Cadastrar</Button>
-//         </Form>
-//       </Container>
-//     )
-//   }
-// }
+  //           <Button type='button' onClick={() => this.props.history.goBack()}> Cancelar </Button>
+  //           <Button positive type='submit' >Cadastrar</Button>
+  //         </Form>
+  //       </Container>
+  //     )
+  //   }
+  // }
 
-// export default ClienteForm
+  // export default ClienteForm
   render() {
     const { handleSubmit } = this.props
-    const { errors } = this.state
+    const { errors, optionsDispositivos, loading } = this.state
+
+    console.log(optionsDispositivos)
+
+    const dispositivosOpts = optionsDispositivos.filter(item => {
+       if (item.key) {
+         return item
+       }
+   });
 
     return (
       <Container className='semi-fluid'>
@@ -232,7 +328,7 @@ class ClienteForm extends Component {
               component={SelectField} />
             <Field
               name='dispositivo'
-              options={this.state.optionsDispositivos}
+              options={dispositivosOpts}
               placeholder='Selecione um dispositivo'
               label='Dispositivo'
               component={SelectField} />
@@ -258,7 +354,7 @@ class ClienteForm extends Component {
           </Form.Group>
 
           <Button type='button' onClick={() => this.props.history.goBack()}> Cancelar </Button>
-          <Button positive type='submit' >Cadastrar</Button>
+          <Button positive loading={loading} type='submit' >Cadastrar</Button>
         </Form>
       </Container>
     );

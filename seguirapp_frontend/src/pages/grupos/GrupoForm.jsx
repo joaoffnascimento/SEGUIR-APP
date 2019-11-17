@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createDispositivo } from '../../actions/clienteActions'
 import { Field, reduxForm } from 'redux-form'
-import { Container, Header, Form, Button, Table } from 'semantic-ui-react';
+import { Container, Header, Form, Button, Table, Modal } from 'semantic-ui-react';
 import { TextField } from '../../shared/form/TextField'
 import Requests from '../../shared/Requests'
 import { toastr } from 'react-redux-toastr'
@@ -11,28 +11,35 @@ import { toastr } from 'react-redux-toastr'
 class GrupoForm extends Component {
     state = {
         grupos: [],
-        nomeGrupo: ''
+        nomeGrupo: '',
+        loading: false
     }
 
     componentDidMount() {
         this.getGrupos()
     }
 
+
     getGrupos() {
+        this.setState({loading: true})
+
         Requests.getGrupos().then(grupo => {
-            this.setState({ grupos: grupo })
+            console.log(grupo)
+            this.setState({ grupos: grupo, loading: false })
         })
     }
 
     handleSubmit = () => {
         const { nomeGrupo } = this.state
+        this.setState({loading: true})
+
         const grupo = {
             empresa: nomeGrupo
         }
 
         Requests.createGrupo(grupo).then(resp => {
             toastr.success('Sucesso', 'Grupo cadastrado com sucesso!')
-            this.setState({ nomeGrupo: '' })
+            this.setState({ nomeGrupo: '', loading: false})
 
             this.getGrupos()
         }).catch(err => {
@@ -50,7 +57,7 @@ class GrupoForm extends Component {
     }
 
     render() {
-        const { grupos, nomeGrupo } = this.state
+        const { grupos, nomeGrupo, loading } = this.state
 
         return (
             <Container className='semi-fluid'>
@@ -66,7 +73,7 @@ class GrupoForm extends Component {
                         />
                     </Form.Group>
 
-                    <Button positive type='submit'>Cadastrar</Button>
+                    <Button positive loading={loading} disabled={loading} type='submit'>Cadastrar</Button>
                 </Form>
 
                 <Header>Listar Grupos</Header>

@@ -11,7 +11,8 @@ import { toastr } from 'react-redux-toastr'
 class DispositivoForm extends Component {
   state = {
     dispositivos: [],
-    nomeDispositivo: ''
+    nomeDispositivo: '',
+    loading: false
   }
 
   componentDidMount() {
@@ -19,20 +20,25 @@ class DispositivoForm extends Component {
   }
 
   getDispositivos() {
+    this.setState({loading: true})
+
     Requests.getDispositivos().then(dispositivo => {
-      this.setState({ dispositivos: dispositivo })
+      this.setState({ dispositivos: dispositivo, loading: false })
     })
   }
 
   handleSubmit = () => {
     const { nomeDispositivo } = this.state
+
+    this.setState({loading: true})
+
     const dispositivo = {
       nome: nomeDispositivo
     }
 
     Requests.createDispositivo(dispositivo).then(resp => {
       toastr.success('Sucesso', 'Dispositivo cadastrado com sucesso!')
-      this.setState({nomeDispositivo: ''})
+      this.setState({nomeDispositivo: '', loading: false})
 
       this.getDispositivos()
     }).catch(err =>{
@@ -51,7 +57,7 @@ class DispositivoForm extends Component {
   }
 
   render() {
-    const { dispositivos, nomeDispositivo } = this.state
+    const { dispositivos, nomeDispositivo, loading } = this.state
 
     return (
       <Container className='semi-fluid'>
@@ -67,7 +73,7 @@ class DispositivoForm extends Component {
               />
           </Form.Group>
 
-          <Button positive type='submit'>Cadastrar</Button>
+          <Button positive loading={loading} disabled={loading} type='submit'>Cadastrar</Button>
         </Form>
 
         <Header>Lista Dipositivos</Header>
