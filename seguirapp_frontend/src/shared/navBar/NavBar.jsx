@@ -25,15 +25,21 @@ class NavBar extends Component {
                     href="#/"
                     onClick={this.handleItemClick} />
                 <Menu.Item
-                    name='Clientes'
-                    active={itemAtivo === 'Clientes'}
-                    href="#/cliente"
+                    name='Grupos'
+                    active={itemAtivo === 'Grupos'}
+                    href="#/grupo"
                     onClick={this.handleItemClick}
                 />
                 <Menu.Item
                     name='Dispositivos'
                     active={itemAtivo === 'Dispositivos'}
                     href="#/dispositivo"
+                    onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                    name='Clientes'
+                    active={itemAtivo === 'Clientes'}
+                    href="#/cliente"
                     onClick={this.handleItemClick}
                 />
             </Menu>
@@ -43,20 +49,15 @@ class NavBar extends Component {
     renderCliente() {
         const { itemAtivo } = this.state
 
-        return(
+        return (
             <Menu vertical pointing inverted color='grey'>
-                    <Menu.Item className="text-inicio"
-                        name='Inicio'
-                        active={itemAtivo === 'Inicio'}
-                        href="#/"
-                        onClick={this.handleItemClick} />
-                    <Menu.Item
-                        name='Localizar Dispositivo'
-                        active={itemAtivo === 'Localizar Dispositivo'}
-                        href="#/"
-                        onClick={this.handleItemClick}
-                    />
-                </Menu>
+                <Menu.Item
+                    name='Localizar Dispositivo'
+                    active={itemAtivo === 'Localizar Dispositivo'}
+                    href="#/"
+                    onClick={this.handleItemClick}
+                />
+            </Menu>
         )
     }
 
@@ -72,7 +73,7 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.system.user
+    user: state.system.user
 });
 
 export default connect(mapStateToProps)(NavBar)

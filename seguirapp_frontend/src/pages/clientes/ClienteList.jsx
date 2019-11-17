@@ -15,11 +15,18 @@ class ClienteList extends Component {
 
   getClientes() {
     Requests.getClientes().then(data => {
+      console.log(data)
       this.setState({ clientes: data })
     })
   }
 
   renderClientes(cliente) {
+    const cidade = cliente.cidade ? cliente.cidade.nome : 'Não encontrada'
+    const dispositivo = cliente.dispositivo ? cliente.dispositivo.nome : 'Não encontrado'
+    const grupo = cliente.grupo ? cliente.grupo.empresa : 'Não encontrado'
+
+    console.log(cidade)
+
     return (
       <Table.Row key={cliente.idPessoa}>
         <Table.Cell>
@@ -32,13 +39,13 @@ class ClienteList extends Component {
           {cliente.email}
         </Table.Cell>
         <Table.Cell>
-          {cliente.cidade}
+          {cidade}
         </Table.Cell>
         <Table.Cell>
-          {cliente.grupo}
+          {grupo}
         </Table.Cell>
         <Table.Cell>
-          {cliente.dispositivo}
+          {dispositivo}
         </Table.Cell>
         <Table.Cell>
           {cliente.tipo}

@@ -20,7 +20,8 @@
     "redux-multi": "^0.1.12",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^0.88.1"
+    "semantic-ui-react": "^0.88.1",
+    "vanilla-masker": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

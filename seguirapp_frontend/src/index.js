@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Dashboard from './pages/dashboard/Dashboard'
+import Toaster from './shared/Toaster'
 
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware, compose} from 'redux'
@@ -23,6 +23,7 @@ const store = createStore(reducers,composeEnhancers(
 
 ReactDOM.render(
     <Provider store={store}>
+        <Toaster/>
         <App/>
     </Provider>
     ,document.getElementById('root')

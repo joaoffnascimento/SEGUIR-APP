@@ -13,3 +13,18 @@ export const createCliente = (values) => {
             })
     }
 }
+
+export const createDispositivo = (values) => {
+    return dispatch => {
+        console.log(values)
+        Requests.createDispositivo(values)
+            .then(resp => {
+                dispatch([
+                    resetForm('dispositivoForm')
+                ])
+                toastr.success('Sucesso', 'Dispositivo cadastrado com sucesso!')
+            }).catch(err =>{
+                toastr.error(err)
+            })
+    }
+}

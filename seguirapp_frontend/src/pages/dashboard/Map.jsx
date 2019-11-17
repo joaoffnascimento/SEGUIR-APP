@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 
-import mapboxgl, {Marker} from 'mapbox-gl'
+import mapboxgl, { Marker } from 'mapbox-gl'
 
 import { Button } from 'semantic-ui-react'
+
+import Requests from '../../shared/Requests'
 
 class Map extends Component {
 
@@ -10,18 +12,23 @@ class Map extends Component {
         center: [-37.6737025, -10.9162652],
         position: [],
         lat: 1,
-        long: 1
+        long: 1,
+
+        dispositivos: [],
+        pessoas: []
     }
 
     componentDidMount() {
         const { container, style, zoom, accessToken } = this.props
         const { center } = this.state
 
-        this.handlePosition()
         this.handleMap(container, style, center, zoom, accessToken)
+        this.handlePosition()
     }
 
     handleMap(container, style, center, zoom, accessToken) {
+        const { pessoas, dispositivos } = this.state
+
         mapboxgl.accessToken = accessToken
         const map = new mapboxgl.Map({
             container: container,
@@ -30,29 +37,63 @@ class Map extends Component {
             zoom: zoom
         })
 
-        
         navigator.geolocation.getCurrentPosition((pos) => {
             let latitude = pos.coords.latitude
             let longitude = pos.coords.longitude
 
+            const dispositivos = [
+                {
+                    id: 1,
+                    longitude: pos.coords.longitude,
+                    latitude: pos.coords.latitude
+                },
+                {
+                    id: 2,
+                    longitude: pos.coords.longitude + 1,
+                    latitude: pos.coords.latitude + 1,
+                },
+                {
+                    id: 3,
+                    longitude: pos.coords.longitude + 2,
+                    latitude: pos.coords.latitude + 2
+                }
+            ]
 
-            const marker = new Marker()
+            if (localStorage.getItem('tipo') === 'administrador') {
+                for (let index = 0; index < dispositivos.length; index++) {
+                    dispositivos.map(dispositivo => {
+                        new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
+                            .addTo(map)
+                    })
+                }
+            } else {
+                dispositivos.map(dispositivo => {
+                    console.log(dispositivo.id)
+                    console.log(localStorage.getItem('user'))
+                    if (dispositivo.id == localStorage.getItem('user')) {
+                        new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
+                            .addTo(map)
+                    }
+                })
+            }
 
-            const marker2 = new Marker()
+            // const marker = new Marker()
 
-            marker2.setLngLat([longitude, latitude])
-            marker2.addTo(map)
+            // const marker2 = new Marker()
 
-            marker.setLngLat([longitude, latitude])
-            marker.addTo(map)
+            // marker2.setLngLat([longitude, latitude])
+            // marker2.addTo(map)
 
-            setInterval(() => {
-                longitude = longitude + 0.00005
-                latitude = latitude + 0.00005
+            // marker.setLngLat([longitude, latitude])
+            // marker.addTo(map)
 
-                marker.setLngLat([longitude, latitude])
-            }, 1000);
-            
+            // setInterval(() => {
+            //     longitude = longitude + 0.00005
+            //     latitude = latitude + 0.00005
+
+            //     marker.setLngLat([longitude, latitude])
+            // }, 1000);
+
             // map.on('load', () => {
 
             //     map.addSource('pointsSoucer', {
@@ -87,7 +128,7 @@ class Map extends Component {
             //     map.set .setPaintProperty('points', 'circle-translate', offset);
             //     }, 5000);
 
-                
+
 
             // })
 
@@ -116,48 +157,6 @@ class Map extends Component {
 
         this.setState({
             map: map
-        })
-    }
-
-    addLayer() {
-        const { map } = this.state
-
-        map.on('load', () => {
-            map.addSource('pointsSoucer', {
-                type: 'geojson',
-                data: {
-                    "type": "FeatureCollection",
-                    "features": [{
-                        "type": "Feature",
-                        "properties": {},
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                -74.50,
-                                40
-                            ]
-                        }
-                    }]
-                }
-            });
-
-            map.addLayer({
-                id: 'points',
-                source: 'pointsSoucer',
-                type: 'circle',
-            });
-
-            // map.getSource('pointsSoucer').setData({
-            //     "type": "FeatureCollection",
-            //     "features": [{
-            //         "type": "Feature",
-            //         "properties": { "name": "Null Island" },
-            //         "geometry": {
-            //             "type": "Point",
-            //             "coordinates": [0, 0]
-            //         }
-            //     }]
-            // });
         })
     }
 

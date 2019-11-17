@@ -8,7 +8,7 @@ import Dashboard from './pages/dashboard/Dashboard'
 import ClienteForm from './pages/clientes/ClienteForm'
 import DispositivoForm from './pages/dispositivos/DispositivoForm'
 import ClienteList from './pages/clientes/ClienteList'
-import Cookie from 'cookiejs'
+import GrupoForm from './pages/grupos/GrupoForm'
 
 class App extends Component {
 
@@ -32,6 +32,7 @@ class App extends Component {
                   <Route path="/cliente" exact component={ClienteList} />
                   <Route path="/cliente/novo" exact component={ClienteForm} />
                   <Route path="/dispositivo" exact component={DispositivoForm} />
+                  <Route path="/grupo" exact component={GrupoForm} />
                 </div>
               </div>
             )} />

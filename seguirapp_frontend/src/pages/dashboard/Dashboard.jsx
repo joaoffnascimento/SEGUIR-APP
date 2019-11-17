@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl';
-import ReactMapGL, { Marker } from 'react-map-gl';
 import { Container } from 'semantic-ui-react';
 import 'mapbox-gl/dist/mapbox-gl.css'
 
