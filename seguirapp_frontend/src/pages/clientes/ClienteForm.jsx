@@ -310,6 +310,7 @@ class ClienteForm extends Component {
               name='telefone'
               label='Telefone'
               placeholder='Informe seu número'
+              normalize={celularLabel}
               component={TextField} />
           </Form.Group>
           <Form.Group widths='equal'>

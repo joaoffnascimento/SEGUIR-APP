@@ -98,7 +98,7 @@ class Dashboard extends Component {
                 <Map
                     container='map'
                     style='mapbox://styles/mapbox/streets-v9'
-                    zoom={15}
+                    zoom={0}
                     classNameStyle='mapContainer'
                     accessToken='pk.eyJ1IjoiYWxhbmZscG5zIiwiYSI6ImNrMnYyenJpNTAwOTMzb28zdHJvcmVrY28ifQ.cxL_Jttd3g3T9prj0TcRUg'
                 />

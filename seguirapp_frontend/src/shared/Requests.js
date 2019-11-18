@@ -40,6 +40,18 @@ export const getGrupos = () => {
     return axiosApi.get('/grupo')
 }
 
+export const getLocalizacaoById = (id) => {
+    return axiosApi.get(`/localizacao/getLocalizacaoById/${id}`)
+}
+
+export const getLocalizacao = () => {
+    return axiosApi.get('/localizacao')
+}
+
+export const createLocalizacao = (localizacao) => {
+    return axiosApi.post('localizacao/post', localizacao)
+}
+
 export default {
     getClientes,
     createCliente,
@@ -50,5 +62,8 @@ export default {
     createGrupo,
     getGrupos,
     createVeiculo,
-    getVeiculos
+    getVeiculos,
+    getLocalizacaoById,
+    getLocalizacao,
+    createLocalizacao
 }

@@ -4,6 +4,8 @@ import mapboxgl, { Marker } from 'mapbox-gl'
 
 import { Button } from 'semantic-ui-react'
 
+import { removeNoNumeric } from '../../helpers/FnUtils'
+
 import Requests from '../../shared/Requests'
 
 class Map extends Component {
@@ -37,123 +39,158 @@ class Map extends Component {
             zoom: zoom
         })
 
-        navigator.geolocation.getCurrentPosition((pos) => {
-            let latitude = pos.coords.latitude
-            let longitude = pos.coords.longitude
+        if (localStorage.getItem('tipo') === 'administrador') {
 
-            const dispositivos = [
-                {
-                    id: 1,
-                    longitude: pos.coords.longitude,
-                    latitude: pos.coords.latitude
-                },
-                {
-                    id: 2,
-                    longitude: pos.coords.longitude + 1,
-                    latitude: pos.coords.latitude + 1,
-                },
-                {
-                    id: 3,
-                    longitude: pos.coords.longitude + 2,
-                    latitude: pos.coords.latitude + 2
-                }
-            ]
+            Requests.getLocalizacao().then(local => {
+                console.log(local)
+                for (let index = 1; index < local.length; index++) {
+                    const locali = local[index]
 
-            if (localStorage.getItem('tipo') === 'administrador') {
-                for (let index = 0; index < dispositivos.length; index++) {
-                    dispositivos.map(dispositivo => {
-                        new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
-                            .addTo(map)
-                    })
+                    new Marker().setLngLat([locali.longitude, locali.latitude])
+                        .addTo(map)
                 }
-            } else {
-                dispositivos.map(dispositivo => {
-                    console.log(dispositivo.id)
-                    console.log(localStorage.getItem('user'))
-                    if (dispositivo.id == localStorage.getItem('user')) {
-                        new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
-                            .addTo(map)
+            })
+        } else {
+            Requests.getClientes().then(clientes => {
+                clientes.map(cliente => {
+                    if (cliente.idPessoa == localStorage.getItem('user')) {
+                        const idDispositivo = cliente.dispositivo ? cliente.dispositivo.idDispositivo : null
+
+                        Requests.getLocalizacaoById(idDispositivo).then(dispositivo => {
+                            new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
+                                .addTo(map)
+                        })
                     }
                 })
-            }
+            })
+        }
+        // } else {
+        //     dispositivos.map(dispositivo => {
+        //         console.log(dispositivo.id)
+        //         console.log(localStorage.getItem('user'))
+        //         if (dispositivo.id == localStorage.getItem('user')) {
+        //             new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
+        //                 .addTo(map)
+        //         }
+        //     })
+        // }
+        // navigator.geolocation.getCurrentPosition((pos) => {
+        //     let latitude = pos.coords.latitude
+        //     let longitude = pos.coords.longitude
 
-            // const marker = new Marker()
+        //     const dispositivos = [
+        //         {
+        //             id: 1,
+        //             longitude: pos.coords.longitude,
+        //             latitude: pos.coords.latitude
+        //         },
+        //         {
+        //             id: 2,
+        //             longitude: pos.coords.longitude + 1,
+        //             latitude: pos.coords.latitude + 1,
+        //         },
+        //         {
+        //             id: 3,
+        //             longitude: pos.coords.longitude + 2,
+        //             latitude: pos.coords.latitude + 2
+        //         }
+        //     ]
 
-            // const marker2 = new Marker()
+        //     if (localStorage.getItem('tipo') === 'administrador') {
+        //         for (let index = 0; index < dispositivos.length; index++) {
+        //             dispositivos.map(dispositivo => {
+        //                 new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
+        //                     .addTo(map)
+        //             })
+        //         }
+        //     } else {
+        //         dispositivos.map(dispositivo => {
+        //             console.log(dispositivo.id)
+        //             console.log(localStorage.getItem('user'))
+        //             if (dispositivo.id == localStorage.getItem('user')) {
+        //                 new Marker().setLngLat([dispositivo.longitude, dispositivo.latitude])
+        //                     .addTo(map)
+        //             }
+        //         })
+        //     }
 
-            // marker2.setLngLat([longitude, latitude])
-            // marker2.addTo(map)
+        //     // const marker = new Marker()
 
-            // marker.setLngLat([longitude, latitude])
-            // marker.addTo(map)
+        //     // const marker2 = new Marker()
 
-            // setInterval(() => {
-            //     longitude = longitude + 0.00005
-            //     latitude = latitude + 0.00005
+        //     // marker2.setLngLat([longitude, latitude])
+        //     // marker2.addTo(map)
 
-            //     marker.setLngLat([longitude, latitude])
-            // }, 1000);
+        //     // marker.setLngLat([longitude, latitude])
+        //     // marker.addTo(map)
 
-            // map.on('load', () => {
+        //     // setInterval(() => {
+        //     //     longitude = longitude + 0.00005
+        //     //     latitude = latitude + 0.00005
 
-            //     map.addSource('pointsSoucer', {
-            //         type: 'geojson',
-            //         data: {
-            //             "type": "FeatureCollection",
-            //             "features": [{
-            //                 "type": "Feature",
-            //                 "properties": {},
-            //                 "geometry": {
-            //                     "type": "Point",
-            //                     "coordinates": [longitude, latitude]
-            //                 }
-            //             }]
-            //         }
+        //     //     marker.setLngLat([longitude, latitude])
+        //     // }, 1000);
 
-            //     });
+        //     // map.on('load', () => {
 
-            //     let offset = [longitude, latitude]
+        //     //     map.addSource('pointsSoucer', {
+        //     //         type: 'geojson',
+        //     //         data: {
+        //     //             "type": "FeatureCollection",
+        //     //             "features": [{
+        //     //                 "type": "Feature",
+        //     //                 "properties": {},
+        //     //                 "geometry": {
+        //     //                     "type": "Point",
+        //     //                     "coordinates": [longitude, latitude]
+        //     //                 }
+        //     //             }]
+        //     //         }
 
-            //     map.addLayer({
-            //         id: 'points',
-            //         source: 'pointsSoucer',
-            //         type: 'circle',
-            //         paint: {
-            //             'circle-translate': [longitude + 0.1, latitude + 0.1]
-            //         },
-            //     });
+        //     //     });
 
-            //     setTimeout(() => {
-            //         offset = [longitude + 0.1, latitude + 0.1]; // or whatever
-            //     map.set .setPaintProperty('points', 'circle-translate', offset);
-            //     }, 5000);
+        //     //     let offset = [longitude, latitude]
 
+        //     //     map.addLayer({
+        //     //         id: 'points',
+        //     //         source: 'pointsSoucer',
+        //     //         type: 'circle',
+        //     //         paint: {
+        //     //             'circle-translate': [longitude + 0.1, latitude + 0.1]
+        //     //         },
+        //     //     });
 
-
-            // })
-
-
-            // 
+        //     //     setTimeout(() => {
+        //     //         offset = [longitude + 0.1, latitude + 0.1]; // or whatever
+        //     //     map.set .setPaintProperty('points', 'circle-translate', offset);
+        //     //     }, 5000);
 
 
 
+        //     // })
+
+
+        //     // 
 
 
 
-            //fill, line, symbol, circle, heatmap, fill-extrusion, raster, hillshade, background
 
-            // map.getSource('pointsSoucer').setData({
-            //     "type": "FeatureCollection",
-            //     "features": [{
-            //         "type": "Feature",
-            //         "properties": { "name": "Null Island" },
-            //         "geometry": {
-            //             "type": "Point",
-            //             "coordinates": [0, 0]
-            //         }
-            //     }]
-            // });
-        })
+
+
+        //     //fill, line, symbol, circle, heatmap, fill-extrusion, raster, hillshade, background
+
+        //     // map.getSource('pointsSoucer').setData({
+        //     //     "type": "FeatureCollection",
+        //     //     "features": [{
+        //     //         "type": "Feature",
+        //     //         "properties": { "name": "Null Island" },
+        //     //         "geometry": {
+        //     //             "type": "Point",
+        //     //             "coordinates": [0, 0]
+        //     //         }
+        //     //     }]
+        //     // });
+        // })
 
         this.setState({
             map: map
