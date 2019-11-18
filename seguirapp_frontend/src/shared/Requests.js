@@ -28,6 +28,14 @@ export const createGrupo = (value) =>{
     return axiosApi.post('/grupo/cadastrar', value)
 } 
 
+export const createVeiculo = (value) => {
+    return axiosApi.post('/veiculo/cadastrar', value)
+}
+
+export const getVeiculos = () => {
+    return axiosApi.get('/veiculo')
+}
+
 export const getGrupos = () => {
     return axiosApi.get('/grupo')
 }
@@ -40,5 +48,7 @@ export default {
     getCidades,
     getEstados,
     createGrupo,
-    getGrupos
+    getGrupos,
+    createVeiculo,
+    getVeiculos
 }

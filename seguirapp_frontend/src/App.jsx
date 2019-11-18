@@ -9,6 +9,8 @@ import ClienteForm from './pages/clientes/ClienteForm'
 import DispositivoForm from './pages/dispositivos/DispositivoForm'
 import ClienteList from './pages/clientes/ClienteList'
 import GrupoForm from './pages/grupos/GrupoForm'
+import VeiculoForm from './pages/veiculos/VeiculoForm'
+import VeiculoList from './pages/veiculos/VeiculosList'
 
 class App extends Component {
 
@@ -33,6 +35,8 @@ class App extends Component {
                   <Route path="/cliente/novo" exact component={ClienteForm} />
                   <Route path="/dispositivo" exact component={DispositivoForm} />
                   <Route path="/grupo" exact component={GrupoForm} />
+                  <Route path="/veiculo" exact component={VeiculoList} />
+                  <Route path="/veiculo/novo" exact component={VeiculoForm} />
                 </div>
               </div>
             )} />

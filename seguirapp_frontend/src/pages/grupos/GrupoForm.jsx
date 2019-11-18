@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { createDispositivo } from '../../actions/clienteActions'
+import { createDispositivo } from '../../actions/formActions'
 import { Field, reduxForm } from 'redux-form'
 import { Container, Header, Form, Button, Table, Modal } from 'semantic-ui-react';
 import { TextField } from '../../shared/form/TextField'

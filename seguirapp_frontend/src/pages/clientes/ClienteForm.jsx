@@ -4,7 +4,7 @@ import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
 import { cpfLabel, validateCpf, requiredValidate, celularLabel, validatePhoneBr } from '../../helpers/FnUtils'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { createCliente } from '../../actions/clienteActions'
+import { createCliente } from '../../actions/formActions'
 import { TextField } from '../../shared/form/TextField'
 import { SelectField } from '../../shared/form/SelectField'
 import Requests from '../../shared/Requests'
@@ -43,95 +43,37 @@ class ClienteForm extends Component {
     Requests.getClientes().then(pessoas => {
 
       let identificador = []
+      let dispositivoValid = []
 
       const dispPessoa = pessoas.filter(pessoa => {
         return pessoa.dispositivo
       })
-
-      console.log(dispPessoa)
 
       dispPessoa.map(id => {
         identificador.push(id.dispositivo.identificador)
       })
 
       Requests.getDispositivos().then(dispositivos => {
-        let dispositivoValid = []
+        
+        for (let index = 0; index < dispositivos.length; index++) {
 
-        console.log(dispositivos)
+          const dispositivo = dispositivos[index]
 
-        dispositivos.map(disp => {
-          identificador.map(ident => {
-            console.log(disp)
-            console.log(ident)
-          })
+          const identificadorPessoa = identificador[index]
 
+          dispositivoValid.push(dispositivo.identificador !== identificadorPessoa ?
+            dispositivos[index] : null)
+        }
 
-        })
-        // for (let index = 0; index < dispositivos.length; index++) {
+        const disps = dispositivoValid.map(disp => (
+          disp ?
+            { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
+            : {}
+        ))
 
-        //   const dispositivo = dispositivos[index]
-
-        //   const identificadorPessoa = identificador[index]
-
-        //   console.log('disp ' + dispositivo.identificador)
-        //   console.log('idend ' + identificadorPessoa)
-
-        //   dispositivoValid.push(dispositivo.identificador !== identificadorPessoa ?
-        //     dispositivos[index] : null)
-        // }
-
-        // const disps = dispositivoValid.map(disp => (
-        //   disp ?
-        //     { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
-        //     : {}
-        // ))
-
-        // this.setState({ optionsDispositivos: disps, loading: false })
-
+        this.setState({ optionsDispositivos: disps, loading: false })
       })
     })
-
-
-
-
-    // })
-    // let dispositivoPessoa = []
-
-    // Requests.getDispositivos().then(dispositivo => {
-
-    //   Requests.getClientes().then(pessoas => {
-    //     pessoas.map(pessoa => {
-
-    //       dispositivoPessoa.push({id: pessoa.dispositivo ? pessoa.dispositivo.idDispositivo : null})
-
-    //       //
-
-
-    //     })
-    //   })
-
-    //   console.log(dispositivoPessoa)
-
-
-    //     // const dispositivos = dispositivo.filter(disp => {
-    //     //   let pessoa
-    //     //   dispositivoPessoa.map(p => {
-    //     //     pessoa = p.id
-    //     //   })
-    //     //   return disp.idDispositivo === pessoa
-    //     // })
-
-
-
-
-
-
-
-    //   // dispositivo.map(disp => {
-    //   //   console.log(disp)
-    //   // })
-
-    // })
   }
 
   // { key: disp.idDispositivo, text: disp.nome, value: { idDispositivo: String(disp.idDispositivo) } }
@@ -172,7 +114,7 @@ class ClienteForm extends Component {
           const cids = cidadesEsts.map(cid => ({
             key: cid.idCidade,
             text: cid.nome,
-            value: { idCidade: cid.idCidade, nome: cid.nome, estado: {idEstado: value} }
+            value: { idCidade: cid.idCidade, nome: cid.nome, estado: { idEstado: value } }
           }))
 
           this.setState({ optionsCidades: cids })
@@ -430,6 +372,8 @@ const validate = (values, props) => {
 
   const senha = requiredValidate(values.senha)
 
+  const dispositivo = requiredValidate(values.dispositivo)
+
   const errors = {
     nome,
     cpfCnpj,
@@ -438,7 +382,8 @@ const validate = (values, props) => {
     telefone,
     tipo,
     email,
-    senha
+    senha,
+    dispositivo
   }
   return errors
 }

@@ -4,6 +4,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import systemReducer from './systemReducer'
 
+
 const rootReducer = combineReducers({
     system: systemReducer,
     form: formReducer,
