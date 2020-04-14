@@ -1,6 +1,0 @@
-DELETE FROM `DBIFS`.`cidade`
-WHERE id_cidade>=1;
-
-
-
-SET FOREIGN_KEY_CHECKS=1;

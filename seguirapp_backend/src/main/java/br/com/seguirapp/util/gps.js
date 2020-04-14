@@ -1,2 +1,0 @@
-var request = new BPMRESTRequest();
-
