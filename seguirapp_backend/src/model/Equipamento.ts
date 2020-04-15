@@ -2,9 +2,9 @@ import moment from "moment"
 
 class Equipamento {
     createdAt: Date
-    updatedAt: Date
+    updatedAt!: Date
 
-    coordenada: {
+    coordenada!: {
         latitude: number
         longitude: number
         velocidade: number

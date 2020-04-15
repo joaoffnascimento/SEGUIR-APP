@@ -7,13 +7,13 @@ import crypt from './../util/bcrypt'
 
 class Pessoa {
 
-    cnpj: string
-    sexo: string
+    cnpj!: string
+    sexo!: string
     createdAt: Date
-    updatedAt: Date
+    updatedAt!: Date
     //Normalizar endereço depois (issue)
-    telefone: string
-    auth: {
+    telefone!: string
+    auth!: {
         email: string,
         password: string
     }
